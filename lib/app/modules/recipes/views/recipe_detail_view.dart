@@ -1,9 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/custom_button.dart';
 import 'package:bukateria/widgets/custom_input.dart';
 import 'package:bukateria/widgets/ingredientItem.dart';
 import 'package:bukateria/widgets/method_widget.dart';
+import 'package:bukateria/widgets/related_recipe.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -273,6 +275,43 @@ class RecipeDetailView extends GetView {
                   height: 1,
                   thickness: 1,
                   color: Colors.grey,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+
+                // Generated code for this subtitle Widget...
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 10),
+                  child: Text(
+                    'Other recipes by @toyin_345',
+                    style: title3,
+                  ),
+                ),
+                // Generated code for this menuItem Widget...
+                RelatedRecipe(
+                  title: "Fried rice repipe",
+                  text:
+                      "A wonderfully delicious 2 patty melt that melts into your...",
+                  image: "assets/images/egusi.jpg",
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                RelatedRecipe(
+                  title: "Fried rice repipe",
+                  text:
+                      "A wonderfully delicious 2 patty melt that melts into your...",
+                  image: "assets/images/egusi.jpg",
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                RelatedRecipe(
+                  title: "Fried rice repipe",
+                  text:
+                      "A wonderfully delicious 2 patty melt that melts into your...",
+                  image: "assets/images/egusi.jpg",
                 ),
                 SizedBox(
                   height: 20,

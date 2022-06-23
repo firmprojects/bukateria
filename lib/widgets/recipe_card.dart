@@ -1,3 +1,4 @@
+import 'package:bukateria/app/modules/recipes/views/recipe_detail_view.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +49,10 @@ class RecipeCard extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
-          child: Text('Banga Soup', textAlign: TextAlign.start, style: title5),
+          child: GestureDetector(
+              onTap: () => Get.to(() => RecipeDetailView()),
+              child: Text('Banga Soup',
+                  textAlign: TextAlign.start, style: title5)),
         ),
         Row(
           mainAxisSize: MainAxisSize.max,

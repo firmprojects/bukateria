@@ -48,11 +48,11 @@ class LoginView extends GetView<LoginController> {
               prefixIcon: Icons.lock,
             ),
             CustomButton(
-              controller: controller,
+              width: Get.width,
               radius: 30,
               height: 50,
               text: "Sign In",
-              onPressed: () =>{},
+              onPressed: () => {},
             ),
           ],
         ),

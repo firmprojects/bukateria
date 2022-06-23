@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 TextStyle title1 = GoogleFonts.montserrat(
-    fontSize: 30, fontWeight: FontWeight.w700, color: dark);
+    fontSize: 30, fontWeight: FontWeight.w600, color: dark);
 
 TextStyle title2 = GoogleFonts.montserrat(
-    fontSize: 25, fontWeight: FontWeight.w700, color: dark);
+    fontSize: 25, fontWeight: FontWeight.w600, color: dark);
 
 TextStyle title3 = GoogleFonts.montserrat(
-    fontSize: 20, fontWeight: FontWeight.w700, color: dark);
+    fontSize: 20, fontWeight: FontWeight.w600, color: dark);
 
 TextStyle title4 = GoogleFonts.montserrat(
-    fontSize: 18, fontWeight: FontWeight.w700, color: dark);
+    fontSize: 18, fontWeight: FontWeight.w600, color: dark);
 
 TextStyle title5 = GoogleFonts.montserrat(
-    fontSize: 16, fontWeight: FontWeight.w700, color: dark);
+    fontSize: 16, fontWeight: FontWeight.w600, color: dark);
 
 TextStyle body1 = GoogleFonts.montserrat(fontSize: 20, color: dark);
 

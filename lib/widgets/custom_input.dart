@@ -30,6 +30,7 @@ class CustomInput extends StatelessWidget {
   final Widget? suffix;
   final Widget? prefix;
   final double height;
+  final double? borderRadius;
 
   const CustomInput(
       {this.controller,
@@ -48,6 +49,7 @@ class CustomInput extends StatelessWidget {
       this.validator,
       this.onPress,
       this.color,
+      this.borderRadius,
       this.bgcolor,
       this.labelStyle,
       this.iconColor,
@@ -65,7 +67,7 @@ class CustomInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: height,
       child: TextFormField(
         style: TextStyle(color: color),
@@ -78,11 +80,14 @@ class CustomInput extends StatelessWidget {
           filled: filled,
           fillColor: bgcolor,
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: borderColor, width: 1)),
+              borderSide: BorderSide(color: borderColor, width: 1),
+              borderRadius: BorderRadius.circular(borderRadius!)),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: borderColor, width: 1)),
-          border: const OutlineInputBorder(
-              borderSide: BorderSide(color: primary, width: 1)),
+              borderSide: BorderSide(color: borderColor, width: 1),
+              borderRadius: BorderRadius.circular(borderRadius!)),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: primary, width: 1),
+          ),
           hintText: hintText ?? '',
           helperText: helpText ?? '',
           labelText: labelText ?? '',

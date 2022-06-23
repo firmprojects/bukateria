@@ -10,6 +10,7 @@ abstract class Routes {
   static const OTP = _Paths.OTP;
   static const DASHBOARD = _Paths.DASHBOARD;
   static const RECIPES = _Paths.RECIPES;
+  static const MENUS = _Paths.MENUS;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const OTP = '/otp';
   static const DASHBOARD = '/dashboard';
   static const RECIPES = '/recipes';
+  static const MENUS = '/menus';
 }

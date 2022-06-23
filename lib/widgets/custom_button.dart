@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton(
       {Key? key,
-      required this.controller,
       required this.radius,
       required this.height,
       required this.onPressed,
+      required this.width,
       this.color,
       required this.text})
       : super(key: key);
 
-  final dynamic controller;
   final double radius;
   final double height;
+  final double width;
   final String text;
   final Color? color;
   final VoidCallback onPressed;
@@ -23,7 +23,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
+      width: width,
       // decoration: BoxDecoration(borderRadius: BorderRadius.circular(radius)),
       height: height,
       child: ElevatedButton(

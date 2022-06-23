@@ -66,7 +66,7 @@ class RegisterView extends GetView<RegisterController> {
               prefixIcon: Icons.lock,
             ),
             CustomButton(
-                controller: controller,
+                width: Get.width,
                 radius: 30,
                 height: 50,
                 text: "Register",

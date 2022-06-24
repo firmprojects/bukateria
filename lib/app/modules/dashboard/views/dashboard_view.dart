@@ -1,5 +1,6 @@
 import 'package:bukateria/app/modules/home/views/home_view.dart';
 import 'package:bukateria/app/modules/menus/views/menus_view.dart';
+import 'package:bukateria/app/modules/profiles/views/profiles_view.dart';
 import 'package:bukateria/app/modules/recipes/views/recipes_view.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +17,10 @@ class DashboardView extends StatefulWidget {
 
 class _DashboardViewState extends State<DashboardView> {
   final screens = [
-    const MenusView(),
-    const RecipesView(),
-    const HomeView(),
-    const HomeView(),
+    MenusView(),
+    RecipesView(),
+    HomeView(),
+    ProfilesView(),
 
     //AccountView()
   ];
@@ -59,7 +60,7 @@ class _DashboardViewState extends State<DashboardView> {
                 icon: Icon(
                   Icons.person_outline,
                 ),
-                label: "Account"),
+                label: "Vendor"),
           ],
         ));
   }

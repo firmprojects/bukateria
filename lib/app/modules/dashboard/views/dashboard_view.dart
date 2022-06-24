@@ -20,7 +20,7 @@ class _DashboardViewState extends State<DashboardView> {
     const RecipesView(),
     const HomeView(),
     const HomeView(),
-    const HomeView(),
+
     //AccountView()
   ];
 
@@ -48,13 +48,13 @@ class _DashboardViewState extends State<DashboardView> {
                 label: "Home"),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.search,
+                  Icons.food_bank,
                 ),
-                label: "Search"),
+                label: "Recipies"),
+            // BottomNavigationBarItem(
+            //     icon: Icon(Icons.favorite_outline), label: "Favourites"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_outline), label: "Favourites"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart_outlined), label: "Cart"),
+                icon: Icon(Icons.shopping_cart_outlined), label: "My Orders"),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person_outline,

@@ -29,8 +29,9 @@ class CustomInput extends StatelessWidget {
   final String? label;
   final Widget? suffix;
   final Widget? prefix;
-  final double height;
+  final double? height;
   final double? borderRadius;
+  final int? maxLines;
 
   const CustomInput(
       {this.controller,
@@ -58,10 +59,11 @@ class CustomInput extends StatelessWidget {
       this.isPassword,
       this.enabled,
       this.filled,
+      this.maxLines,
       this.readOnly,
       this.borderColor = Colors.grey,
       this.keyboardType,
-      required this.height,
+      this.height,
       Key? key})
       : super(key: key);
 
@@ -74,6 +76,7 @@ class CustomInput extends StatelessWidget {
         keyboardType: keyboardType,
         validator: validator,
         controller: controller,
+        maxLines: maxLines ?? 1,
         readOnly: null == readOnly ? false : true,
         obscureText: null == isPassword ? false : true,
         decoration: InputDecoration(

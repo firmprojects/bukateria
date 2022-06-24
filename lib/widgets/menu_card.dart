@@ -1,6 +1,8 @@
+import 'package:bukateria/app/modules/menus/views/menu_detail_view.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MenuCardComponentWidget extends StatefulWidget {
@@ -39,11 +41,14 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                     topLeft: Radius.circular(12),
                     topRight: Radius.circular(12),
                   ),
-                  child: Image.asset(
-                    'assets/images/egusi_image.jpg',
-                    width: double.infinity,
-                    height: 200,
-                    fit: BoxFit.cover,
+                  child: GestureDetector(
+                    onTap: () => Get.to(() => MenuDetailView()),
+                    child: Image.asset(
+                      'assets/images/egusi_image.jpg',
+                      width: double.infinity,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 // Align(

@@ -1,7 +1,6 @@
+import 'package:bukateria/app/modules/recipes/views/create_recipe_view.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import 'app/routes/app_pages.dart';
 
 void main() {
@@ -10,6 +9,7 @@ void main() {
       title: "Application",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      // home: AddRecipeWidget(),
       debugShowCheckedModeBanner: false,
     ),
   );

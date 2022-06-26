@@ -1,6 +1,7 @@
 import 'package:bukateria/app/modules/home/views/home_view.dart';
 import 'package:bukateria/app/modules/menus/views/menus_view.dart';
 import 'package:bukateria/app/modules/profiles/views/profiles_view.dart';
+import 'package:bukateria/app/modules/recipes/views/create_recipe_view.dart';
 import 'package:bukateria/app/modules/recipes/views/recipes_view.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class _DashboardViewState extends State<DashboardView> {
   final screens = [
     MenusView(),
     RecipesView(),
+    AddRecipeWidget(),
     HomeView(),
     ProfilesView(),
 
@@ -52,6 +54,12 @@ class _DashboardViewState extends State<DashboardView> {
                   Icons.food_bank,
                 ),
                 label: "Recipies"),
+
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.upload,
+                ),
+                label: "Add"),
             // BottomNavigationBarItem(
             //     icon: Icon(Icons.favorite_outline), label: "Favourites"),
             BottomNavigationBarItem(

@@ -23,18 +23,24 @@ class MenuDetailView extends GetView {
             elevation: 1,
             automaticallyImplyLeading: true,
             backgroundColor: white,
+            iconTheme: IconThemeData(color: dark),
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: Row(
                   children: [
                     Icon(
-                      Icons.heart_broken,
-                      color: primary,
+                      Icons.favorite_outline,
+                      color: dark,
+                      size: 30,
+                    ),
+                    SizedBox(
+                      width: 15,
                     ),
                     Icon(
-                      Icons.three_p_outlined,
-                      color: primary,
+                      Icons.more_vert,
+                      color: dark,
+                      size: 30,
                     )
                   ],
                 ),
@@ -55,7 +61,7 @@ class MenuDetailView extends GetView {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Banga Soup Recipe",
+                  "Pot of Banga Soup",
                   style: title2.copyWith(fontWeight: FontWeight.w500),
                 ),
                 SizedBox(

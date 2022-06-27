@@ -23,7 +23,7 @@ class ProfilesView extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(
-              Icons.share_sharp,
+              Icons.more_vert,
               color: dark,
               size: 25,
             ),

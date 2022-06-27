@@ -1,3 +1,7 @@
+import 'package:bukateria/app/modules/dashboard/views/dashboard_view.dart';
+import 'package:bukateria/app/modules/dashboard/views/vendor_dashboard.dart';
+import 'package:bukateria/app/modules/register/views/register_view.dart';
+import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/custom_button.dart';
 import 'package:bukateria/widgets/custom_input.dart';
@@ -38,6 +42,7 @@ class LoginView extends GetView<LoginController> {
               labelText: "Email",
               keyboardType: TextInputType.emailAddress,
               prefixIcon: Icons.email,
+              borderRadius: 10,
             ),
             const CustomInput(
               height: 70,
@@ -46,14 +51,26 @@ class LoginView extends GetView<LoginController> {
               keyboardType: TextInputType.text,
               isPassword: true,
               prefixIcon: Icons.lock,
+              borderRadius: 10,
             ),
             CustomButton(
               width: Get.width,
               radius: 30,
               height: 50,
               text: "Sign In",
-              onPressed: () => {},
+              color: primary,
+              onPressed: () => Get.to(() => VendorDashboard()),
             ),
+            SizedBox(
+              height: 15,
+            ),
+            GestureDetector(
+              onTap: () => Get.to(() => RegisterView()),
+              child: Text(
+                "Don't have an account yet? signup",
+                style: body3,
+              ),
+            )
           ],
         ),
       ),

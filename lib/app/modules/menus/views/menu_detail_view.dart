@@ -5,6 +5,7 @@ import 'package:bukateria/widgets/custom_button.dart';
 import 'package:bukateria/widgets/custom_input.dart';
 import 'package:bukateria/widgets/ingredientItem.dart';
 import 'package:bukateria/widgets/method_widget.dart';
+import 'package:bukateria/widgets/pop_menu.dart';
 import 'package:bukateria/widgets/recipe_card.dart';
 import 'package:bukateria/widgets/related_recipe.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class MenuDetailView extends GetView {
             iconTheme: IconThemeData(color: dark),
             actions: [
               Padding(
-                padding: const EdgeInsets.only(right: 20),
+                padding: const EdgeInsets.only(right: 10),
                 child: Row(
                   children: [
                     Icon(
@@ -34,14 +35,7 @@ class MenuDetailView extends GetView {
                       color: dark,
                       size: 30,
                     ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Icon(
-                      Icons.more_vert,
-                      color: dark,
-                      size: 30,
-                    )
+                    PopMenu(),
                   ],
                 ),
               )
@@ -51,7 +45,7 @@ class MenuDetailView extends GetView {
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/images/egusi.jpg"))),
+                      image: AssetImage("assets/images/img.jpg"))),
             )),
         SliverList(
             delegate: SliverChildListDelegate([
@@ -400,7 +394,7 @@ class MenuDetailView extends GetView {
                   title: "Pot of Ogbono Soup",
                   text:
                       "A wonderfully delicious 2 patty melt that melts into your...",
-                  image: "assets/images/egusi.jpg",
+                  image: "assets/images/square.jpg",
                 ),
                 SizedBox(
                   height: 10,
@@ -409,7 +403,7 @@ class MenuDetailView extends GetView {
                   title: "Beans Cake",
                   text:
                       "A wonderfully delicious 2 patty melt that melts into your...",
-                  image: "assets/images/egusi.jpg",
+                  image: "assets/images/square.jpg",
                 ),
                 SizedBox(
                   height: 10,

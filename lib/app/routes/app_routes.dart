@@ -15,6 +15,7 @@ abstract class Routes {
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
   static const ORDERS = _Paths.ORDERS;
   static const ACCOUNT = _Paths.ACCOUNT;
+  static const PAYMENT = _Paths.PAYMENT;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const NOTIFICATIONS = '/notifications';
   static const ORDERS = '/orders';
   static const ACCOUNT = '/account';
+  static const PAYMENT = '/payment';
 }

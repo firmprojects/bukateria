@@ -1,6 +1,8 @@
 import 'package:bukateria/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_theme.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_widgets.dart';
+import 'package:bukateria/themes/colors.dart';
+import 'package:bukateria/themes/text.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,9 +39,13 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryBtnText,
-        iconTheme: IconThemeData(color: FlutterFlowTheme.of(context).black600),
+        backgroundColor: white,
+        iconTheme: IconThemeData(color: dark),
         automaticallyImplyLeading: true,
+        title: Text(
+          "Create recipe",
+          style: title4,
+        ),
         actions: [],
         centerTitle: true,
         elevation: 0,
@@ -310,6 +316,7 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
                             size: 15,
                           ),
                           options: FFButtonOptions(
+                            elevation: 0,
                             width: 200,
                             height: 40,
                             color: FlutterFlowTheme.of(context).alternate,
@@ -461,6 +468,7 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
                             },
                             text: 'Create recipe',
                             options: FFButtonOptions(
+                              elevation: 0,
                               width: 280,
                               height: 40,
                               color: FlutterFlowTheme.of(context).primaryColor,

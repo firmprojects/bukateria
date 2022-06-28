@@ -44,7 +44,7 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                   child: GestureDetector(
                     onTap: () => Get.to(() => MenuDetailView()),
                     child: Image.asset(
-                      'assets/images/egusi_image.jpg',
+                      'assets/images/img.jpg',
                       width: double.infinity,
                       height: 200,
                       fit: BoxFit.cover,

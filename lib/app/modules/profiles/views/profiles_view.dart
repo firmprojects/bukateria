@@ -1,6 +1,11 @@
+import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
+import 'package:bukateria/data/menu_items.dart';
+import 'package:bukateria/models/menu_item_model.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/custom_button.dart';
+import 'package:bukateria/widgets/custom_dialog.dart';
+import 'package:bukateria/widgets/pop_menu.dart';
 import 'package:bukateria/widgets/profile_menu_list.dart';
 import 'package:bukateria/widgets/tab_button.dart';
 import 'package:flutter/material.dart';
@@ -21,16 +26,7 @@ class ProfilesView extends StatelessWidget {
         iconTheme: IconThemeData(color: dark),
         automaticallyImplyLeading: true,
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.more_vert,
-              color: dark,
-              size: 25,
-            ),
-            onPressed: () {
-              print('IconButton pressed ...');
-            },
-          ),
+          PopMenu(),
           SizedBox(
             width: 20,
           )
@@ -60,7 +56,7 @@ class ProfilesView extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(
-                      'assets/images/avatar-s-7.png',
+                      'assets/images/person.png',
                     ),
                   ),
                 ),

@@ -40,8 +40,8 @@ class RecipeCard extends StatelessWidget {
         ),
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.network(
-            'https://picsum.photos/seed/588/600',
+          child: Image.asset(
+            'assets/images/square.jpg',
             width: double.infinity,
             height: 151,
             fit: BoxFit.cover,

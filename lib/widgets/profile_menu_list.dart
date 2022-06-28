@@ -27,8 +27,8 @@ class ProfileMenusList extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  'https://picsum.photos/seed/588/600',
+                child: Image.asset(
+                  'assets/images/square.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -57,8 +57,8 @@ class ProfileMenusList extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  'https://picsum.photos/seed/588/600',
+                child: Image.asset(
+                  'assets/images/square.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -89,8 +89,8 @@ class ProfileMenusList extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    'https://picsum.photos/seed/588/600',
+                  child: Image.asset(
+                    'assets/images/square.jpg',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -121,8 +121,8 @@ class ProfileMenusList extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  'https://picsum.photos/seed/588/600',
+                child: Image.asset(
+                  'assets/images/square.jpg',
                   fit: BoxFit.cover,
                 ),
               ),

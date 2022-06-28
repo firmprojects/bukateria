@@ -1,5 +1,7 @@
 import 'package:bukateria/app/modules/home/views/home_view.dart';
 import 'package:bukateria/app/modules/menus/views/menus_view.dart';
+import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
+import 'package:bukateria/app/modules/orders/views/orders_view.dart';
 import 'package:bukateria/app/modules/profiles/views/profiles_view.dart';
 import 'package:bukateria/app/modules/recipes/views/create_recipe_view.dart';
 import 'package:bukateria/app/modules/recipes/views/recipes_view.dart';
@@ -20,9 +22,8 @@ class _DashboardViewState extends State<DashboardView> {
   final screens = [
     MenusView(),
     RecipesView(),
-    AddRecipeWidget(),
-    HomeView(),
-    ProfilesView(),
+    OrdersView(),
+    NotificationsView(),
 
     //AccountView()
   ];
@@ -54,21 +55,13 @@ class _DashboardViewState extends State<DashboardView> {
                   Icons.food_bank,
                 ),
                 label: "Recipies"),
-
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.upload,
-                ),
-                label: "Add"),
-            // BottomNavigationBarItem(
-            //     icon: Icon(Icons.favorite_outline), label: "Favourites"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.shopping_cart_outlined), label: "My Orders"),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person_outline,
                 ),
-                label: "Vendor"),
+                label: "Notifications"),
           ],
         ));
   }

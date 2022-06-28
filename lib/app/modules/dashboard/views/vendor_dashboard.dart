@@ -3,6 +3,8 @@ import 'package:bukateria/app/modules/home/views/home_view.dart';
 import 'package:bukateria/app/modules/menus/views/menus_view.dart';
 import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
 import 'package:bukateria/app/modules/orders/views/orders_view.dart';
+import 'package:bukateria/app/modules/payment/views/payment_success_view.dart';
+import 'package:bukateria/app/modules/payment/views/payment_view.dart';
 import 'package:bukateria/app/modules/profiles/views/profiles_view.dart';
 import 'package:bukateria/app/modules/recipes/views/create_recipe_view.dart';
 import 'package:bukateria/app/modules/recipes/views/recipes_view.dart';
@@ -25,7 +27,8 @@ class _VendorDashboardState extends State<VendorDashboard> {
     NotificationsView(),
     AddRecipeWidget(),
     OrdersView(),
-    AccountView()
+    // AccountPageWidget()
+    PaymentWidget()
     //AccountView()
   ];
 

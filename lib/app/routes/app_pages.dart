@@ -18,6 +18,8 @@ import '../modules/orders/bindings/orders_binding.dart';
 import '../modules/orders/views/orders_view.dart';
 import '../modules/otp/bindings/otp_binding.dart';
 import '../modules/otp/views/otp_view.dart';
+import '../modules/payment/bindings/payment_binding.dart';
+import '../modules/payment/views/payment_view.dart';
 import '../modules/profiles/bindings/profiles_binding.dart';
 import '../modules/profiles/views/profiles_view.dart';
 import '../modules/recipes/bindings/recipes_binding.dart';
@@ -90,8 +92,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ACCOUNT,
-      page: () => const AccountView(),
+      page: () => const AccountPageWidget(),
       binding: AccountBinding(),
+    ),
+    GetPage(
+      name: _Paths.PAYMENT,
+      page: () => const PaymentWidget(),
+      binding: PaymentBinding(),
     ),
   ];
 }

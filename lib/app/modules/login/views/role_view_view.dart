@@ -1,3 +1,5 @@
+import 'package:bukateria/app/modules/dashboard/views/dashboard_view.dart';
+import 'package:bukateria/app/modules/dashboard/views/vendor_dashboard.dart';
 import 'package:bukateria/app/modules/profiles/views/profiles_view.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
@@ -34,18 +36,21 @@ class _RoleRedirectWidgetState extends State<RoleRedirectWidget> {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFEEEEEE),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: Image.asset(
-                              'assets/images/foodie.jpg',
-                            ).image,
+                      GestureDetector(
+                        onTap: () => Get.offAll(() => DashboardView()),
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFEEEEEE),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: Image.asset(
+                                'assets/images/foodie.jpg',
+                              ).image,
+                            ),
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                          borderRadius: BorderRadius.circular(15),
                         ),
                       ),
                       Text(
@@ -59,7 +64,7 @@ class _RoleRedirectWidgetState extends State<RoleRedirectWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     GestureDetector(
-                      onTap: () => Get.to(() => ProfilesView()),
+                      onTap: () => Get.offAll(() => VendorDashboard()),
                       child: Container(
                         width: 100,
                         height: 100,

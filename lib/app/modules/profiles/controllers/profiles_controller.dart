@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 class ProfilesController extends GetxController {
   late PageController pagecontroller;
   var selectedPage = 0.obs;
+  var checkedValue = false.obs;
 
   @override
   void onInit() {

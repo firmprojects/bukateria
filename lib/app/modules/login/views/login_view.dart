@@ -1,5 +1,6 @@
 import 'package:bukateria/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:bukateria/app/modules/dashboard/views/vendor_dashboard.dart';
+import 'package:bukateria/app/modules/login/views/role_view_view.dart';
 import 'package:bukateria/app/modules/register/views/register_view.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
@@ -59,7 +60,7 @@ class LoginView extends GetView<LoginController> {
               height: 50,
               text: "Sign In",
               color: primary,
-              onPressed: () => Get.to(() => VendorDashboard()),
+              onPressed: () => Get.to(() => RoleRedirectWidget()),
             ),
             SizedBox(
               height: 15,

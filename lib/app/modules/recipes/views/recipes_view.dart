@@ -1,3 +1,4 @@
+import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/recipe_card.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,13 @@ class RecipesView extends GetView<RecipesController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('RecipesView'),
+        backgroundColor: white,
+        elevation: 0,
+        title: Text(
+          'Recipes',
+          style: title4,
+        ),
+        iconTheme: IconThemeData(color: dark),
         centerTitle: true,
       ),
       body: Padding(

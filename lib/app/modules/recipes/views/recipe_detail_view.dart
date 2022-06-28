@@ -5,6 +5,7 @@ import 'package:bukateria/widgets/custom_button.dart';
 import 'package:bukateria/widgets/custom_input.dart';
 import 'package:bukateria/widgets/ingredientItem.dart';
 import 'package:bukateria/widgets/method_widget.dart';
+import 'package:bukateria/widgets/pop_menu.dart';
 import 'package:bukateria/widgets/related_recipe.dart';
 import 'package:flutter/material.dart';
 
@@ -20,13 +21,21 @@ class RecipeDetailView extends GetView {
             elevation: 1,
             automaticallyImplyLeading: true,
             backgroundColor: white,
-            title: Text("Repcipe detail"),
+            iconTheme: IconThemeData(color: dark),
             expandedHeight: 250,
+            actions: [
+              Icon(
+                Icons.favorite_outline,
+                color: dark,
+                size: 30,
+              ),
+              PopMenu(),
+            ],
             pinned: true,
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/images/egusi.jpg"))),
+                      image: AssetImage("assets/images/img.jpg"))),
             )),
         SliverList(
             delegate: SliverChildListDelegate([
@@ -92,6 +101,7 @@ class RecipeDetailView extends GetView {
                         width: 90,
                         radius: 30,
                         height: 35,
+                        color: primary,
                         onPressed: () => {},
                         text: "Follow")
                   ],
@@ -110,7 +120,7 @@ class RecipeDetailView extends GetView {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                   child: Text(
-                      'Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your \nYour recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your',
+                      'Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your \nYour recipe has been uploaded, you can',
                       style: body3),
                 ),
 
@@ -151,17 +161,12 @@ class RecipeDetailView extends GetView {
                 MethodWidget(
                   text:
                       'Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your \n',
-                  image: "assets/images/egusi.jpg",
+                  image: "assets/images/img.jpg",
                 ),
                 MethodWidget(
                   text:
                       'Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your \n',
-                  image: "assets/images/egusi.jpg",
-                ),
-                MethodWidget(
-                  text:
-                      'Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your \n',
-                  image: "assets/images/egusi.jpg",
+                  image: "assets/images/img.jpg",
                 ),
 
                 // Generated code for this Row Widget...
@@ -293,7 +298,7 @@ class RecipeDetailView extends GetView {
                   title: "Fried rice repipe",
                   text:
                       "A wonderfully delicious 2 patty melt that melts into your...",
-                  image: "assets/images/egusi.jpg",
+                  image: "assets/images/square.jpg",
                 ),
                 SizedBox(
                   height: 10,
@@ -302,17 +307,9 @@ class RecipeDetailView extends GetView {
                   title: "Fried rice repipe",
                   text:
                       "A wonderfully delicious 2 patty melt that melts into your...",
-                  image: "assets/images/egusi.jpg",
+                  image: "assets/images/square.jpg",
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                RelatedRecipe(
-                  title: "Fried rice repipe",
-                  text:
-                      "A wonderfully delicious 2 patty melt that melts into your...",
-                  image: "assets/images/egusi.jpg",
-                ),
+
                 SizedBox(
                   height: 20,
                 ),

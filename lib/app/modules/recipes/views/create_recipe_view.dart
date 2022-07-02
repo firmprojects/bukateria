@@ -157,7 +157,7 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
                     Container(
                       width: double.infinity,
                       child: Slider(
-                        activeColor: FlutterFlowTheme.of(context).primaryColor,
+                        activeColor: primary,
                         inactiveColor: Color(0xFF9E9E9E),
                         min: 10,
                         max: 60,

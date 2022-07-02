@@ -23,15 +23,15 @@ class SlideThreeView extends GetView<OnboardingController> {
                   bottom: 250,
                   left: 20,
                   child: Text(
-                      "You Need Cooks\nFor Your Events? \nWe've Got You",
+                      "To Our Talented Chefs\nYet To Be Discovered\nHere's Your Opportunity\nToStruit Your Stuff",
                       textAlign: TextAlign.left,
-                      style: title1.copyWith(color: white, fontSize: 40))),
+                      style: title1.copyWith(color: white, fontSize: 27))),
               Positioned(
                   bottom: 170,
                   left: 20,
                   child: Text(
-                      "Bukataria make available to you \nthousands of recipes for African and \nContinental dishes for your delight",
-                      style: body3.copyWith(color: white))),
+                      "Simply upload your menus that will be \npublished to foodies within walking \ndistance from you",
+                      style: body2.copyWith(color: white))),
             ],
           ),
         )

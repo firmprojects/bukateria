@@ -1,4 +1,5 @@
 import 'package:bukateria/app/modules/menus/views/menu_detail_view.dart';
+import 'package:bukateria/data/menus_list.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MenuCardComponentWidget extends StatefulWidget {
+  final menus;
+  final index;
+
+  const MenuCardComponentWidget(
+      {super.key, required this.menus, required this.index});
   @override
   _MenuCardComponentWidgetState createState() =>
       _MenuCardComponentWidgetState();
@@ -14,6 +20,7 @@ class MenuCardComponentWidget extends StatefulWidget {
 class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
   @override
   Widget build(BuildContext context) {
+    var menu = widget.menus[widget.index];
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
       child: Container(
@@ -44,7 +51,7 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                   child: GestureDetector(
                     onTap: () => Get.to(() => MenuDetailView()),
                     child: Image.asset(
-                      'assets/images/img.jpg',
+                      '${menu.image}',
                       width: double.infinity,
                       height: 200,
                       fit: BoxFit.cover,
@@ -108,15 +115,13 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Pot Egusi Soup', style: title5),
+                  Text('${menu.title}', style: title5),
                 ],
               ),
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
-              child: Text(
-                  'Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Aenean massa.',
-                  style: body4),
+              child: Text('${menu.description}', style: body4),
             ),
             SizedBox(
               height: 12,
@@ -135,7 +140,7 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                         color: orange,
                         size: 24,
                       ),
-                      Text('4.5', style: body4),
+                      Text('${menu.stars}', style: body4),
                     ],
                   ),
                   Column(
@@ -143,8 +148,8 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text('N4000', style: title5),
-                      Text('Plate', style: body4),
+                      Text('${menu.amount}', style: title5),
+                      Text('${menu.location}', style: body4),
                     ],
                   ),
                 ],

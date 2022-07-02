@@ -1,3 +1,4 @@
+import 'package:bukateria/data/menus_list.dart';
 import 'package:bukateria/widgets/menu_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,10 +38,13 @@ class MenusView extends GetView<MenusController> {
               child: ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
-                  itemCount: 10,
+                  itemCount: menus.length,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
-                    return MenuCardComponentWidget();
+                    return MenuCardComponentWidget(
+                      menus: menus,
+                      index: index,
+                    );
                   }),
             ),
           ],

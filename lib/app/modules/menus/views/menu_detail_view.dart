@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bukateria/app/modules/payment/views/payment_view.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/custom_button.dart';
@@ -113,7 +114,7 @@ class MenuDetailView extends GetView {
                         height: 35,
                         onPressed: () => {},
                         color: primary,
-                        text: "Order")
+                        text: "Follow")
                   ],
                 ),
 
@@ -177,7 +178,7 @@ class MenuDetailView extends GetView {
                               padding: const EdgeInsets.only(
                                   left: 20, right: 20, top: 30),
                               child: Container(
-                                height: Get.height * 0.75,
+                                height: Get.height * 0.4,
                                 child: Column(
                                   children: [
                                     Row(
@@ -185,7 +186,7 @@ class MenuDetailView extends GetView {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Confirm Order",
+                                          "Order",
                                           style: title3,
                                         ),
                                         Text(
@@ -206,7 +207,7 @@ class MenuDetailView extends GetView {
                                           style: title5,
                                         ),
                                         Text(
-                                          "Add Address",
+                                          "Change Address",
                                           style: body3.copyWith(color: blue),
                                         )
                                       ],
@@ -253,120 +254,126 @@ class MenuDetailView extends GetView {
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      color: grey,
-                                      padding: EdgeInsets.all(8),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "Delivery Time",
-                                            style: body2,
-                                          ),
-                                          Text(
-                                            "3 days",
-                                            style: title4,
-                                          )
-                                        ],
-                                      ),
-                                    ),
                                     SizedBox(
-                                      height: 10,
+                                      height: 15,
                                     ),
-                                    Container(
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Image.asset(
-                                                "assets/images/egusi.jpg",
-                                                width: 120,
-                                                height: 100,
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Text(
-                                                    "Pot of Egusi Soup",
-                                                    style: title5,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Text(
-                                                    "With 2kg of beef",
-                                                    style: body4,
-                                                  )
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Subtotal(1 pot of soup)",
-                                                style: title5,
-                                              ),
-                                              Text(
-                                                "N12,000",
-                                                style: title5,
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Shipping",
-                                                style: title5,
-                                              ),
-                                              Text(
-                                                "N2,000",
-                                                style: title5,
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 30,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Total",
-                                                style: title5.copyWith(
-                                                    color: primary),
-                                              ),
-                                              Text(
-                                                "N2,000",
-                                                style: title5,
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          CustomButton(
-                                              radius: 30,
-                                              color: primary,
-                                              height: 40,
-                                              onPressed: () {},
-                                              width: 200,
-                                              text: "Confirm order")
-                                        ],
-                                      ),
-                                    )
+                                    // Container(
+                                    //   color: grey,
+                                    //   padding: EdgeInsets.all(8),
+                                    //   child: Row(
+                                    //     children: [
+                                    //       Text(
+                                    //         "Delivery Time: ",
+                                    //         style: body2,
+                                    //       ),
+                                    //       Text(
+                                    //         "3 days",
+                                    //         style: title4,
+                                    //       )
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                    // SizedBox(
+                                    //   height: 10,
+                                    // ),
+                                    // Container(
+                                    //   child: Column(
+                                    //     children: [
+                                    //       Row(
+                                    //         children: [
+                                    //           Image.asset(
+                                    //             "assets/images/egusi.jpg",
+                                    //             width: 120,
+                                    //             height: 100,
+                                    //           ),
+                                    //           SizedBox(
+                                    //             width: 20,
+                                    //           ),
+                                    //           Column(
+                                    //             children: [
+                                    //               Text(
+                                    //                 "Pot of Egusi Soup",
+                                    //                 style: title5,
+                                    //               ),
+                                    //               SizedBox(
+                                    //                 height: 10,
+                                    //               ),
+                                    //               Text(
+                                    //                 "With 2kg of beef",
+                                    //                 style: body4,
+                                    //               )
+                                    //             ],
+                                    //           )
+                                    //         ],
+                                    //       ),
+                                    //       SizedBox(
+                                    //         height: 10,
+                                    //       ),
+                                    //       Row(
+                                    //         mainAxisAlignment:
+                                    //             MainAxisAlignment.spaceBetween,
+                                    //         children: [
+                                    //           Text(
+                                    //             "Subtotal(1 pot of soup)",
+                                    //             style: title5,
+                                    //           ),
+                                    //           Text(
+                                    //             "N12,000",
+                                    //             style: title5,
+                                    //           ),
+                                    //         ],
+                                    //       ),
+                                    //       SizedBox(
+                                    //         height: 10,
+                                    //       ),
+                                    //       Row(
+                                    //         mainAxisAlignment:
+                                    //             MainAxisAlignment.spaceBetween,
+                                    //         children: [
+                                    //           Text(
+                                    //             "Shipping",
+                                    //             style: title5,
+                                    //           ),
+                                    //           Text(
+                                    //             "N2,000",
+                                    //             style: title5,
+                                    //           ),
+                                    //         ],
+                                    //       ),
+                                    //       SizedBox(
+                                    //         height: 30,
+                                    //       ),
+                                    //       Row(
+                                    //         mainAxisAlignment:
+                                    //             MainAxisAlignment.spaceBetween,
+                                    //         children: [
+                                    //           Text(
+                                    //             "Total",
+                                    //             style: title5.copyWith(
+                                    //                 color: primary),
+                                    //           ),
+                                    //           Text(
+                                    //             "N2,000",
+                                    //             style: title5,
+                                    //           ),
+                                    //         ],
+                                    //       ),
+                                    //       SizedBox(
+                                    //         height: 20,
+                                    //       ),
+
+                                    //     ],
+                                    //   ),
+                                    // ),
+
+                                    CustomButton(
+                                        radius: 30,
+                                        color: primary,
+                                        height: 40,
+                                        onPressed: () =>
+                                            Get.to(() => PaymentWidget()),
+                                        width: 200,
+                                        text: "Confirm order")
                                   ],
                                 ),
                               ),

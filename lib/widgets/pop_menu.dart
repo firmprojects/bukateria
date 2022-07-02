@@ -1,3 +1,4 @@
+import 'package:bukateria/app/modules/login/views/role_view_view.dart';
 import 'package:bukateria/app/modules/profiles/controllers/profiles_controller.dart';
 import 'package:bukateria/data/menu_items.dart';
 import 'package:bukateria/models/menu_item_model.dart';
@@ -45,6 +46,10 @@ class PopMenu extends StatelessWidget {
               cancel: TextButton(
                   onPressed: () => Get.back(), child: Text("Cancel")),
             );
+          }
+
+          if (item == MenuItems.logout) {
+            Get.offAll(() => RoleRedirectWidget());
           }
         }),
         itemBuilder: (context) => [

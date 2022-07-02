@@ -81,7 +81,7 @@ class _RoleRedirectWidgetState extends State<RoleRedirectWidget> {
                       ),
                     ),
                     Text(
-                      'Vendor',
+                      'Chef',
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                   ],

@@ -3,6 +3,7 @@ import 'package:bukateria/app/modules/home/views/home_view.dart';
 import 'package:bukateria/app/modules/menus/views/menus_view.dart';
 import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
 import 'package:bukateria/app/modules/orders/views/orders_view.dart';
+import 'package:bukateria/app/modules/orders/views/vendor_order_view.dart';
 import 'package:bukateria/app/modules/payment/views/payment_success_view.dart';
 import 'package:bukateria/app/modules/payment/views/payment_view.dart';
 import 'package:bukateria/app/modules/profiles/views/profiles_view.dart';
@@ -24,12 +25,10 @@ class VendorDashboard extends StatefulWidget {
 class _VendorDashboardState extends State<VendorDashboard> {
   final screens = [
     ProfilesView(),
-    NotificationsView(),
+    NotificationView(),
     AddRecipeWidget(),
-    OrdersView(),
-    // AccountPageWidget()
-    PaymentWidget()
-    //AccountView()
+    VendorOrdersWidget(),
+    AccountPageWidget()
   ];
 
   var curentIndex = 0;
@@ -80,7 +79,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                       }),
                   IconBottomBar(
                       text: "Orders",
-                      icon: Icons.shopping_cart_outlined,
+                      icon: Icons.shop_outlined,
                       selected: false,
                       onPressed: () {
                         setState(() {

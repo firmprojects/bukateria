@@ -38,13 +38,16 @@ class RecipeCard extends StatelessWidget {
             ],
           ),
         ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            'assets/images/square.jpg',
-            width: double.infinity,
-            height: 151,
-            fit: BoxFit.cover,
+        GestureDetector(
+          onTap: () => Get.to(() => RecipeDetailView()),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              'assets/images/square.jpg',
+              width: double.infinity,
+              height: 151,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         Padding(

@@ -22,8 +22,8 @@ class _DashboardViewState extends State<DashboardView> {
   final screens = [
     MenusView(),
     RecipesView(),
-    OrdersView(),
-    NotificationsView(),
+    HistoryWidget(),
+    NotificationView(),
 
     //AccountView()
   ];

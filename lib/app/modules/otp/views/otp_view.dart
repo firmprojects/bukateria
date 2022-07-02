@@ -1,5 +1,6 @@
 import 'package:bukateria/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:bukateria/app/modules/home/views/home_view.dart';
+import 'package:bukateria/app/modules/login/views/login_view.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_theme.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_widgets.dart';
 import 'package:bukateria/themes/colors.dart';
@@ -101,12 +102,12 @@ class _OtpViewState extends State<OtpView> {
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                     child: FFButtonWidget(
-                      onPressed: () => Get.to(() => DashboardView()),
+                      onPressed: () => Get.to(() => LoginView()),
                       text: 'Verify',
                       options: FFButtonOptions(
                         width: 130,
                         height: 40,
-                        color: FlutterFlowTheme.of(context).primaryColor,
+                        color: primary,
                         textStyle:
                             FlutterFlowTheme.of(context).subtitle2.override(
                                   fontFamily: 'Poppins',

@@ -82,12 +82,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.NOTIFICATIONS,
-      page: () => const NotificationsView(),
+      page: () => const NotificationView(),
       binding: NotificationsBinding(),
     ),
     GetPage(
       name: _Paths.ORDERS,
-      page: () => const OrdersView(),
+      page: () => const HistoryWidget(),
       binding: OrdersBinding(),
     ),
     GetPage(

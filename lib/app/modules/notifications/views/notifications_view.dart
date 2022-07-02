@@ -1,22 +1,55 @@
+import 'package:bukateria/flutter_flow/flutter_flow_theme.dart';
+import 'package:bukateria/themes/text.dart';
+import 'package:bukateria/widgets/notification_item.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import 'package:get/get.dart';
+class NotificationView extends StatefulWidget {
+  const NotificationView({Key? key}) : super(key: key);
 
-import '../controllers/notifications_controller.dart';
+  @override
+  _NotificationViewState createState() => _NotificationViewState();
+}
 
-class NotificationsView extends GetView<NotificationsController> {
-  const NotificationsView({Key? key}) : super(key: key);
+class _NotificationViewState extends State<NotificationView> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
-        title: const Text('NotificationsView'),
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Notifications',
+          style: title3,
+        ),
+        actions: [],
         centerTitle: true,
+        elevation: 2,
       ),
-      body: Center(
-        child: Text(
-          'NotificationsView is working',
-          style: TextStyle(fontSize: 20),
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      body: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 12, 0, 12),
+                  child: Text(
+                    'This Week',
+                    style: FlutterFlowTheme.of(context).bodyText2,
+                  ),
+                ),
+              ],
+            ),
+            NotificationItem(),
+            NotificationItem(),
+            NotificationItem(),
+          ],
         ),
       ),
     );

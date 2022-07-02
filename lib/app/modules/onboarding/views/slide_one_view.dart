@@ -24,15 +24,15 @@ class SlideOneView extends GetView<OnboardingController> {
               Positioned(
                   bottom: 250,
                   left: 20,
-                  child: Text("Over 5900 \nRecipes \nJust For You",
+                  child: Text("Thousands \nOf Recipes \nJust For You",
                       textAlign: TextAlign.left,
-                      style: title1.copyWith(color: white, fontSize: 40))),
+                      style: title1.copyWith(color: white, fontSize: 27))),
               Positioned(
-                  bottom: 170,
+                  bottom: 190,
                   left: 20,
                   child: Text(
-                      "Bukataria make available to you \nthousands of recipes for African and \nContinental dishes for your delight",
-                      style: body3.copyWith(color: white))),
+                      "Bukataria makes available to you \nrecipes from around the world.",
+                      style: body2.copyWith(color: white))),
             ],
           ),
         )

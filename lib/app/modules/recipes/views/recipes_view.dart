@@ -14,7 +14,7 @@ class RecipesView extends GetView<RecipesController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: white,
-        elevation: 0,
+        elevation: 1,
         title: Text(
           'Recipes',
           style: title4,

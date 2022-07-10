@@ -2,10 +2,8 @@ import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/slide_bg_widget.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../controllers/onboarding_controller.dart';
 
 class SlideOneView extends GetView<OnboardingController> {
@@ -24,14 +22,14 @@ class SlideOneView extends GetView<OnboardingController> {
               Positioned(
                   bottom: 250,
                   left: 20,
-                  child: Text("Thousands \nOf Recipes \nJust For You",
+                  child: Text("Thousands \nOf Recipes \nJust For You.",
                       textAlign: TextAlign.left,
                       style: title1.copyWith(color: white, fontSize: 27))),
               Positioned(
                   bottom: 190,
                   left: 20,
                   child: Text(
-                      "Bukataria makes available to you \nrecipes from around the world.",
+                      "Bukkateria makes available to you \nrecipes from around the world.",
                       style: body2.copyWith(color: white))),
             ],
           ),

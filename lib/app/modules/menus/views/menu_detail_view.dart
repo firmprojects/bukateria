@@ -10,12 +10,13 @@ import 'package:bukateria/widgets/pop_menu.dart';
 import 'package:bukateria/widgets/recipe_card.dart';
 import 'package:bukateria/widgets/related_recipe.dart';
 import 'package:flutter/material.dart';
-
+import 'package:readmore/readmore.dart';
 import 'package:get/get.dart';
 
 class MenuDetailView extends GetView {
-  MenuDetailView({Key? key}) : super(key: key);
+  MenuDetailView({Key? key, required this.menu}) : super(key: key);
   int? countControllerValue;
+  final menu;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +46,7 @@ class MenuDetailView extends GetView {
             pinned: true,
             flexibleSpace: Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/img.jpg"))),
+                  image: DecorationImage(image: AssetImage("${menu.image}"))),
             )),
         SliverList(
             delegate: SliverChildListDelegate([
@@ -55,9 +55,12 @@ class MenuDetailView extends GetView {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: 13,
+                ),
                 Text(
-                  "Pot of Banga Soup",
-                  style: title2.copyWith(fontWeight: FontWeight.w500),
+                  "${menu.title}",
+                  style: title3,
                 ),
                 SizedBox(
                   height: 10,
@@ -82,7 +85,7 @@ class MenuDetailView extends GetView {
                                 shape: BoxShape.circle,
                               ),
                               child: Image.asset(
-                                'assets/images/customer.jpg',
+                                '${menu.user.avatar}',
                               ),
                             ),
                           ),
@@ -90,8 +93,13 @@ class MenuDetailView extends GetView {
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Toyin Kitchen', style: body4),
-                              Text('@toyin_345', style: body5),
+                              Text(
+                                  '${menu.user.firstName} ${menu.user.lastName}',
+                                  style: body4),
+                              Text('${menu.user.platFormName}', style: body5),
+                              SizedBox(
+                                height: 3,
+                              ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -100,7 +108,7 @@ class MenuDetailView extends GetView {
                                     color: green,
                                     size: 20,
                                   ),
-                                  Text('Abuja Nigeria', style: body5),
+                                  Text('${menu.location}', style: body5),
                                 ],
                               ),
                             ],
@@ -123,42 +131,20 @@ class MenuDetailView extends GetView {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 10),
                   child: Text(
                     'Description',
-                    style: title3,
+                    style: title5,
                   ),
                 ),
 
                 // Generated code for this body_text Widget...
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                  child: Text(
-                      'Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your \nYour recipe has been uploaded, you can see it on your profile.',
-                      style: body3),
-                ),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                    child: ReadMoreText(
+                      '${menu.description}',
+                      trimLines: 4,
+                      trimMode: TrimMode.Line,
+                      style: body3,
+                    )),
 
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 10),
-                  child: Text(
-                    'Ingredients',
-                    style: title3,
-                  ),
-                ),
-
-                // Generated code for this ListTile Widget...
-                IngredientItem(
-                  text: "Palm nuts",
-                ),
-                IngredientItem(
-                  text: "Dried Fish",
-                ),
-                IngredientItem(
-                  text: "Table spoon of Salt",
-                ),
-                IngredientItem(
-                  text: "1kg of beef",
-                ),
-                IngredientItem(
-                  text: "Locust beans",
-                ),
                 SizedBox(
                   height: 20,
                 ),
@@ -203,13 +189,13 @@ class MenuDetailView extends GetView {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Delivery To",
+                                          "Pickup Address",
                                           style: title5,
                                         ),
-                                        Text(
-                                          "Change Address",
-                                          style: body3.copyWith(color: blue),
-                                        )
+                                        // Text(
+                                        //   "Change Address",
+                                        //   style: body3.copyWith(color: blue),
+                                        // )
                                       ],
                                     ),
                                     Card(
@@ -257,115 +243,6 @@ class MenuDetailView extends GetView {
                                     SizedBox(
                                       height: 15,
                                     ),
-                                    // Container(
-                                    //   color: grey,
-                                    //   padding: EdgeInsets.all(8),
-                                    //   child: Row(
-                                    //     children: [
-                                    //       Text(
-                                    //         "Delivery Time: ",
-                                    //         style: body2,
-                                    //       ),
-                                    //       Text(
-                                    //         "3 days",
-                                    //         style: title4,
-                                    //       )
-                                    //     ],
-                                    //   ),
-                                    // ),
-                                    // SizedBox(
-                                    //   height: 10,
-                                    // ),
-                                    // Container(
-                                    //   child: Column(
-                                    //     children: [
-                                    //       Row(
-                                    //         children: [
-                                    //           Image.asset(
-                                    //             "assets/images/egusi.jpg",
-                                    //             width: 120,
-                                    //             height: 100,
-                                    //           ),
-                                    //           SizedBox(
-                                    //             width: 20,
-                                    //           ),
-                                    //           Column(
-                                    //             children: [
-                                    //               Text(
-                                    //                 "Pot of Egusi Soup",
-                                    //                 style: title5,
-                                    //               ),
-                                    //               SizedBox(
-                                    //                 height: 10,
-                                    //               ),
-                                    //               Text(
-                                    //                 "With 2kg of beef",
-                                    //                 style: body4,
-                                    //               )
-                                    //             ],
-                                    //           )
-                                    //         ],
-                                    //       ),
-                                    //       SizedBox(
-                                    //         height: 10,
-                                    //       ),
-                                    //       Row(
-                                    //         mainAxisAlignment:
-                                    //             MainAxisAlignment.spaceBetween,
-                                    //         children: [
-                                    //           Text(
-                                    //             "Subtotal(1 pot of soup)",
-                                    //             style: title5,
-                                    //           ),
-                                    //           Text(
-                                    //             "N12,000",
-                                    //             style: title5,
-                                    //           ),
-                                    //         ],
-                                    //       ),
-                                    //       SizedBox(
-                                    //         height: 10,
-                                    //       ),
-                                    //       Row(
-                                    //         mainAxisAlignment:
-                                    //             MainAxisAlignment.spaceBetween,
-                                    //         children: [
-                                    //           Text(
-                                    //             "Shipping",
-                                    //             style: title5,
-                                    //           ),
-                                    //           Text(
-                                    //             "N2,000",
-                                    //             style: title5,
-                                    //           ),
-                                    //         ],
-                                    //       ),
-                                    //       SizedBox(
-                                    //         height: 30,
-                                    //       ),
-                                    //       Row(
-                                    //         mainAxisAlignment:
-                                    //             MainAxisAlignment.spaceBetween,
-                                    //         children: [
-                                    //           Text(
-                                    //             "Total",
-                                    //             style: title5.copyWith(
-                                    //                 color: primary),
-                                    //           ),
-                                    //           Text(
-                                    //             "N2,000",
-                                    //             style: title5,
-                                    //           ),
-                                    //         ],
-                                    //       ),
-                                    //       SizedBox(
-                                    //         height: 20,
-                                    //       ),
-
-                                    //     ],
-                                    //   ),
-                                    // ),
-
                                     CustomButton(
                                         radius: 30,
                                         color: primary,
@@ -380,7 +257,7 @@ class MenuDetailView extends GetView {
                             );
                           });
                     },
-                    color: primary,
+                    color: dark,
                     text: "Place Order"),
 
                 // Generated code for this Row Widget...
@@ -393,24 +270,24 @@ class MenuDetailView extends GetView {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 10),
                   child: Text(
                     'Other menus by @toyin_345',
-                    style: title3,
+                    style: title5,
                   ),
                 ),
                 // Generated code for this menuItem Widget...
                 RelatedRecipe(
-                  title: "Pot of Ogbono Soup",
+                  title: "Okro Soup",
                   text:
                       "A wonderfully delicious 2 patty melt that melts into your...",
-                  image: "assets/images/square.jpg",
+                  image: "assets/images/fd3.jpg",
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 RelatedRecipe(
-                  title: "Beans Cake",
+                  title: "Shakky Pepper soup",
                   text:
                       "A wonderfully delicious 2 patty melt that melts into your...",
-                  image: "assets/images/square.jpg",
+                  image: "assets/images/fd5.jpg",
                 ),
                 SizedBox(
                   height: 10,

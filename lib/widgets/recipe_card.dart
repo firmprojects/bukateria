@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RecipeCard extends StatelessWidget {
-  const RecipeCard({
-    Key? key,
-  }) : super(key: key);
+  RecipeCard({Key? key, required this.index, required this.recipes})
+      : super(key: key);
+
+  final recipes;
+  final index;
 
   @override
   Widget build(BuildContext context) {
+    var recipe = recipes[index];
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,20 +33,21 @@ class RecipeCard extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Image.asset(
-                    'assets/images/customer.jpg',
+                    '${recipe.user.avatar}',
                   ),
                 ),
               ),
-              Text('Toyin Kitchen', style: body5),
+              Text('${recipe.user.firstName} ${recipe.user.lastName}',
+                  style: body5),
             ],
           ),
         ),
         GestureDetector(
-          onTap: () => Get.to(() => RecipeDetailView()),
+          onTap: () => Get.to(() => RecipeDetailView(recipe: recipe)),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
-              'assets/images/square.jpg',
+              '${recipe.image}',
               width: double.infinity,
               height: 151,
               fit: BoxFit.cover,
@@ -53,15 +57,15 @@ class RecipeCard extends StatelessWidget {
         Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
           child: GestureDetector(
-              onTap: () => Get.to(() => RecipeDetailView()),
-              child: Text('Banga Soup',
-                  textAlign: TextAlign.start, style: title5)),
+              onTap: () => Get.to(() => RecipeDetailView(recipe: recipe)),
+              child: Text('${recipe.title}',
+                  textAlign: TextAlign.start, style: title6)),
         ),
         Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text('Food > ', style: body5),
-            Text('60 mins', style: body5),
+            Text('${recipe.category} > ', style: body5),
+            Text('${recipe.duration}', style: body5),
           ],
         ),
       ],

@@ -1,33 +1,34 @@
 import 'package:bukateria/models/ingredients.dart';
+import 'package:bukateria/models/user_model.dart';
 
 class MenusModel {
   String title;
   String description;
-  String userId;
-  String location;
-  List<Ingredients> ingredients;
-  String createdAt;
+  UserModel? user;
+  String? location;
+  List<Ingredients>? ingredients;
+  String? createdAt;
   String image;
-  bool likes;
+  bool? likes;
   int amount;
-  int stars;
+  double? stars;
 
   MenusModel(
       {required this.title,
       required this.description,
-      required this.userId,
-      required this.location,
-      required this.ingredients,
-      required this.createdAt,
+      this.user,
+      this.location,
+      this.ingredients,
+      this.createdAt,
       required this.image,
-      required this.likes,
+      this.likes,
       required this.amount,
-      required this.stars});
+      this.stars});
 
   factory MenusModel.fromJson(Map<String, dynamic> json) => MenusModel(
         title: json['title'],
         description: json['description'],
-        userId: json['userId'],
+        user: json['user'],
         location: json['location'],
         ingredients: json['ingredients'],
         createdAt: json['createdAt'],
@@ -40,7 +41,7 @@ class MenusModel {
   Map<String, dynamic> toJson() => {
         'title': title,
         'description': description,
-        'userId': userId,
+        'user': user,
         'location': location,
         'ingredients': ingredients,
         'createdAt': createdAt,

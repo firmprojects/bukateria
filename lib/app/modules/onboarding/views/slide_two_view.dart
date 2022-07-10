@@ -22,14 +22,14 @@ class SlideTwoView extends GetView<OnboardingController> {
               Positioned(
                   bottom: 250,
                   left: 20,
-                  child: Text("Think Global \nEat Local",
+                  child: Text("Think Global \nEat Local.",
                       textAlign: TextAlign.left,
                       style: title1.copyWith(color: white, fontSize: 27))),
               Positioned(
                   bottom: 190,
                   left: 20,
                   child: Text(
-                      "Order delicious meals from chefs \nwithin walking distance from you",
+                      "Order delicious meals from chefs \nwithin walking distance from you.",
                       style: body2.copyWith(color: white))),
             ],
           ),

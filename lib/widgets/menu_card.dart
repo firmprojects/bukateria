@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bukateria/app/modules/menus/views/menu_detail_view.dart';
 import 'package:bukateria/data/menus_list.dart';
 import 'package:bukateria/themes/colors.dart';
@@ -5,12 +7,16 @@ import 'package:bukateria/themes/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart';
 
 class MenuCardComponentWidget extends StatefulWidget {
   final menus;
   final index;
+  final formatCurrency =
+      NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'NGN');
 
-  const MenuCardComponentWidget(
+  MenuCardComponentWidget(
       {super.key, required this.menus, required this.index});
   @override
   _MenuCardComponentWidgetState createState() =>
@@ -49,7 +55,8 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                     topRight: Radius.circular(12),
                   ),
                   child: GestureDetector(
-                    onTap: () => Get.to(() => MenuDetailView()),
+                    onTap: () => Get.to(
+                        () => MenuDetailView(menu: widget.menus[widget.index])),
                     child: Image.asset(
                       '${menu.image}',
                       width: double.infinity,
@@ -58,25 +65,15 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                     ),
                   ),
                 ),
-                // Align(
-                //   alignment: AlignmentDirectional(1, -1),
-                //   child: Padding(
-                //     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 16, 0),
-                //     child: Container(
-                //       width: 70,
-                //       height: 32,
-                //       decoration: BoxDecoration(
-                //         color: blue,
-                //         borderRadius: BorderRadius.circular(12),
-                //       ),
-                //       alignment: AlignmentDirectional(0, 0),
-                //       child: Padding(
-                //         padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                //         child: Text('menu', style: body5),
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                Positioned(
+                  right: 20,
+                  top: 10,
+                  child: Icon(
+                    menu.likes ? Icons.favorite : Icons.favorite_outline,
+                    color: menu.likes ? primary : dark,
+                    size: 24,
+                  ),
+                ),
               ],
             ),
             Padding(
@@ -93,19 +90,14 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                       ),
-                      child: Image.asset(
-                        'assets/images/customer.jpg',
-                      ),
+                      child: Image.asset('${menu.user.avatar}'),
                     ),
                   ),
                   Expanded(
-                    child: Text('Toyin kitchen', style: body4),
+                    child: Text('${menu.user.firstName} ${menu.user.lastName}',
+                        style: body4),
                   ),
-                  Icon(
-                    Icons.favorite,
-                    color: primary,
-                    size: 24,
-                  ),
+                  Text('${menu.location}', style: body4),
                 ],
               ),
             ),
@@ -121,7 +113,11 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
-              child: Text('${menu.description}', style: body4),
+              child: Text('${menu.description}',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                  softWrap: false,
+                  style: body4),
             ),
             SizedBox(
               height: 12,
@@ -148,8 +144,8 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text('${menu.amount}', style: title5),
-                      Text('${menu.location}', style: body4),
+                      Text('${widget.formatCurrency.format(menu.amount)}',
+                          style: title5),
                     ],
                   ),
                 ],

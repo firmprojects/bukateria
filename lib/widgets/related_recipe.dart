@@ -21,7 +21,7 @@ class RelatedRecipe extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            blurRadius: 3,
+            blurRadius: 1,
             color: Color(0x411D2429),
             offset: Offset(0, 1),
           )
@@ -53,12 +53,12 @@ class RelatedRecipe extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('$title', style: title5),
+                    Text('$title', style: title6),
                     Expanded(
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 4, 8, 0),
                         child: AutoSizeText('$text',
-                            textAlign: TextAlign.start, style: body3),
+                            textAlign: TextAlign.start, style: body4),
                       ),
                     ),
                   ],

@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
           onPressed: onPressed,
           child: Text(
             text,
-            style: body3.copyWith(color: white),
+            style: title5.copyWith(color: white),
           )
           // controller.isLoading.value
           //     ? Row(mainAxisAlignment: MainAxisAlignment.center, children: [

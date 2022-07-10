@@ -34,21 +34,41 @@ class SocialRegisterView extends GetView<RegisterController> {
                 fit: BoxFit.contain,
               ),
             ),
-            Text(
-              "Think Global \nEat Local",
-              textAlign: TextAlign.center,
-              style: title1,
+            const CustomInput(
+              height: 70,
+              hintText: "Email",
+              labelText: "Email",
+              keyboardType: TextInputType.emailAddress,
+              prefixIcon: Icons.email,
+              borderRadius: 10,
             ),
+            const CustomInput(
+              height: 70,
+              hintText: "Password",
+              labelText: "Password",
+              keyboardType: TextInputType.text,
+              isPassword: true,
+              prefixIcon: Icons.lock,
+              borderRadius: 10,
+            ),
+            const CustomInput(
+              height: 70,
+              hintText: "Confirm Password",
+              labelText: "Confirm Password",
+              keyboardType: TextInputType.text,
+              isPassword: true,
+              prefixIcon: Icons.lock,
+              borderRadius: 10,
+            ),
+            CustomButton(
+                width: Get.width,
+                radius: 30,
+                height: 50,
+                text: "Create Account",
+                color: primary,
+                onPressed: () => Get.to(() => OtpView())),
             SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Delicious meals at waking distance",
-              textAlign: TextAlign.center,
-              style: body2,
-            ),
-            SizedBox(
-              height: 20,
+              height: 15,
             ),
             CustomButton(
                 width: Get.width,
@@ -59,16 +79,6 @@ class SocialRegisterView extends GetView<RegisterController> {
                 onPressed: () => Get.to(() => SocialLoginView())),
             SizedBox(
               height: 20,
-            ),
-            CustomButton(
-                width: Get.width,
-                radius: 30,
-                height: 50,
-                text: "Sign Up With Facebook",
-                color: blue,
-                onPressed: () => Get.to(() => SocialLoginView())),
-            SizedBox(
-              height: 15,
             ),
             GestureDetector(
               onTap: () => Get.to(() => SocialLoginView()),

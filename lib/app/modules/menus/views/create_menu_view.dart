@@ -4,6 +4,7 @@ import 'package:bukateria/flutter_flow/flutter_flow_theme.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_widgets.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
+import 'package:bukateria/widgets/custom_button.dart';
 import 'package:bukateria/widgets/radio_button_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart';
@@ -78,11 +79,14 @@ class _AddMenuState extends State<AddMenu> {
         backgroundColor: white,
         iconTheme: IconThemeData(color: dark),
         automaticallyImplyLeading: true,
-        title: Text(
-          "Create menu",
-          style: title4,
-        ),
-        actions: [],
+        actions: [
+          CustomButton(
+              radius: 10,
+              height: 20,
+              onPressed: () {},
+              width: 100,
+              text: "Publish")
+        ],
         centerTitle: true,
         elevation: 0,
       ),

@@ -1,3 +1,4 @@
+import 'package:bukateria/app/modules/pages/google_places_search.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_theme.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_widgets.dart';
@@ -7,6 +8,8 @@ import 'package:bukateria/widgets/radio_button_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_awesome_select/flutter_awesome_select.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddMenu extends StatefulWidget {
@@ -37,6 +40,35 @@ class _AddMenuState extends State<AddMenu> {
   }
 
   MenuType? _menuType;
+
+  String value = 'cuisines';
+  List<S2Choice<String>> options = [
+    S2Choice<String>(value: 'african', title: 'African'),
+    S2Choice<String>(value: 'american', title: 'American'),
+    S2Choice<String>(value: 'Brazilian', title: 'Brazilian'),
+    S2Choice<String>(value: 'british', title: 'British'),
+    S2Choice<String>(value: 'cajun', title: 'Cajun'),
+    S2Choice<String>(value: 'chinese', title: 'Chinese'),
+    S2Choice<String>(value: 'french', title: 'French'),
+    S2Choice<String>(value: 'german', title: 'German'),
+    S2Choice<String>(value: 'greek', title: 'Greek'),
+    S2Choice<String>(value: 'italian', title: 'Italian'),
+    S2Choice<String>(value: 'indian', title: 'Indian'),
+    S2Choice<String>(value: 'indonesian', title: 'Indonesian'),
+    S2Choice<String>(value: 'japanese', title: 'Japanese'),
+    S2Choice<String>(value: 'korean', title: 'Korean'),
+    S2Choice<String>(value: 'lebanese', title: 'Lebanese'),
+    S2Choice<String>(value: 'mediterranean', title: 'Mediterranean'),
+    S2Choice<String>(value: 'mexican', title: 'Mexican'),
+    S2Choice<String>(value: 'moroccan', title: 'Moroccan'),
+    S2Choice<String>(value: 'pakistani', title: 'Pakistani'),
+    S2Choice<String>(value: 'russian', title: 'Russian'),
+    S2Choice<String>(value: 'spanish', title: 'Spanish'),
+    S2Choice<String>(value: 'thai', title: 'Thai'),
+    S2Choice<String>(value: 'turkish', title: 'Turkish'),
+    S2Choice<String>(value: 'Vietnamese', title: 'Vietnamese'),
+    S2Choice<String>(value: 'others', title: 'Others'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +189,49 @@ class _AddMenuState extends State<AddMenu> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(
+                      'Select Origin',
+                      style: title4,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => Get.to(() => PlaceSearch()),
+                    child: Container(
+                        color: greyLight.withOpacity(0.3),
+                        child: ListTile(
+                          title: Text(
+                            "Pickup location",
+                            style: body3,
+                          ),
+                          trailing: Icon(
+                            Icons.arrow_forward_ios,
+                            size: 18,
+                          ),
+                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
+                    child: Text(
+                      'Select Type of Cuisines',
+                      style: title4,
+                    ),
+                  ),
+                  Container(
+                    color: greyLight.withOpacity(0.3),
+                    child: SmartSelect<String>.single(
+                        choiceType: S2ChoiceType.chips,
+                        placeholder: "",
+                        selectedValue: value,
+                        title: 'Select one',
+                        choiceItems: options,
+                        onChange: (state) =>
+                            setState(() => value = state.value)),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
+                    child: Text(
                       'Select Menu Category',
                       style: title4,
                     ),
@@ -199,6 +274,73 @@ class _AddMenuState extends State<AddMenu> {
                   ),
                   SizedBox(
                     height: 20,
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
+                    child: Text(
+                      'Select Delivery Type',
+                      style: title4,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomRadio(
+                          menuType: _menuType,
+                          title: "POD",
+                          value: MenuType.POD,
+                          onChanged: (val) {
+                            setState(() {
+                              _menuType = val;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: CustomRadio(
+                          menuType: _menuType,
+                          title: MenuType.Pickup.name,
+                          value: MenuType.Pickup,
+                          onChanged: (val) {
+                            setState(() {
+                              _menuType = val;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                    child: TextFormField(
+                      controller: descriptionController,
+                      onChanged: (val) {},
+                      autofocus: true,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        // labelText: 'Description',
+                        hintText: 'Enter your pick address',
+                        hintStyle: body3.copyWith(color: grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: grey,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: grey,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        filled: true,
+                        fillColor: greyLight.withOpacity(0.2),
+                      ),
+                      maxLines: 3,
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),

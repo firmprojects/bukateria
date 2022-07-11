@@ -4,7 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
-enum MenuType { Main, Appetizer, Drink }
+enum MenuType { Main, Appetizer, Drink, POD, Pickup }
 
 class CustomRadio extends StatelessWidget {
   CustomRadio(

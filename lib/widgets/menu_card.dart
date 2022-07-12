@@ -65,15 +65,15 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                     ),
                   ),
                 ),
-                Positioned(
-                  right: 20,
-                  top: 10,
-                  child: Icon(
-                    menu.likes ? Icons.favorite : Icons.favorite_outline,
-                    color: menu.likes ? primary : dark,
-                    size: 24,
-                  ),
-                ),
+                // Positioned(
+                //   right: 20,
+                //   top: 10,
+                //   child: Icon(
+                //     menu.likes ? Icons.favorite : Icons.favorite_outline,
+                //     color: menu.likes ? primary : dark,
+                //     size: 24,
+                //   ),
+                // ),
               ],
             ),
             Padding(
@@ -97,7 +97,19 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                     child: Text('${menu.user.firstName} ${menu.user.lastName}',
                         style: body4),
                   ),
-                  Text('${menu.location}', style: body4),
+                  Row(
+                    children: [
+                      Icon(
+                        menu.likes ? Icons.favorite : Icons.favorite_outline,
+                        color: menu.likes ? primary : dark,
+                        size: 24,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("2,500")
+                    ],
+                  ),
                 ],
               ),
             ),

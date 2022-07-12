@@ -4,8 +4,8 @@ import 'package:bukateria/widgets/profile_menu_card.dart';
 import 'package:bukateria/widgets/recipe_card.dart';
 import 'package:flutter/material.dart';
 
-class ProfileMenusList extends StatelessWidget {
-  const ProfileMenusList({
+class ProfileExploreList extends StatelessWidget {
+  const ProfileExploreList({
     Key? key,
   }) : super(key: key);
 
@@ -19,7 +19,7 @@ class ProfileMenusList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "My Menus",
+            "My Explore Posts",
             style: title4,
           ),
           SizedBox(

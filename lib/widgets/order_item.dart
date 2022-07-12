@@ -93,9 +93,15 @@ class OrderItem extends StatelessWidget {
                     child: Text(
                       '\N$cost',
                       textAlign: TextAlign.end,
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: title6,
                     ),
                   ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  status == 'delivered'
+                      ? Text("Re-Order", style: title5.copyWith(color: blue))
+                      : Text(""),
                 ],
               ),
             ],

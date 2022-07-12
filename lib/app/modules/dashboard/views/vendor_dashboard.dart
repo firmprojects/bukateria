@@ -1,4 +1,5 @@
 import 'package:bukateria/app/modules/account/views/account_view.dart';
+import 'package:bukateria/app/modules/favourites/views/favourites_view.dart';
 import 'package:bukateria/app/modules/home/views/home_view.dart';
 import 'package:bukateria/app/modules/menus/views/menus_view.dart';
 import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
@@ -26,7 +27,7 @@ class VendorDashboard extends StatefulWidget {
 class _VendorDashboardState extends State<VendorDashboard> {
   final screens = [
     ProfilesView(),
-    NotificationView(),
+    FavouritesView(),
     CreateView(),
     VendorOrdersWidget(),
     AccountPageWidget()
@@ -61,8 +62,8 @@ class _VendorDashboardState extends State<VendorDashboard> {
                         });
                       }),
                   IconBottomBar(
-                      text: "Notifications",
-                      icon: Icons.notifications_outlined,
+                      text: "Favourites",
+                      icon: Icons.favorite_outline,
                       selected: false,
                       onPressed: () {
                         setState(() {

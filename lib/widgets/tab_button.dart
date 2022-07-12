@@ -27,7 +27,7 @@ class TabButton extends StatelessWidget {
           child: Text(
             text,
             style: GoogleFonts.montserrat(
-                color: selectedpage == pageNum ? primary : dark),
+                color: selectedpage == pageNum ? white : dark),
           )),
     );
   }

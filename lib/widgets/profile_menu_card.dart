@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-class RecipeCard extends StatelessWidget {
-  RecipeCard({Key? key, required this.index, required this.recipes})
+class ProfileMenuCard extends StatelessWidget {
+  ProfileMenuCard({Key? key, required this.index, required this.recipes})
       : super(key: key);
 
   final recipes;
@@ -64,8 +64,7 @@ class RecipeCard extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text('${recipe.category} > ', style: body5),
-            Text('${recipe.duration}', style: body5),
+            Text('Date: March 5th, 2022', style: body5),
           ],
         ),
       ],

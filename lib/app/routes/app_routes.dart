@@ -17,6 +17,7 @@ abstract class Routes {
   static const ACCOUNT = _Paths.ACCOUNT;
   static const PAYMENT = _Paths.PAYMENT;
   static const VLOG = _Paths.VLOG;
+  static const FAVOURITES = _Paths.FAVOURITES;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const ACCOUNT = '/account';
   static const PAYMENT = '/payment';
   static const VLOG = '/vlog';
+  static const FAVOURITES = '/favourites';
 }

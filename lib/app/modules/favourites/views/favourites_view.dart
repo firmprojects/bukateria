@@ -5,14 +5,14 @@ import 'package:bukateria/widgets/related_recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NotificationView extends StatefulWidget {
-  const NotificationView({Key? key}) : super(key: key);
+class FavouritesView extends StatefulWidget {
+  const FavouritesView({Key? key}) : super(key: key);
 
   @override
-  _NotificationViewState createState() => _NotificationViewState();
+  _FavouritesViewState createState() => _FavouritesViewState();
 }
 
-class _NotificationViewState extends State<NotificationView> {
+class _FavouritesViewState extends State<FavouritesView> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -23,7 +23,7 @@ class _NotificationViewState extends State<NotificationView> {
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         automaticallyImplyLeading: false,
         title: Text(
-          'Notifications',
+          'Favourites',
           style: title3,
         ),
         actions: [],
@@ -33,25 +33,28 @@ class _NotificationViewState extends State<NotificationView> {
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 12, 0, 12),
-                    child: Text(
-                      'This Week',
-                      style: FlutterFlowTheme.of(context).bodyText2,
-                    ),
-                  ),
-                ],
+              RelatedRecipe(
+                title: "Okro Soup",
+                text:
+                    "A wonderfully delicious 2 patty melt that melts into your...",
+                image: "assets/images/fd3.jpg",
               ),
-              NotificationItem(),
-              NotificationItem(),
-              NotificationItem(),
+              SizedBox(
+                height: 10,
+              ),
+              RelatedRecipe(
+                title: "Shakky Pepper soup",
+                text:
+                    "A wonderfully delicious 2 patty melt that melts into your...",
+                image: "assets/images/fd5.jpg",
+              ),
+              SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),

@@ -6,13 +6,20 @@ import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/custom_button.dart';
 import 'package:bukateria/widgets/custom_input.dart';
 import 'package:flutter/material.dart';
+import 'package:country_picker/country_picker.dart';
 
 import 'package:get/get.dart';
 
 import '../controllers/register_controller.dart';
 
-class SocialRegisterView extends GetView<RegisterController> {
-  const SocialRegisterView({Key? key}) : super(key: key);
+class SocialRegisterView extends StatefulWidget {
+  SocialRegisterView({Key? key, this.selectedCountry}) : super(key: key);
+  String? selectedCountry;
+  @override
+  State<SocialRegisterView> createState() => _SocialRegisterViewState();
+}
+
+class _SocialRegisterViewState extends State<SocialRegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,13 +67,42 @@ class SocialRegisterView extends GetView<RegisterController> {
               prefixIcon: Icons.lock,
               borderRadius: 10,
             ),
+            GestureDetector(
+              onTap: () => {
+                showCountryPicker(
+                  context: context,
+                  showPhoneCode:
+                      true, // optional. Shows phone code before the country name.
+                  onSelect: (Country country) {
+                    setState(
+                        () => widget.selectedCountry = country.displayName);
+                    print('Select country: ${country.displayName}');
+                  },
+                )
+              },
+              child: Container(
+                  color: greyLight.withOpacity(0.3),
+                  child: ListTile(
+                    title: Text(
+                      "Select Country",
+                      style: body3,
+                    ),
+                    trailing: widget.selectedCountry == null
+                        ? Text("")
+                        : Container(
+                            child: Text(widget.selectedCountry.toString())),
+                  )),
+            ),
+            SizedBox(
+              height: 20,
+            ),
             CustomButton(
                 width: Get.width,
                 radius: 30,
                 height: 50,
                 text: "Create Account",
                 color: primary,
-                onPressed: () => Get.to(() => OtpView())),
+                onPressed: () => {}),
             SizedBox(
               height: 15,
             ),

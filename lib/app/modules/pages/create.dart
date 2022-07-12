@@ -1,4 +1,5 @@
 import 'package:bukateria/app/modules/menus/views/create_menu_view.dart';
+import 'package:bukateria/app/modules/pages/holder.dart';
 import 'package:bukateria/app/modules/recipes/views/create_recipe_view.dart';
 import 'package:bukateria/app/modules/vlog/views/add_vlog_view.dart';
 import 'package:bukateria/themes/colors.dart';
@@ -77,7 +78,7 @@ class CreateView extends StatelessWidget {
                         Get.to(() => AddVlog());
                       },
                       width: 90,
-                      text: "Vlog"),
+                      text: "Explore"),
                 ],
               )
             ],

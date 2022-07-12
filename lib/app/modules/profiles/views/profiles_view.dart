@@ -6,7 +6,9 @@ import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/custom_button.dart';
 import 'package:bukateria/widgets/custom_dialog.dart';
 import 'package:bukateria/widgets/pop_menu.dart';
+import 'package:bukateria/widgets/profile_explore_list.dart';
 import 'package:bukateria/widgets/profile_menu_list.dart';
+import 'package:bukateria/widgets/profile_recipe_list.dart';
 import 'package:bukateria/widgets/tab_button.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +34,7 @@ class ProfilesView extends StatelessWidget {
           )
         ],
         centerTitle: true,
-        elevation: 0,
+        elevation: 1,
       ),
       backgroundColor: white,
       body: SafeArea(
@@ -159,6 +161,14 @@ class ProfilesView extends StatelessWidget {
                             controller.getPage(1);
                           },
                         ),
+                        TabButton(
+                          text: "Explore",
+                          pageNum: 2,
+                          selectedpage: controller.selectedPage.value,
+                          onPressed: () {
+                            controller.getPage(2);
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -173,9 +183,8 @@ class ProfilesView extends StatelessWidget {
                     controller: controller.pagecontroller,
                     children: [
                       ProfileMenusList(),
-                      Center(
-                        child: Text("Recipes list here"),
-                      )
+                      ProfileRecipeList(),
+                      ProfileExploreList(),
                     ],
                   ),
                 ),

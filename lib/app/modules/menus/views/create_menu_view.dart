@@ -170,11 +170,7 @@ class _AddMenuState extends State<AddMenu> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                     child: TextFormField(
                       controller: fullNameController,
-                      onChanged: (_) => EasyDebounce.debounce(
-                        'fullNameController',
-                        Duration(milliseconds: 2000),
-                        () => setState(() {}),
-                      ),
+                      onChanged: (val) {},
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -204,11 +200,7 @@ class _AddMenuState extends State<AddMenu> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                     child: TextFormField(
                       controller: descriptionController,
-                      onChanged: (_) => EasyDebounce.debounce(
-                        'descriptionController',
-                        Duration(milliseconds: 2000),
-                        () => setState(() {}),
-                      ),
+                      onChanged: (val) {},
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -235,6 +227,39 @@ class _AddMenuState extends State<AddMenu> {
                       maxLines: 4,
                     ),
                   ),
+
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                    child: TextFormField(
+                      controller: fullNameController,
+                      onChanged: (val) {},
+                      autofocus: true,
+                      obscureText: false,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: 'Amount',
+                        hintText: 'Amount',
+                        hintStyle: body3.copyWith(color: grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFFE5E5E5),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFFE5E5E5),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        filled: true,
+                        fillColor: greyLight.withOpacity(0.2),
+                      ),
+                    ),
+                  ),
+
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(
@@ -422,11 +447,7 @@ class _AddMenuState extends State<AddMenu> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                           child: TextFormField(
                             controller: addIngredientFieldController1,
-                            onChanged: (_) => EasyDebounce.debounce(
-                              'addIngredientFieldController1',
-                              Duration(milliseconds: 2000),
-                              () => setState(() {}),
-                            ),
+                            onChanged: (val) {},
                             autofocus: true,
                             obscureText: false,
                             decoration: InputDecoration(
@@ -483,11 +504,7 @@ class _AddMenuState extends State<AddMenu> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                           child: TextFormField(
                             controller: addIngredientFieldController2,
-                            onChanged: (_) => EasyDebounce.debounce(
-                              'addIngredientFieldController2',
-                              Duration(milliseconds: 2000),
-                              () => setState(() {}),
-                            ),
+                            onChanged: (val) {},
                             autofocus: true,
                             obscureText: false,
                             decoration: InputDecoration(

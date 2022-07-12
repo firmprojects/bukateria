@@ -1,14 +1,11 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/custom_button.dart';
 import 'package:bukateria/widgets/custom_input.dart';
 import 'package:bukateria/widgets/ingredientItem.dart';
-import 'package:bukateria/widgets/method_widget.dart';
 import 'package:bukateria/widgets/pop_menu.dart';
 import 'package:bukateria/widgets/related_recipe.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 
@@ -28,11 +25,6 @@ class RecipeDetailView extends GetView {
               iconTheme: IconThemeData(color: dark),
               expandedHeight: 250,
               actions: [
-                Icon(
-                  Icons.favorite_outline,
-                  color: dark,
-                  size: 30,
-                ),
                 PopMenu(),
               ],
               pinned: true,
@@ -108,13 +100,30 @@ class RecipeDetailView extends GetView {
                           ],
                         ),
                       ),
-                      CustomButton(
-                          width: 90,
-                          radius: 30,
-                          height: 35,
-                          color: primary,
-                          onPressed: () => {},
-                          text: "Follow")
+                      Column(
+                        children: [
+                          CustomButton(
+                              width: 90,
+                              radius: 30,
+                              height: 35,
+                              color: primary,
+                              onPressed: () => {},
+                              text: "Follow"),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.favorite_outline,
+                                color: dark,
+                                size: 25,
+                              ),
+                              Text("2,500"),
+                            ],
+                          ),
+                        ],
+                      )
                     ],
                   ),
 

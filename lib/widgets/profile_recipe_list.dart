@@ -1,11 +1,10 @@
 import 'package:bukateria/data/menus_list.dart';
 import 'package:bukateria/themes/text.dart';
-import 'package:bukateria/widgets/profile_menu_card.dart';
 import 'package:bukateria/widgets/recipe_card.dart';
 import 'package:flutter/material.dart';
 
-class ProfileMenusList extends StatelessWidget {
-  const ProfileMenusList({
+class ProfileRecipeList extends StatelessWidget {
+  const ProfileRecipeList({
     Key? key,
   }) : super(key: key);
 
@@ -19,7 +18,7 @@ class ProfileMenusList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "My Menus",
+            "My Recipes",
             style: title4,
           ),
           SizedBox(
@@ -37,7 +36,7 @@ class ProfileMenusList extends StatelessWidget {
               ),
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                return ProfileMenuCard(recipes: menus, index: index);
+                return RecipeCard(recipes: recipes, index: index);
               },
             ),
           ),

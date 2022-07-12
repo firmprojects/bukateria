@@ -1,3 +1,4 @@
+import 'package:bukateria/app/modules/account/views/chef_settings.dart';
 import 'package:bukateria/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:bukateria/app/modules/dashboard/views/vendor_dashboard.dart';
 import 'package:bukateria/data/menus_list.dart';
@@ -25,7 +26,7 @@ class _RecipesViewState extends State<RecipesView> {
 
   void switchRole() {
     if (_checked == true) {
-      Get.to(() => VendorDashboard());
+      Get.to(() => ChefSettings());
     } else {
       Get.to(() => DashboardView());
     }

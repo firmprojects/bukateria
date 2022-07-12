@@ -26,10 +26,10 @@ class SlideTwoView extends GetView<OnboardingController> {
                       textAlign: TextAlign.left,
                       style: title1.copyWith(color: white, fontSize: 27))),
               Positioned(
-                  bottom: 190,
+                  bottom: 160,
                   left: 20,
                   child: Text(
-                      "Order delicious meals from chefs \nwithin walking distance from you.",
+                      "Order delicious meals on Bukkateria \nfrom chefs within walking distance \nfrom you",
                       style: body2.copyWith(color: white))),
             ],
           ),

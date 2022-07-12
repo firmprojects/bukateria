@@ -26,10 +26,10 @@ class SlideOneView extends GetView<OnboardingController> {
                       textAlign: TextAlign.left,
                       style: title1.copyWith(color: white, fontSize: 27))),
               Positioned(
-                  bottom: 190,
+                  bottom: 160,
                   left: 20,
                   child: Text(
-                      "Bukkateria makes available to you \nrecipes from around the world.",
+                      "View recipes from around the world \nand also share your favorite recipes and \nfood adventures with your followers",
                       style: body2.copyWith(color: white))),
             ],
           ),

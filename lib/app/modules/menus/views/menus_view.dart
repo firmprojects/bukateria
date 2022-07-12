@@ -26,7 +26,7 @@ class _MenusViewState extends State<MenusView> {
 
   void switchRole() {
     if (_checked == true) {
-      Get.offAll(() => ChefSettings());
+      Get.to(() => ChefSettings());
     } else {
       Get.to(() => DashboardView());
     }

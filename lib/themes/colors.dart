@@ -7,4 +7,4 @@ const Color green = Color(0xff00cd3d);
 const Color greyLight = Color(0xffc6c6c6);
 const Color dark = Color(0xFF5E5E5E);
 const Color white = Color(0xFFFFFFFF);
-const Color grey = Color(0xFFD5DBDB);
+const Color grey = Color.fromARGB(255, 161, 161, 161);

@@ -26,6 +26,8 @@ import '../modules/recipes/bindings/recipes_binding.dart';
 import '../modules/recipes/views/recipes_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/vlog/bindings/vlog_binding.dart';
+import '../modules/vlog/views/vlog_view.dart';
 
 part 'app_routes.dart';
 
@@ -99,6 +101,11 @@ class AppPages {
       name: _Paths.PAYMENT,
       page: () => const PaymentWidget(),
       binding: PaymentBinding(),
+    ),
+    GetPage(
+      name: _Paths.VLOG,
+      page: () => const VlogView(),
+      binding: VlogBinding(),
     ),
   ];
 }

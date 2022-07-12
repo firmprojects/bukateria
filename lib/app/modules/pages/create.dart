@@ -1,5 +1,6 @@
 import 'package:bukateria/app/modules/menus/views/create_menu_view.dart';
 import 'package:bukateria/app/modules/recipes/views/create_recipe_view.dart';
+import 'package:bukateria/app/modules/vlog/views/add_vlog_view.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/custom_button.dart';
@@ -47,11 +48,11 @@ class CreateView extends StatelessWidget {
                   CustomButton(
                       radius: 10,
                       color: dark,
-                      height: 30,
+                      height: 35,
                       onPressed: () {
                         Get.to(() => AddMenu());
                       },
-                      width: 100,
+                      width: 90,
                       text: "menu"),
                   SizedBox(
                     width: 10,
@@ -59,10 +60,24 @@ class CreateView extends StatelessWidget {
                   CustomButton(
                       radius: 10,
                       color: dark,
-                      height: 30,
-                      onPressed: () {},
-                      width: 100,
-                      text: "Recipe")
+                      height: 35,
+                      onPressed: () {
+                        Get.to(() => AddRecipe());
+                      },
+                      width: 90,
+                      text: "Recipe"),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  CustomButton(
+                      radius: 10,
+                      color: dark,
+                      height: 35,
+                      onPressed: () {
+                        Get.to(() => AddVlog());
+                      },
+                      width: 90,
+                      text: "Vlog"),
                 ],
               )
             ],

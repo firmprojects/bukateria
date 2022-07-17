@@ -153,109 +153,110 @@ class MenuDetailView extends GetView {
                     radius: 30,
                     height: 45,
                     onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(30))),
-                          builder: (context) {
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20, right: 20, top: 30),
-                              child: Container(
-                                height: Get.height * 0.4,
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Order",
-                                          style: title3,
-                                        ),
-                                        Text(
-                                          "ID: 5673h33",
-                                          style: title5,
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 25,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Pickup Address",
-                                          style: title5,
-                                        ),
-                                        // Text(
-                                        //   "Change Address",
-                                        //   style: body3.copyWith(color: blue),
-                                        // )
-                                      ],
-                                    ),
-                                    Card(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 5),
-                                              child: Row(
-                                                children: [
-                                                  Icon(Icons.location_pin),
-                                                  Text("Abuja, Nigeria")
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 5),
-                                              child: Row(
-                                                children: [
-                                                  Icon(Icons.person),
-                                                  Text("Shola Kilode")
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 5),
-                                              child: Row(
-                                                children: [
-                                                  Icon(Icons.phone),
-                                                  Text("+234-801-998882282")
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    CustomButton(
-                                        radius: 30,
-                                        color: primary,
-                                        height: 40,
-                                        onPressed: () =>
-                                            Get.to(() => PaymentWidget()),
-                                        width: 200,
-                                        text: "Confirm order")
-                                  ],
-                                ),
-                              ),
-                            );
-                          });
+                      // showModalBottomSheet(
+                      //     context: context,
+                      //     isScrollControlled: true,
+                      //     shape: RoundedRectangleBorder(
+                      //         borderRadius: BorderRadius.vertical(
+                      //             top: Radius.circular(30))),
+                      //     builder: (context) {
+                      //       return Padding(
+                      //         padding: const EdgeInsets.only(
+                      //             left: 20, right: 20, top: 30),
+                      //         child: Container(
+                      //           height: Get.height * 0.4,
+                      //           child: Column(
+                      //             children: [
+                      //               Row(
+                      //                 mainAxisAlignment:
+                      //                     MainAxisAlignment.spaceBetween,
+                      //                 children: [
+                      //                   Text(
+                      //                     "Order",
+                      //                     style: title3,
+                      //                   ),
+                      //                   Text(
+                      //                     "ID: 5673h33",
+                      //                     style: title5,
+                      //                   )
+                      //                 ],
+                      //               ),
+                      //               SizedBox(
+                      //                 height: 25,
+                      //               ),
+                      //               Row(
+                      //                 mainAxisAlignment:
+                      //                     MainAxisAlignment.spaceBetween,
+                      //                 children: [
+                      //                   Text(
+                      //                     "Pickup Address",
+                      //                     style: title5,
+                      //                   ),
+                      //                   // Text(
+                      //                   //   "Change Address",
+                      //                   //   style: body3.copyWith(color: blue),
+                      //                   // )
+                      //                 ],
+                      //               ),
+                      //               Card(
+                      //                 child: Padding(
+                      //                   padding: const EdgeInsets.all(8.0),
+                      //                   child: Column(
+                      //                     children: [
+                      //                       Padding(
+                      //                         padding:
+                      //                             const EdgeInsets.symmetric(
+                      //                                 vertical: 5),
+                      //                         child: Row(
+                      //                           children: [
+                      //                             Icon(Icons.location_pin),
+                      //                             Text("Abuja, Nigeria")
+                      //                           ],
+                      //                         ),
+                      //                       ),
+                      //                       Padding(
+                      //                         padding:
+                      //                             const EdgeInsets.symmetric(
+                      //                                 vertical: 5),
+                      //                         child: Row(
+                      //                           children: [
+                      //                             Icon(Icons.person),
+                      //                             Text("Shola Kilode")
+                      //                           ],
+                      //                         ),
+                      //                       ),
+                      //                       Padding(
+                      //                         padding:
+                      //                             const EdgeInsets.symmetric(
+                      //                                 vertical: 5),
+                      //                         child: Row(
+                      //                           children: [
+                      //                             Icon(Icons.phone),
+                      //                             Text("+234-801-998882282")
+                      //                           ],
+                      //                         ),
+                      //                       ),
+                      //                     ],
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //               SizedBox(
+                      //                 height: 15,
+                      //               ),
+                      //               CustomButton(
+                      //                   radius: 30,
+                      //                   color: primary,
+                      //                   height: 40,
+                      //                   onPressed: () =>
+                      //                       Get.to(() => PaymentWidget()),
+                      //                   width: 200,
+                      //                   text: "Confirm order")
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       );
+                      //     });
+                      // Get.to(() => PaymentWidget());
                     },
                     color: dark,
                     text: "Place Order"),

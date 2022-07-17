@@ -1,4 +1,5 @@
 import 'package:bukateria/app/modules/login/views/role_view_view.dart';
+import 'package:bukateria/app/modules/login/views/social_login_view.dart';
 import 'package:bukateria/app/modules/profiles/controllers/profiles_controller.dart';
 import 'package:bukateria/data/menu_items.dart';
 import 'package:bukateria/models/menu_item_model.dart';
@@ -61,7 +62,7 @@ class PopMenu extends StatelessWidget {
           }
 
           if (item == MenuItems.logout) {
-            Get.offAll(() => RoleRedirectWidget());
+            Get.offAll(() => SocialLoginView());
           }
         }),
         itemBuilder: (context) => [

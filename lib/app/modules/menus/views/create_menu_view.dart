@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bukateria/widgets/deliverytype_radio_button_widget.dart';
 import 'package:flutter/services.dart';
 
 import 'package:bukateria/app/modules/pages/google_places_search.dart';
@@ -7,14 +8,10 @@ import 'package:bukateria/flutter_flow/flutter_flow_theme.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_widgets.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
-import 'package:bukateria/widgets/custom_button.dart';
 import 'package:bukateria/widgets/radio_button_widget.dart';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_awesome_select/flutter_awesome_select.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddMenu extends StatefulWidget {
@@ -45,6 +42,7 @@ class _AddMenuState extends State<AddMenu> {
   }
 
   MenuType? _menuType;
+  DeliveryType? _deliveryType;
 
   String value = 'cuisines';
   List<S2Choice<String>> options = [
@@ -145,8 +143,8 @@ class _AddMenuState extends State<AddMenu> {
                       alignment: Alignment.center,
                       width: double.infinity,
                       child: Text(
-                        "Tap to upload menu image",
-                        style: title3,
+                        "Tap to upload image/video",
+                        style: title4,
                         textAlign: TextAlign.center,
                       ),
                       decoration: BoxDecoration(
@@ -174,9 +172,10 @@ class _AddMenuState extends State<AddMenu> {
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Food Name',
+                        labelText: 'Meal Title',
                         hintText: 'Title: e.g Vegetable Salad',
-                        hintStyle: title3.copyWith(color: grey),
+                        hintStyle: title3,
+                        labelStyle: body3,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFFE5E5E5),
@@ -206,7 +205,7 @@ class _AddMenuState extends State<AddMenu> {
                       decoration: InputDecoration(
                         // labelText: 'Description',
                         hintText: 'Briefly describe your menu here',
-                        hintStyle: body3.copyWith(color: grey),
+                        hintStyle: body3,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: greyLight.withOpacity(0.3),
@@ -237,9 +236,10 @@ class _AddMenuState extends State<AddMenu> {
                       obscureText: false,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: 'Amount',
-                        hintText: 'Amount',
-                        hintStyle: body3.copyWith(color: grey),
+                        labelText: 'Price',
+                        hintText: 'Price',
+                        hintStyle: body3.copyWith(color: grey.withOpacity(0.3)),
+                        labelStyle: body3,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFFE5E5E5),
@@ -263,8 +263,8 @@ class _AddMenuState extends State<AddMenu> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(
-                      'Select Origin',
-                      style: title4,
+                      'Origin',
+                      style: title5,
                     ),
                   ),
                   GestureDetector(
@@ -285,8 +285,8 @@ class _AddMenuState extends State<AddMenu> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(
-                      'Select Type of Cuisines',
-                      style: title4,
+                      'Type of Cuisines',
+                      style: title5,
                     ),
                   ),
                   Container(
@@ -306,13 +306,13 @@ class _AddMenuState extends State<AddMenu> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(
-                      'Select Menu Category',
-                      style: title4,
+                      'Menu Category',
+                      style: title5,
                     ),
                   ),
                   CustomRadio(
                     menuType: _menuType,
-                    title: MenuType.Appetizer.name,
+                    title: "Appetizer",
                     value: MenuType.Appetizer,
                     onChanged: (val) {
                       setState(() {
@@ -325,7 +325,7 @@ class _AddMenuState extends State<AddMenu> {
                   ),
                   CustomRadio(
                     menuType: _menuType,
-                    title: MenuType.Main.name,
+                    title: "Main Dish",
                     value: MenuType.Main,
                     onChanged: (val) {
                       setState(() {
@@ -338,8 +338,34 @@ class _AddMenuState extends State<AddMenu> {
                   ),
                   CustomRadio(
                     menuType: _menuType,
-                    title: MenuType.Drink.name,
+                    title: "Drink",
                     value: MenuType.Drink,
+                    onChanged: (val) {
+                      setState(() {
+                        _menuType = val;
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  CustomRadio(
+                    menuType: _menuType,
+                    title: "Desert",
+                    value: MenuType.Desert,
+                    onChanged: (val) {
+                      setState(() {
+                        _menuType = val;
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  CustomRadio(
+                    menuType: _menuType,
+                    title: "Side Dish",
+                    value: MenuType.Side,
                     onChanged: (val) {
                       setState(() {
                         _menuType = val;
@@ -352,33 +378,33 @@ class _AddMenuState extends State<AddMenu> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(
-                      'Select Delivery Type',
-                      style: title4,
+                      'Delivery Type',
+                      style: title5,
                     ),
                   ),
                   Row(
                     children: [
                       Expanded(
-                        child: CustomRadio(
-                          menuType: _menuType,
-                          title: "POD",
-                          value: MenuType.POD,
+                        child: CustomDeliveryTypeRadio(
+                          deliveryType: _deliveryType,
+                          title: "Delivery",
+                          value: DeliveryType.Pickup,
                           onChanged: (val) {
                             setState(() {
-                              _menuType = val;
+                              _deliveryType = val;
                             });
                           },
                         ),
                       ),
                       SizedBox(width: 10),
                       Expanded(
-                        child: CustomRadio(
-                          menuType: _menuType,
-                          title: MenuType.Pickup.name,
-                          value: MenuType.Pickup,
+                        child: CustomDeliveryTypeRadio(
+                          deliveryType: _deliveryType,
+                          title: "Pickup",
+                          value: DeliveryType.Delivery,
                           onChanged: (val) {
                             setState(() {
-                              _menuType = val;
+                              _deliveryType = val;
                             });
                           },
                         ),
@@ -395,7 +421,7 @@ class _AddMenuState extends State<AddMenu> {
                       decoration: InputDecoration(
                         // labelText: 'Description',
                         hintText: 'Enter your pick address',
-                        hintStyle: body3.copyWith(color: grey),
+                        hintStyle: body3,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: greyLight.withOpacity(0.3),
@@ -420,7 +446,7 @@ class _AddMenuState extends State<AddMenu> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(
                       'Ingredients',
-                      style: title4,
+                      style: title5,
                     ),
                   ),
                   Row(

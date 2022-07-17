@@ -145,7 +145,7 @@ class _AddRecipeState extends State<AddRecipe> {
                       alignment: Alignment.center,
                       width: double.infinity,
                       child: Text(
-                        "Tap to upload recipe image",
+                        "Tap to upload image/video",
                         style: title3,
                         textAlign: TextAlign.center,
                       ),
@@ -204,11 +204,7 @@ class _AddRecipeState extends State<AddRecipe> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                     child: TextFormField(
                       controller: descriptionController,
-                      onChanged: (_) => EasyDebounce.debounce(
-                        'descriptionController',
-                        Duration(milliseconds: 2000),
-                        () => setState(() {}),
-                      ),
+                      onChanged: (_) {},
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -239,8 +235,8 @@ class _AddRecipeState extends State<AddRecipe> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(
-                      'Select Menu Category',
-                      style: title4,
+                      'Menu Category',
+                      style: title5,
                     ),
                   ),
                   CustomRadio(
@@ -287,7 +283,7 @@ class _AddRecipeState extends State<AddRecipe> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(
                       'Ingredients',
-                      style: title4,
+                      style: title5,
                     ),
                   ),
                   Row(
@@ -314,11 +310,7 @@ class _AddRecipeState extends State<AddRecipe> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                           child: TextFormField(
                             controller: addIngredientFieldController1,
-                            onChanged: (_) => EasyDebounce.debounce(
-                              'addIngredientFieldController1',
-                              Duration(milliseconds: 2000),
-                              () => setState(() {}),
-                            ),
+                            onChanged: (_) {},
                             autofocus: true,
                             obscureText: false,
                             decoration: InputDecoration(
@@ -375,11 +367,7 @@ class _AddRecipeState extends State<AddRecipe> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                           child: TextFormField(
                             controller: addIngredientFieldController2,
-                            onChanged: (_) => EasyDebounce.debounce(
-                              'addIngredientFieldController2',
-                              Duration(milliseconds: 2000),
-                              () => setState(() {}),
-                            ),
+                            onChanged: (_) {},
                             autofocus: true,
                             obscureText: false,
                             decoration: InputDecoration(

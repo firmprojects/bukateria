@@ -81,7 +81,12 @@ class _SocialRegisterViewState extends State<SocialRegisterView> {
                 )
               },
               child: Container(
-                  color: greyLight.withOpacity(0.3),
+                  // color: greyLight.withOpacity(0.3),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: grey, // red as border color
+                      ),
+                      borderRadius: BorderRadius.circular(10)),
                   child: ListTile(
                     title: Text(
                       "Select Country",
@@ -102,7 +107,7 @@ class _SocialRegisterViewState extends State<SocialRegisterView> {
                 height: 50,
                 text: "Create Account",
                 color: primary,
-                onPressed: () => {}),
+                onPressed: () => Get.offAll(() => SocialLoginView())),
             SizedBox(
               height: 15,
             ),
@@ -112,7 +117,7 @@ class _SocialRegisterViewState extends State<SocialRegisterView> {
                 height: 50,
                 text: "Sign Up With Google",
                 color: dark,
-                onPressed: () => Get.to(() => SocialLoginView())),
+                onPressed: () => Get.offAll(() => SocialLoginView())),
             SizedBox(
               height: 20,
             ),

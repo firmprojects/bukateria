@@ -61,7 +61,7 @@ class _MenusViewState extends State<MenusView> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 15),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  padding: const EdgeInsets.only(left: 1, right: 1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -91,7 +91,7 @@ class _MenusViewState extends State<MenusView> {
                   showSearch(context: context, delegate: MenuSearchDelegate())
                 },
                 child: Container(
-                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 15),
+                    margin: EdgeInsets.only(left: 1, right: 1, bottom: 15),
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     decoration: BoxDecoration(
                         color: white, borderRadius: BorderRadius.circular(10)),

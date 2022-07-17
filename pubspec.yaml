@@ -7,39 +7,41 @@ environment:
 
 dependencies:
   auto_size_text: 3.0.0
+  bloc: ^8.0.3
   cached_network_image: 3.1.0+1
-  font_awesome_flutter: 10.1.0
-  google_fonts: 2.2.0
-  intl: 0.17.0
-  page_transition: 2.0.4
-  timeago: 3.1.0
-  easy_debounce: 2.0.1
-  json_path: 0.3.1
-  flutter_awesome_select: ^6.4.0
-  smooth_page_indicator: 1.0.0+2
-  url_launcher: 6.0.15
-  readmore: ^2.1.0
-  pin_code_fields: ^7.4.0
-  cupertino_icons: ^1.0.2
-  get_cli: ^0.2.30
-  weekday_selector: ^1.1.0
-  image_picker: ^0.8.5+3
-  flutter_advanced_switch: ^3.0.1
-  shared_preferences: 2.0.11
-  currency_picker: ^2.0.11
   country_picker: ^2.0.15
-  get: 4.6.5
+  cupertino_icons: ^1.0.2
+  currency_picker: ^2.0.11
+  easy_debounce: 2.0.1
   flutter:
     sdk: flutter
+  flutter_advanced_switch: ^3.0.1
+  flutter_awesome_select: ^6.4.0
   flutter_localizations:
     sdk: flutter
+  flutter_settings_screens: ^0.2.2+1
+  font_awesome_flutter: 10.1.0
+  get: 4.6.5
+  get_cli: ^0.2.30
+  google_fonts: 2.2.0
+  image_picker: ^0.8.5+3
+  intl: 0.17.0
+  json_path: 0.3.1
+  page_transition: 2.0.4
+  pin_code_fields: ^7.4.0
+  readmore: ^2.1.0
+  shared_preferences: 2.0.11
+  smooth_page_indicator: 1.0.0+2
+  timeago: 3.1.0
+  url_launcher: 6.0.15
+  weekday_selector: ^1.1.0
 
 dev_dependencies:
+  flutter_launcher_icons: '^0.9.2'
   flutter_lints: ^2.0.0
+  flutter_native_splash: ^2.1.1
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: '^0.9.2'
-  flutter_native_splash: ^2.1.1
 
 flutter_native_splash:
   color: '#fb4629'

@@ -1,21 +1,9 @@
 import 'package:bukateria/app/modules/account/views/account_view.dart';
-import 'package:bukateria/app/modules/favourites/views/favourites_view.dart';
-import 'package:bukateria/app/modules/home/views/home_view.dart';
-import 'package:bukateria/app/modules/menus/views/menus_view.dart';
-import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
-import 'package:bukateria/app/modules/orders/views/orders_view.dart';
 import 'package:bukateria/app/modules/orders/views/vendor_order_view.dart';
 import 'package:bukateria/app/modules/pages/create.dart';
-import 'package:bukateria/app/modules/payment/views/payment_success_view.dart';
-import 'package:bukateria/app/modules/payment/views/payment_view.dart';
 import 'package:bukateria/app/modules/profiles/views/profiles_view.dart';
-import 'package:bukateria/app/modules/recipes/views/create_recipe_view.dart';
-import 'package:bukateria/app/modules/recipes/views/recipes_view.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
-import '../controllers/dashboard_controller.dart';
 
 class VendorDashboard extends StatefulWidget {
   VendorDashboard({Key? key}) : super(key: key);
@@ -27,7 +15,6 @@ class VendorDashboard extends StatefulWidget {
 class _VendorDashboardState extends State<VendorDashboard> {
   final screens = [
     ProfilesView(),
-    FavouritesView(),
     CreateView(),
     VendorOrdersWidget(),
     AccountPageWidget()
@@ -62,21 +49,12 @@ class _VendorDashboardState extends State<VendorDashboard> {
                         });
                       }),
                   IconBottomBar(
-                      text: "Favourites",
-                      icon: Icons.favorite_outline,
-                      selected: false,
-                      onPressed: () {
-                        setState(() {
-                          curentIndex = 1;
-                        });
-                      }),
-                  IconBottomBar(
                       text: "Create",
                       icon: Icons.add_outlined,
                       selected: false,
                       onPressed: () {
                         setState(() {
-                          curentIndex = 2;
+                          curentIndex = 1;
                         });
                       }),
                   IconBottomBar(
@@ -85,7 +63,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                       selected: false,
                       onPressed: () {
                         setState(() {
-                          curentIndex = 3;
+                          curentIndex = 2;
                         });
                       }),
                   IconBottomBar(
@@ -94,7 +72,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                       selected: false,
                       onPressed: () {
                         setState(() {
-                          curentIndex = 4;
+                          curentIndex = 3;
                         });
                       })
                 ],

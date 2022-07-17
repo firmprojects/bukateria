@@ -1,3 +1,4 @@
+import 'package:bukateria/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:bukateria/app/modules/login/views/login_view.dart';
 import 'package:bukateria/app/modules/login/views/role_view_view.dart';
 import 'package:bukateria/app/modules/otp/views/otp_view.dart';
@@ -56,7 +57,7 @@ class SocialLoginView extends StatelessWidget {
               height: 50,
               text: "Sign In",
               color: primary,
-              onPressed: () => Get.to(() => RoleRedirectWidget()),
+              onPressed: () => Get.offAll(() => DashboardView()),
             ),
             SizedBox(
               height: 15,
@@ -67,7 +68,7 @@ class SocialLoginView extends StatelessWidget {
                 height: 50,
                 text: "Sign In With Google",
                 color: dark,
-                onPressed: () => Get.to(() => RoleRedirectWidget())),
+                onPressed: () => Get.offAll(() => DashboardView())),
             SizedBox(
               height: 20,
             ),

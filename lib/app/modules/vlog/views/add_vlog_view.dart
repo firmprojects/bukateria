@@ -35,8 +35,6 @@ class _AddVlogState extends State<AddVlog> {
     // WidgetsBinding.instance?.addPostFrameCallback((_) => setState(() {}));
   }
 
-  MenuType? _menuType;
-
   File? image;
 
   // Future pickImage() async {
@@ -120,7 +118,7 @@ class _AddVlogState extends State<AddVlog> {
                       alignment: Alignment.center,
                       width: double.infinity,
                       child: Text(
-                        "Tap to upload recipe image",
+                        "Tap to upload image/video",
                         style: title3,
                         textAlign: TextAlign.center,
                       ),

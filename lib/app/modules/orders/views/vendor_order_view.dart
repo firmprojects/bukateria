@@ -20,24 +20,23 @@ class _VendorOrdersWidgetState extends State<VendorOrdersWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: white,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
           borderRadius: 30,
-          borderWidth: 1,
-          buttonSize: 60,
+          buttonSize: 46,
           icon: Icon(
-            Icons.chevron_left_rounded,
-            color: FlutterFlowTheme.of(context).secondaryText,
-            size: 30,
+            Icons.arrow_back_rounded,
+            color: FlutterFlowTheme.of(context).primaryText,
+            size: 24,
           ),
-          onPressed: () {
-            print('IconButton pressed ...');
+          onPressed: () async {
+            Navigator.pop(context);
           },
         ),
         title: Text(
-          'Review & Confirm',
+          'Order List',
           style: title3,
         ),
         actions: [],
@@ -45,229 +44,217 @@ class _VendorOrdersWidgetState extends State<VendorOrdersWidget> {
         elevation: 1,
       ),
       backgroundColor: white,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 12, 24, 0),
-                child: Row(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+              child: SingleChildScrollView(
+                child: Column(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Pot of soup',
-                            style: title4,
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 8, 0),
-                                  child: Icon(
-                                    Icons.date_range_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 20,
-                                  ),
-                                ),
-                                Text(
-                                  'Friday - May 27, 2022',
-                                  style: body4
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 8, 0),
-                                  child: Icon(
-                                    Icons.person,
-                                    color: dark,
-                                    size: 20,
-                                  ),
-                                ),
-                                Text(
-                                  'kemi',
-                                  style: body4,
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                    SizedBox(
+                      height: 20,
                     ),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: Image.asset(
-                            'assets/images/egusi_image.jpg',
-                            width: 100,
-                            height: 70,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                height: 24,
-                thickness: 2,
-                indent: 16,
-                endIndent: 16,
-                color: FlutterFlowTheme.of(context).primaryBackground,
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
+                    Card(
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 4),
-                        child: Text(
-                          'Payment',
-                          style: title4,
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              "assets/images/egusi.jpg",
+                              width: 100,
+                              height: 100,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Pot of Soup",
+                                  style: title5,
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  "Pot of Soup",
+                                  style: body4,
+                                ),
+                              ],
+                            )
+                          ],
                         ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
-                      child: Icon(
-                        Icons.credit_card,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        size: 24,
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.96,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4,
+                              color: Color(0x3A000000),
+                              offset: Offset(0, 2),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16, 16, 16, 12),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Order Summary',
+                                    style: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: Color(0xFF090F13),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // Padding(
+                            //   padding: EdgeInsetsDirectional.fromSTEB(
+                            //       16, 0, 16, 8),
+                            //   child: Row(
+                            //     mainAxisSize: MainAxisSize.max,
+                            //     mainAxisAlignment:
+                            //         MainAxisAlignment.spaceBetween,
+                            //     children: [
+                            //       Text(
+                            //         'Subtotal',
+                            //         style: FlutterFlowTheme.of(context)
+                            //             .bodyText2,
+                            //       ),
+                            //       Text(
+                            //         '[Price]',
+                            //         textAlign: TextAlign.end,
+                            //         style: FlutterFlowTheme.of(context)
+                            //             .subtitle2,
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Customer', style: title5),
+                                      Text('Kolade Aremu',
+                                          textAlign: TextAlign.end,
+                                          style: body3),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Delivery Type', style: title5),
+                                      Text('Pay on Delivery',
+                                          textAlign: TextAlign.end,
+                                          style: body3),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Delivery Due Date', style: title5),
+                                      Text('July 25, 2022',
+                                          textAlign: TextAlign.end,
+                                          style:
+                                              body3.copyWith(color: primary)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // Padding(
+                            //   padding: EdgeInsetsDirectional.fromSTEB(
+                            //       16, 12, 16, 16),
+                            //   child: Row(
+                            //     mainAxisSize: MainAxisSize.max,
+                            //     mainAxisAlignment:
+                            //         MainAxisAlignment.spaceBetween,
+                            //     children: [
+                            //       Text(
+                            //         'Total',
+                            //         style: FlutterFlowTheme.of(context)
+                            //             .bodyText2,
+                            //       ),
+                            //       Text(
+                            //         'N12, 000',
+                            //         textAlign: TextAlign.end,
+                            //         style:
+                            //             FlutterFlowTheme.of(context).title2,
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                          ],
+                        ),
                       ),
                     ),
-                    Text(
-                      'Paid',
-                      style: body4,
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                height: 24,
-                thickness: 2,
-                indent: 16,
-                endIndent: 16,
-                color: FlutterFlowTheme.of(context).primaryBackground,
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Delivery address',
-                      style: title4,
+                    Divider(
+                      height: 2,
+                      thickness: 1,
+                      indent: 16,
+                      endIndent: 16,
+                      color: Colors.transparent,
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Icon(
-                          Icons.location_on,
-                          color: Colors.black,
-                          size: 24,
-                        ),
+                        Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                            child: Text(
+                              "Accept",
+                              style: title3,
+                            )),
                         Text(
-                          '12, Allen avenue, Ikeja',
-                          style: body4,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Icon(
-                          Icons.location_on,
-                          color: Colors.black,
-                          size: 24,
-                        ),
-                        Text(
-                          'Lagos',
-                          style: body4,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Icon(
-                          Icons.phone,
-                          color: Colors.black,
-                          size: 24,
-                        ),
-                        Text(
-                          '*234-0907656788',
-                          style: body4,
-                        ),
+                          "Reject",
+                          style: title3.copyWith(color: primary),
+                        )
                       ],
                     ),
                   ],
                 ),
               ),
-              Divider(
-                height: 24,
-                thickness: 2,
-                indent: 16,
-                endIndent: 16,
-                color: FlutterFlowTheme.of(context).primaryBackground,
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Amount',
-                      style: title4,
-                    ),
-                    Text(
-                      'N12,000',
-                      style: title4,
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                height: 24,
-                thickness: 2,
-                indent: 16,
-                endIndent: 16,
-                color: FlutterFlowTheme.of(context).primaryBackground,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text('Accept', style: title4.copyWith(color: green)),
-                  Text('Reject', style: title4.copyWith(color: primary)),
-                ],
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 40,
+            )
+          ],
         ),
       ),
     );

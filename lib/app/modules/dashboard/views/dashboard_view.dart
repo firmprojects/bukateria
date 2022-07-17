@@ -1,3 +1,4 @@
+import 'package:bukateria/app/modules/account/views/account_view.dart';
 import 'package:bukateria/app/modules/favourites/views/favourites_view.dart';
 import 'package:bukateria/app/modules/home/views/home_view.dart';
 import 'package:bukateria/app/modules/menus/views/menus_view.dart';
@@ -25,8 +26,8 @@ class _DashboardViewState extends State<DashboardView> {
     MenusView(),
     RecipesView(),
     VlogView(),
-    HistoryWidget(),
     FavouritesView(),
+    AccountPageWidget()
 
     //AccountView()
   ];
@@ -64,12 +65,12 @@ class _DashboardViewState extends State<DashboardView> {
                 ),
                 label: "Explore"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart_outlined), label: "My Orders"),
+                icon: Icon(Icons.favorite_outline), label: "Favourites"),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.favorite_outline,
+                  Icons.person,
                 ),
-                label: "Favourites"),
+                label: "Account"),
           ],
         ));
   }

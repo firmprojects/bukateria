@@ -4,28 +4,28 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
-enum MenuType { Main, Appetizer, Drink, Desert, Side }
+enum DeliveryType { Pickup, Delivery }
 
-class CustomRadio extends StatelessWidget {
-  CustomRadio(
+class CustomDeliveryTypeRadio extends StatelessWidget {
+  CustomDeliveryTypeRadio(
       {Key? key,
-      required this.menuType,
+      this.deliveryType,
       required this.title,
       required this.value,
       this.onChanged})
       : super(key: key);
 
   String title;
-  MenuType value;
-  MenuType? menuType;
-  Function(MenuType?)? onChanged;
+  DeliveryType? value;
+  DeliveryType? deliveryType;
+  Function(DeliveryType?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return RadioListTile<MenuType>(
-        value: value,
+    return RadioListTile<DeliveryType>(
+        value: value!,
         tileColor: greyLight.withOpacity(0.3),
-        groupValue: menuType,
+        groupValue: deliveryType,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         dense: true,
         contentPadding: EdgeInsets.all(0.0),

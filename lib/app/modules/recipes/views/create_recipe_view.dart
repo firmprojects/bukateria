@@ -241,7 +241,7 @@ class _AddRecipeState extends State<AddRecipe> {
                   ),
                   CustomRadio(
                     menuType: _menuType,
-                    title: MenuType.Appetizer.name,
+                    title: "Appetizer",
                     value: MenuType.Appetizer,
                     onChanged: (val) {
                       setState(() {
@@ -254,7 +254,7 @@ class _AddRecipeState extends State<AddRecipe> {
                   ),
                   CustomRadio(
                     menuType: _menuType,
-                    title: MenuType.Main.name,
+                    title: "Main Dish",
                     value: MenuType.Main,
                     onChanged: (val) {
                       setState(() {
@@ -267,7 +267,7 @@ class _AddRecipeState extends State<AddRecipe> {
                   ),
                   CustomRadio(
                     menuType: _menuType,
-                    title: MenuType.Drink.name,
+                    title: "Drink",
                     value: MenuType.Drink,
                     onChanged: (val) {
                       setState(() {
@@ -275,6 +275,33 @@ class _AddRecipeState extends State<AddRecipe> {
                       });
                     },
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  CustomRadio(
+                    menuType: _menuType,
+                    title: "Desert",
+                    value: MenuType.Desert,
+                    onChanged: (val) {
+                      setState(() {
+                        _menuType = val;
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  CustomRadio(
+                    menuType: _menuType,
+                    title: "Side Dish",
+                    value: MenuType.Side,
+                    onChanged: (val) {
+                      setState(() {
+                        _menuType = val;
+                      });
+                    },
+                  ),
+
                   SizedBox(
                     height: 20,
                   ),

@@ -21,74 +21,83 @@ class SocialLoginView extends StatelessWidget {
       height: double.infinity,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 30),
-              child: Image.asset(
-                'assets/images/Bukkateria_Logomark_Colour.png',
-                width: 100,
-                height: 100,
-                fit: BoxFit.contain,
+        child: Container(
+          width: Get.width,
+          height: Get.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/big_logo.png"),
+                  colorFilter: ColorFilter.mode(
+                      white.withOpacity(0.1), BlendMode.modulate))),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 30),
+                child: Image.asset(
+                  'assets/images/Bukkateria_Logomark_Colour.png',
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
               ),
-            ),
-            const CustomInput(
-              height: 70,
-              hintText: "Email",
-              labelText: "Email",
-              keyboardType: TextInputType.emailAddress,
-              prefixIcon: Icons.email,
-              borderRadius: 10,
-            ),
-            const CustomInput(
-              height: 70,
-              hintText: "Password",
-              labelText: "Password",
-              keyboardType: TextInputType.text,
-              isPassword: true,
-              prefixIcon: Icons.lock,
-              borderRadius: 10,
-            ),
-            CustomButton(
-              width: Get.width,
-              radius: 30,
-              height: 50,
-              text: "Sign In",
-              color: primary,
-              onPressed: () => Get.offAll(() => DashboardView()),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            CustomButton(
+              const CustomInput(
+                height: 70,
+                hintText: "Email",
+                labelText: "Email",
+                keyboardType: TextInputType.emailAddress,
+                prefixIcon: Icons.email,
+                borderRadius: 10,
+              ),
+              const CustomInput(
+                height: 70,
+                hintText: "Password",
+                labelText: "Password",
+                keyboardType: TextInputType.text,
+                isPassword: true,
+                prefixIcon: Icons.lock,
+                borderRadius: 10,
+              ),
+              CustomButton(
                 width: Get.width,
                 radius: 30,
                 height: 50,
-                text: "Sign In With Google",
-                color: dark,
-                onPressed: () => Get.offAll(() => DashboardView())),
-            SizedBox(
-              height: 20,
-            ),
-            GestureDetector(
-              onTap: () => Get.to(() => SocialRegisterView()),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account yet ? ",
-                    style: body3,
-                  ),
-                  Text(
-                    "register",
-                    style: body3.copyWith(color: primary),
-                  )
-                ],
+                text: "Sign In",
+                color: primary,
+                onPressed: () => Get.offAll(() => RoleRedirectWidget()),
               ),
-            )
-          ],
+              SizedBox(
+                height: 15,
+              ),
+              CustomButton(
+                  width: Get.width,
+                  radius: 30,
+                  height: 50,
+                  text: "Sign In With Google",
+                  color: dark,
+                  onPressed: () => Get.offAll(() => RoleRedirectWidget())),
+              SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () => Get.to(() => SocialRegisterView()),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account yet ? ",
+                      style: body3,
+                    ),
+                    Text(
+                      "register",
+                      style: body3.copyWith(color: primary),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     ));

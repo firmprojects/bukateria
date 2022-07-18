@@ -1,4 +1,5 @@
 import 'package:bukateria/app/modules/account/views/account_view.dart';
+import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
 import 'package:bukateria/app/modules/orders/views/vendor_order_view.dart';
 import 'package:bukateria/app/modules/pages/create.dart';
 import 'package:bukateria/app/modules/profiles/views/profiles_view.dart';
@@ -15,8 +16,9 @@ class VendorDashboard extends StatefulWidget {
 class _VendorDashboardState extends State<VendorDashboard> {
   final screens = [
     ProfilesView(),
-    CreateView(),
     VendorOrdersWidget(),
+    CreateView(),
+    NotificationView(),
     AccountPageWidget()
   ];
 
@@ -49,15 +51,6 @@ class _VendorDashboardState extends State<VendorDashboard> {
                         });
                       }),
                   IconBottomBar(
-                      text: "Create",
-                      icon: Icons.add_outlined,
-                      selected: false,
-                      onPressed: () {
-                        setState(() {
-                          curentIndex = 1;
-                        });
-                      }),
-                  IconBottomBar(
                       text: "Orders",
                       icon: Icons.shop_outlined,
                       selected: false,
@@ -67,12 +60,30 @@ class _VendorDashboardState extends State<VendorDashboard> {
                         });
                       }),
                   IconBottomBar(
+                      text: "Create",
+                      icon: Icons.add_outlined,
+                      selected: false,
+                      onPressed: () {
+                        setState(() {
+                          curentIndex = 1;
+                        });
+                      }),
+                  IconBottomBar(
+                      text: "Notifications",
+                      icon: Icons.notifications_outlined,
+                      selected: false,
+                      onPressed: () {
+                        setState(() {
+                          curentIndex = 3;
+                        });
+                      }),
+                  IconBottomBar(
                       text: "Account",
                       icon: Icons.person_outline,
                       selected: false,
                       onPressed: () {
                         setState(() {
-                          curentIndex = 3;
+                          curentIndex = 4;
                         });
                       })
                 ],

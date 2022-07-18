@@ -1,4 +1,9 @@
+import 'package:bukateria/app/modules/account/views/edit_profile.dart';
+import 'package:bukateria/app/modules/account/views/pickup_info_page.dart';
+import 'package:bukateria/app/modules/account/views/security_settings_page.dart';
 import 'package:bukateria/app/modules/account/views/settings_page.dart';
+import 'package:bukateria/app/modules/dashboard/views/dashboard_view.dart';
+import 'package:bukateria/app/modules/dashboard/views/vendor_dashboard.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_theme.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_widgets.dart';
@@ -6,6 +11,7 @@ import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AccountPageWidget extends StatefulWidget {
@@ -33,20 +39,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        iconTheme: IconThemeData(color: dark),
-        actions: [],
-        elevation: 0,
-      ),
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+              SizedBox(
+                height: 30,
+              ),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -84,8 +84,16 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                   SizedBox(
                     height: 15,
                   ),
+                  EditProfile(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  PickupInfo(),
                   buildChefSwitch(),
-                  buildOrders(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  SecuritySettingsPage(),
                   SizedBox(
                     height: 15,
                   ),
@@ -93,11 +101,6 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                   SizedBox(
                     height: 15,
                   ),
-                  buildPrivacy(),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  buildTOS(),
                 ]),
               ),
             ],
@@ -122,7 +125,7 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
       );
 
   Widget buildOrders() => SimpleSettingsTile(
-        title: "Orders",
+        title: "Business Info",
         subtitle: "",
         leading: Icon(Icons.food_bank),
         onTap: () {},
@@ -130,11 +133,17 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
       );
 
   Widget buildChefSwitch() => SwitchSettingsTile(
-        title: "Switch",
+        title: "Chef Mode",
         settingKey: "chef-switch",
         subtitle: "",
         leading: Icon(Icons.switch_access_shortcut),
-        onChange: (val) {},
+        onChange: (val) {
+          if (val == true) {
+            Get.offAll(() => VendorDashboard());
+          } else {
+            Get.offAll(() => DashboardView());
+          }
+        },
       );
 
   Widget buildLogout() => SimpleSettingsTile(
@@ -144,19 +153,5 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
         onTap: () {
           Settings.clearCache();
         },
-      );
-
-  Widget buildPrivacy() => SimpleSettingsTile(
-        title: "Privacy",
-        subtitle: "",
-        leading: Icon(Icons.privacy_tip),
-        onTap: () {},
-      );
-
-  Widget buildTOS() => SimpleSettingsTile(
-        title: "Terms & Conditions",
-        subtitle: "",
-        leading: Icon(Icons.document_scanner),
-        onTap: () {},
       );
 }

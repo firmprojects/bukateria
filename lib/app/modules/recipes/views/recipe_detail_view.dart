@@ -3,6 +3,7 @@ import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/custom_button.dart';
 import 'package:bukateria/widgets/custom_input.dart';
 import 'package:bukateria/widgets/ingredientItem.dart';
+import 'package:bukateria/widgets/method_widget.dart';
 import 'package:bukateria/widgets/pop_menu.dart';
 import 'package:bukateria/widgets/related_recipe.dart';
 import 'package:flutter/material.dart';
@@ -172,28 +173,27 @@ class RecipeDetailView extends GetView {
                     text: "Locust beans",
                   ),
 
-                  // Padding(
-                  //   padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 10),
-                  //   child: Text(
-                  //     'Methods',
-                  //     style: title3,
-                  //   ),
-                  // ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 10),
+                    child: Text(
+                      'Methods',
+                      style: title3,
+                    ),
+                  ),
 
-                  // Generated code for this Column Widget...
-                  // MethodWidget(
-                  //   text:
-                  //       'Your recipe has been uploaded, you can see it on your profile.',
-                  //   image: "assets/images/fd6.jpg",
-                  // ),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
-                  // MethodWidget(
-                  //   text:
-                  //       'Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, ',
-                  //   image: "assets/images/fd7.jpg",
-                  // ),
+                  MethodWidget(
+                    text:
+                        'Your recipe has been uploaded, you can see it on your profile.',
+                    image: "assets/images/fd6.jpg",
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  MethodWidget(
+                    text:
+                        'Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, ',
+                    image: "assets/images/fd7.jpg",
+                  ),
 
                   // Generated code for this Row Widget...
                   SizedBox(

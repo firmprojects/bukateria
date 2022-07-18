@@ -22,31 +22,10 @@ class RecipesView extends StatefulWidget {
 class _RecipesViewState extends State<RecipesView> {
   final _controller = ValueNotifier<bool>(false);
 
-  bool _checked = false;
-
-  void switchRole() {
-    if (_checked == true) {
-      Get.to(() => ChefSettings());
-    } else {
-      Get.to(() => DashboardView());
-    }
-  }
-
 // ...
   @override
   void initState() {
     super.initState();
-
-    _controller.addListener(() {
-      setState(() {
-        if (_controller.value) {
-          _checked = true;
-          switchRole();
-        } else {
-          _checked = false;
-        }
-      });
-    });
   }
 
   @override
@@ -68,18 +47,6 @@ class _RecipesViewState extends State<RecipesView> {
                     Text(
                       "Ikeja, Lagos",
                       style: body3.copyWith(color: white),
-                    ),
-                    AdvancedSwitch(
-                      controller: _controller,
-                      activeColor: green,
-                      inactiveColor: dark,
-                      activeChild: Text('Chef'),
-                      inactiveChild: Text('Chef'),
-                      borderRadius: BorderRadius.all(const Radius.circular(15)),
-                      width: 60.0,
-                      height: 20.0,
-                      enabled: true,
-                      disabledOpacity: 0.5,
                     ),
                   ],
                 ),

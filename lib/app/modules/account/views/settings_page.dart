@@ -6,50 +6,32 @@ import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
-  static const phoneKey = 'phone-key';
-  static const nameKey = 'name-key';
+  static const notification_key = 'notification-key';
 
   @override
   Widget build(BuildContext context) {
     return SimpleSettingsTile(
       title: "Settings",
-      subtitle: "Password, Name, Phone",
+      subtitle: "Notifications",
       leading: Icon(Icons.settings),
       onTap: () {},
-      child: SettingsScreen(title: "Edit Profile", children: [
+      child: SettingsScreen(title: "Settings", children: [
         SizedBox(
           height: 15,
         ),
-        buildUpdatePassword(context),
+        buildNotification(context),
         SizedBox(
           height: 15,
         ),
-        buildUpdatePhone(context),
-        SizedBox(
-          height: 15,
-        ),
-        buildUpdateName(context),
       ]),
     );
   }
 
-  Widget buildUpdatePassword(context) => SimpleSettingsTile(
-        title: "Terms & Conditions",
+  Widget buildNotification(context) => SwitchSettingsTile(
+        title: "Notification",
+        settingKey: notification_key,
         subtitle: "",
-        leading: Icon(Icons.document_scanner),
-        onTap: () {},
-      );
-
-  Widget buildUpdatePhone(context) => TextInputSettingsTile(
-        title: "Update Phone",
-        settingKey: phoneKey,
-        onChange: (phone) {},
-      );
-
-  Widget buildUpdateName(context) => TextInputSettingsTile(
-        title: "Update Name",
-        settingKey: nameKey,
-        initialValue: "Kayode Wole",
-        onChange: (name) {/* NOOP*/},
+        leading: Icon(Icons.notifications),
+        onChange: (val) {},
       );
 }

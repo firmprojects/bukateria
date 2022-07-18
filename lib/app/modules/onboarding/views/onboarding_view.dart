@@ -31,7 +31,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                 setState(() => {isLast = index == 2})
               }),
           controller: _controller,
-          children: [SlideOneView(), SlideTwoView(), SlideThreeView()],
+          children: [SlideTwoView(), SlideOneView(),  SlideThreeView()],
         ),
         Container(
             alignment: Alignment(0, 0.9),

@@ -10,6 +10,7 @@ class MenusModel {
   String? createdAt;
   String image;
   bool? likes;
+  bool? deliveyStatus;
   int amount;
   double? stars;
 
@@ -18,6 +19,7 @@ class MenusModel {
       required this.description,
       this.user,
       this.location,
+      this.deliveyStatus,
       this.ingredients,
       this.createdAt,
       required this.image,
@@ -33,6 +35,7 @@ class MenusModel {
         ingredients: json['ingredients'],
         createdAt: json['createdAt'],
         image: json['image'],
+        deliveyStatus: json['deliveyStatus'],
         likes: json['likes'],
         amount: json['amount'],
         stars: json['stars'],
@@ -43,6 +46,7 @@ class MenusModel {
         'description': description,
         'user': user,
         'location': location,
+        'deliveyStatus': deliveyStatus,
         'ingredients': ingredients,
         'createdAt': createdAt,
         'image': image,

@@ -65,17 +65,23 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                     ),
                   ),
                 ),
-                // Positioned(
-                //   right: 20,
-                //   top: 10,
-                //   child: Icon(
-                //     menu.likes ? Icons.favorite : Icons.favorite_outline,
-                //     color: menu.likes ? primary : dark,
-                //     size: 24,
-                //   ),
-                // ),
               ],
             ),
+            menu.deliveyStatus
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 0, right: 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [Image.asset("assets/images/delivery2.png")],
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.only(top: 0, right: 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [],
+                    ),
+                  ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),
               child: Row(

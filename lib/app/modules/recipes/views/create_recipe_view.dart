@@ -426,28 +426,115 @@ class _AddRecipeState extends State<AddRecipe> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
-                        },
-                        text: 'Add ingredient',
-                        icon: Icon(
-                          Icons.add,
-                          size: 15,
-                        ),
-                        options: FFButtonOptions(
-                          elevation: 0,
-                          width: 200,
-                          height: 40,
-                          color: dark,
-                          textStyle: body3.copyWith(color: white),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
-                        ),
+                      Icon(Icons.add),
+                      SizedBox(
+                        width: 7,
                       ),
+                      Text(
+                        "ingredient",
+                        style: title5,
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
+                    child: Text(
+                      'Methods',
+                      style: title5,
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              Chip(
+                                padding: EdgeInsets.all(0),
+                                backgroundColor: dark,
+                                label: Text('1',
+                                    style: TextStyle(color: Colors.white)),
+                              ),
+                              Icon(
+                                Icons.drag_indicator,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 20,
+                              ),
+                            ],
+                          ),
+                          Flexible(
+                            child: TextFormField(
+                              controller: descriptionController,
+                              onChanged: (_) {},
+                              autofocus: true,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                // labelText: 'Description',
+                                hintText: 'method text',
+                                hintStyle: body3.copyWith(color: grey),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: greyLight.withOpacity(0.3),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: greyLight.withOpacity(0.3),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                filled: true,
+                                fillColor: greyLight.withOpacity(0.2),
+                              ),
+                              maxLines: 2,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(Icons.more_horiz)
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 50,
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              color: greyLight.withOpacity(0.3),
+                            ),
+                            width: 60,
+                            height: 60,
+                            child: Image.asset("assets/images/camera.png"),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.add),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            "step",
+                            style: title5,
+                          )
+                        ],
+                      )
                     ],
                   ),
                   // Padding(

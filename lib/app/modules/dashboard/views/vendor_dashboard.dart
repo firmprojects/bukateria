@@ -56,7 +56,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                       selected: false,
                       onPressed: () {
                         setState(() {
-                          curentIndex = 2;
+                          curentIndex = 1;
                         });
                       }),
                   IconBottomBar(
@@ -65,7 +65,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                       selected: false,
                       onPressed: () {
                         setState(() {
-                          curentIndex = 1;
+                          curentIndex = 2;
                         });
                       }),
                   IconBottomBar(

@@ -172,9 +172,9 @@ class _AddMenuState extends State<AddMenu> {
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Meal Title',
-                        hintText: 'Title: e.g Vegetable Salad',
-                        hintStyle: title3,
+                        labelText: 'Title',
+                        hintText: 'Title',
+                        hintStyle: title3.copyWith(color: grey),
                         labelStyle: body3,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -260,20 +260,13 @@ class _AddMenuState extends State<AddMenu> {
                     ),
                   ),
 
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
-                    child: Text(
-                      'Origin',
-                      style: title5,
-                    ),
-                  ),
                   GestureDetector(
                     onTap: () => Get.to(() => PlaceSearch()),
                     child: Container(
                         color: greyLight.withOpacity(0.3),
                         child: ListTile(
                           title: Text(
-                            "Pickup location",
+                            "Location",
                             style: body3,
                           ),
                           trailing: Icon(
@@ -282,99 +275,92 @@ class _AddMenuState extends State<AddMenu> {
                           ),
                         )),
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
-                    child: Text(
-                      'Type of Cuisines',
-                      style: title5,
-                    ),
-                  ),
-                  Container(
-                    color: greyLight.withOpacity(0.3),
-                    child: SmartSelect<String>.single(
-                        choiceType: S2ChoiceType.chips,
-                        placeholder: "",
-                        selectedValue: value,
-                        title: 'Select one',
-                        choiceItems: options,
-                        onChange: (state) =>
-                            setState(() => value = state.value)),
-                  ),
                   SizedBox(
                     height: 20,
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
-                    child: Text(
-                      'Menu Category',
-                      style: title5,
-                    ),
-                  ),
-                  CustomRadio(
-                    menuType: _menuType,
-                    title: "Appetizer",
-                    value: MenuType.Appetizer,
-                    onChanged: (val) {
-                      setState(() {
-                        _menuType = val;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  CustomRadio(
-                    menuType: _menuType,
-                    title: "Main Dish",
-                    value: MenuType.Main,
-                    onChanged: (val) {
-                      setState(() {
-                        _menuType = val;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  CustomRadio(
-                    menuType: _menuType,
-                    title: "Drink",
-                    value: MenuType.Drink,
-                    onChanged: (val) {
-                      setState(() {
-                        _menuType = val;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  CustomRadio(
-                    menuType: _menuType,
-                    title: "Desert",
-                    value: MenuType.Desert,
-                    onChanged: (val) {
-                      setState(() {
-                        _menuType = val;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  CustomRadio(
-                    menuType: _menuType,
-                    title: "Side Dish",
-                    value: MenuType.Side,
-                    onChanged: (val) {
-                      setState(() {
-                        _menuType = val;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  // Container(
+                  //   color: greyLight.withOpacity(0.3),
+                  //   child: SmartSelect<String>.single(
+                  //       choiceType: S2ChoiceType.chips,
+                  //       placeholder: "",
+                  //       selectedValue: value,
+                  //       title: 'Type of Cuisines',
+                  //       choiceItems: options,
+                  //       onChange: (state) =>
+                  //           setState(() => value = state.value)),
+                  // ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  // Padding(
+                  //   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
+                  //   child: Text(
+                  //     'Recipe Category',
+                  //     style: title5,
+                  //   ),
+                  // ),
+                  // CustomRadio(
+                  //   menuType: _menuType,
+                  //   title: "Appetizer",
+                  //   value: MenuType.Appetizer,
+                  //   onChanged: (val) {
+                  //     setState(() {
+                  //       _menuType = val;
+                  //     });
+                  //   },
+                  // ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
+                  // CustomRadio(
+                  //   menuType: _menuType,
+                  //   title: "Main Dish",
+                  //   value: MenuType.Main,
+                  //   onChanged: (val) {
+                  //     setState(() {
+                  //       _menuType = val;
+                  //     });
+                  //   },
+                  // ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
+                  // CustomRadio(
+                  //   menuType: _menuType,
+                  //   title: "Drink",
+                  //   value: MenuType.Drink,
+                  //   onChanged: (val) {
+                  //     setState(() {
+                  //       _menuType = val;
+                  //     });
+                  //   },
+                  // ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
+                  // CustomRadio(
+                  //   menuType: _menuType,
+                  //   title: "Desert",
+                  //   value: MenuType.Desert,
+                  //   onChanged: (val) {
+                  //     setState(() {
+                  //       _menuType = val;
+                  //     });
+                  //   },
+                  // ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
+                  // CustomRadio(
+                  //   menuType: _menuType,
+                  //   title: "Side Dish",
+                  //   value: MenuType.Side,
+                  //   onChanged: (val) {
+                  //     setState(() {
+                  //       _menuType = val;
+                  //     });
+                  //   },
+                  // ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(
@@ -411,181 +397,173 @@ class _AddMenuState extends State<AddMenu> {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
-                    child: TextFormField(
-                      controller: descriptionController,
-                      onChanged: (val) {},
-                      autofocus: true,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        // labelText: 'Description',
-                        hintText: 'Enter your pick address',
-                        hintStyle: body3,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: greyLight.withOpacity(0.3),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: greyLight.withOpacity(0.3),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        filled: true,
-                        fillColor: greyLight.withOpacity(0.2),
-                      ),
-                      maxLines: 3,
-                    ),
+                  SizedBox(
+                    height: 30,
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
-                    child: Text(
-                      'Ingredients',
-                      style: title5,
-                    ),
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 30,
-                        borderWidth: 1,
-                        buttonSize: 60,
-                        icon: Icon(
-                          Icons.drag_indicator,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 30,
-                        ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                        },
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                          child: TextFormField(
-                            controller: addIngredientFieldController1,
-                            onChanged: (val) {},
-                            autofocus: true,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: 'Add ingredient',
-                              hintText: 'Enter  ingredient',
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFE5E5E5),
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFE5E5E5),
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              filled: true,
-                              fillColor: greyLight.withOpacity(0.2),
-                            ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 30,
-                        borderWidth: 1,
-                        buttonSize: 60,
-                        icon: Icon(
-                          Icons.drag_indicator,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 30,
-                        ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                        },
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                          child: TextFormField(
-                            controller: addIngredientFieldController2,
-                            onChanged: (val) {},
-                            autofocus: true,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: 'Add  ingredient',
-                              hintText: 'Enter  ingredient',
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFE5E5E5),
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFE5E5E5),
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              filled: true,
-                              fillColor: greyLight.withOpacity(0.2),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
-                        },
-                        text: 'Add ingredient',
-                        icon: Icon(
-                          Icons.add,
-                          size: 15,
-                        ),
-                        options: FFButtonOptions(
-                          elevation: 0,
-                          width: 200,
-                          height: 40,
-                          color: dark,
-                          textStyle: body3.copyWith(color: white),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                  //   child: TextFormField(
+                  //     controller: descriptionController,
+                  //     onChanged: (val) {},
+                  //     autofocus: true,
+                  //     obscureText: false,
+                  //     decoration: InputDecoration(
+                  //       // labelText: 'Description',
+                  //       hintText: 'Enter your pick address',
+                  //       hintStyle: body3,
+                  //       enabledBorder: OutlineInputBorder(
+                  //         borderSide: BorderSide(
+                  //           color: greyLight.withOpacity(0.3),
+                  //           width: 1,
+                  //         ),
+                  //         borderRadius: BorderRadius.circular(10),
+                  //       ),
+                  //       focusedBorder: OutlineInputBorder(
+                  //         borderSide: BorderSide(
+                  //           color: greyLight.withOpacity(0.3),
+                  //           width: 1,
+                  //         ),
+                  //         borderRadius: BorderRadius.circular(10),
+                  //       ),
+                  //       filled: true,
+                  //       fillColor: greyLight.withOpacity(0.2),
+                  //     ),
+                  //     maxLines: 3,
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
+                  //   child: Text(
+                  //     'Ingredients',
+                  //     style: title5,
+                  //   ),
+                  // ),
+                  // Row(
+                  //   mainAxisSize: MainAxisSize.max,
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     FlutterFlowIconButton(
+                  //       borderColor: Colors.transparent,
+                  //       borderRadius: 30,
+                  //       borderWidth: 1,
+                  //       buttonSize: 60,
+                  //       icon: Icon(
+                  //         Icons.drag_indicator,
+                  //         color: FlutterFlowTheme.of(context).primaryText,
+                  //         size: 30,
+                  //       ),
+                  //       onPressed: () {
+                  //         print('IconButton pressed ...');
+                  //       },
+                  //     ),
+                  //     Expanded(
+                  //       child: Padding(
+                  //         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                  //         child: TextFormField(
+                  //           controller: addIngredientFieldController1,
+                  //           onChanged: (val) {},
+                  //           autofocus: true,
+                  //           obscureText: false,
+                  //           decoration: InputDecoration(
+                  //             labelText: 'Add ingredient',
+                  //             hintText: 'Enter  ingredient',
+                  //             enabledBorder: OutlineInputBorder(
+                  //               borderSide: BorderSide(
+                  //                 color: Color(0xFFE5E5E5),
+                  //                 width: 1,
+                  //               ),
+                  //               borderRadius: BorderRadius.circular(10),
+                  //             ),
+                  //             focusedBorder: OutlineInputBorder(
+                  //               borderSide: BorderSide(
+                  //                 color: Color(0xFFE5E5E5),
+                  //                 width: 1,
+                  //               ),
+                  //               borderRadius: BorderRadius.circular(10),
+                  //             ),
+                  //             filled: true,
+                  //             fillColor: greyLight.withOpacity(0.2),
+                  //           ),
+                  //           style:
+                  //               FlutterFlowTheme.of(context).bodyText1.override(
+                  //                     fontFamily: 'Poppins',
+                  //                     fontWeight: FontWeight.normal,
+                  //                   ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   mainAxisSize: MainAxisSize.max,
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     FlutterFlowIconButton(
+                  //       borderColor: Colors.transparent,
+                  //       borderRadius: 30,
+                  //       borderWidth: 1,
+                  //       buttonSize: 60,
+                  //       icon: Icon(
+                  //         Icons.drag_indicator,
+                  //         color: FlutterFlowTheme.of(context).primaryText,
+                  //         size: 30,
+                  //       ),
+                  //       onPressed: () {
+                  //         print('IconButton pressed ...');
+                  //       },
+                  //     ),
+                  //     Expanded(
+                  //       child: Padding(
+                  //         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                  //         child: TextFormField(
+                  //           controller: addIngredientFieldController2,
+                  //           onChanged: (val) {},
+                  //           autofocus: true,
+                  //           obscureText: false,
+                  //           decoration: InputDecoration(
+                  //             labelText: 'Add  ingredient',
+                  //             hintText: 'Enter  ingredient',
+                  //             enabledBorder: OutlineInputBorder(
+                  //               borderSide: BorderSide(
+                  //                 color: Color(0xFFE5E5E5),
+                  //                 width: 1,
+                  //               ),
+                  //               borderRadius: BorderRadius.circular(10),
+                  //             ),
+                  //             focusedBorder: OutlineInputBorder(
+                  //               borderSide: BorderSide(
+                  //                 color: Color(0xFFE5E5E5),
+                  //                 width: 1,
+                  //               ),
+                  //               borderRadius: BorderRadius.circular(10),
+                  //             ),
+                  //             filled: true,
+                  //             fillColor: greyLight.withOpacity(0.2),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   mainAxisSize: MainAxisSize.max,
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Icon(Icons.add),
+                  //     SizedBox(
+                  //       width: 7,
+                  //     ),
+                  //     Text(
+                  //       "ingredient",
+                  //       style: title5,
+                  //     )
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
                   // Padding(
                   //   padding: const EdgeInsets.only(top: 20),
                   //   child: Row(

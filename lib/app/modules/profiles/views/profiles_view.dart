@@ -161,19 +161,19 @@ class _ProfilesViewState extends State<ProfilesView> {
                 SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: CustomButton(
-                      radius: 30,
-                      height: 40,
-                      onPressed: () {},
-                      color: primary,
-                      width: Get.width,
-                      text: "Follow"),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 40),
+                //   child: CustomButton(
+                //       radius: 30,
+                //       height: 40,
+                //       onPressed: () {},
+                //       color: primary,
+                //       width: Get.width,
+                //       text: "Follow"),
+                // ),
+                // SizedBox(
+                //   height: 10,
+                // ),
                 Obx(
                   () => Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),

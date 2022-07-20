@@ -17,11 +17,11 @@ class PickupInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleSettingsTile(
-      title: "Pickup Settings",
-      subtitle: "phone, pickup-address, ",
+      title: "Contact Settings",
+      subtitle: "phone, address, ",
       leading: Icon(Icons.settings),
       onTap: () {},
-      child: SettingsScreen(title: "Pickup Settings", children: [
+      child: SettingsScreen(title: "Contact Settings", children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(

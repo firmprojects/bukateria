@@ -72,7 +72,7 @@ class _RecipesViewState extends State<RecipesView> {
                         width: 40,
                       ),
                       Text(
-                        "Search menus",
+                        "Search recipes",
                         style: body3,
                       )
                     ],
@@ -96,7 +96,7 @@ class _RecipesViewState extends State<RecipesView> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20,
-                  childAspectRatio: 0.6,
+                  childAspectRatio: 0.7,
                 ),
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {

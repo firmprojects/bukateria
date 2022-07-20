@@ -170,16 +170,12 @@ class _AddRecipeState extends State<AddRecipe> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                     child: TextFormField(
                       controller: fullNameController,
-                      onChanged: (_) => EasyDebounce.debounce(
-                        'fullNameController',
-                        Duration(milliseconds: 2000),
-                        () => setState(() {}),
-                      ),
+                      onChanged: (val) {},
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Food Name',
-                        hintText: 'Title: e.g Vegetable Salad',
+                        labelText: 'Title',
+                        hintText: 'Title',
                         hintStyle: title3.copyWith(color: grey),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -232,10 +228,28 @@ class _AddRecipeState extends State<AddRecipe> {
                     ),
                   ),
 
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  Container(
+                    color: greyLight.withOpacity(0.3),
+                    child: SmartSelect<String>.single(
+                        choiceType: S2ChoiceType.chips,
+                        placeholder: "",
+                        selectedValue: value,
+                        title: 'Type of Cuisines',
+                        choiceItems: options,
+                        onChange: (state) =>
+                            setState(() => value = state.value)),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(
-                      'Menu Category',
+                      'Recipe Category',
                       style: title5,
                     ),
                   ),
@@ -265,19 +279,7 @@ class _AddRecipeState extends State<AddRecipe> {
                   SizedBox(
                     height: 10,
                   ),
-                  CustomRadio(
-                    menuType: _menuType,
-                    title: "Drink",
-                    value: MenuType.Drink,
-                    onChanged: (val) {
-                      setState(() {
-                        _menuType = val;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+
                   CustomRadio(
                     menuType: _menuType,
                     title: "Desert",
@@ -288,6 +290,7 @@ class _AddRecipeState extends State<AddRecipe> {
                       });
                     },
                   ),
+
                   SizedBox(
                     height: 10,
                   ),
@@ -302,6 +305,19 @@ class _AddRecipeState extends State<AddRecipe> {
                     },
                   ),
 
+                  SizedBox(
+                    height: 10,
+                  ),
+                  CustomRadio(
+                    menuType: _menuType,
+                    title: "Drink",
+                    value: MenuType.Drink,
+                    onChanged: (val) {
+                      setState(() {
+                        _menuType = val;
+                      });
+                    },
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -436,6 +452,10 @@ class _AddRecipeState extends State<AddRecipe> {
                       )
                     ],
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                     child: Text(

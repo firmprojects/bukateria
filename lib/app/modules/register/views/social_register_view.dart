@@ -75,40 +75,38 @@ class _SocialRegisterViewState extends State<SocialRegisterView> {
                 prefixIcon: Icons.lock,
                 borderRadius: 10,
               ),
-              GestureDetector(
-                onTap: () => {
-                  showCountryPicker(
-                    context: context,
-                    showPhoneCode:
-                        true, // optional. Shows phone code before the country name.
-                    onSelect: (Country country) {
-                      setState(
-                          () => widget.selectedCountry = country.displayName);
-                      print('Select country: ${country.displayName}');
-                    },
-                  )
-                },
-                child: Container(
-                    // color: greyLight.withOpacity(0.3),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: grey, // red as border color
-                        ),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: ListTile(
-                      title: Text(
-                        "Select Country",
-                        style: body3,
-                      ),
-                      trailing: widget.selectedCountry == null
-                          ? Text("")
-                          : Container(
-                              child: Text(widget.selectedCountry.toString())),
-                    )),
-              ),
-              SizedBox(
-                height: 20,
-              ),
+              // GestureDetector(
+              //   onTap: () => {
+              //     showCountryPicker(
+              //       context: context,
+              //       showPhoneCode:
+              //           true, // optional. Shows phone code before the country name.
+              //       onSelect: (Country country) {
+              //         setState(
+              //             () => widget.selectedCountry = country.displayName);
+              //         print('Select country: ${country.displayName}');
+              //       },
+              //     )
+              //   },
+              //   child: Container(
+              //       // color: greyLight.withOpacity(0.3),
+              //       decoration: BoxDecoration(
+              //           border: Border.all(
+              //             color: grey, // red as border color
+              //           ),
+              //           borderRadius: BorderRadius.circular(10)),
+              //       child: ListTile(
+              //         title: Text(
+              //           "Select Country",
+              //           style: body3,
+              //         ),
+              //         trailing: widget.selectedCountry == null
+              //             ? Text("")
+              //             : Container(
+              //                 child: Text(widget.selectedCountry.toString())),
+              //       )),
+              // ),
+
               CustomButton(
                   width: Get.width,
                   radius: 30,
@@ -119,16 +117,16 @@ class _SocialRegisterViewState extends State<SocialRegisterView> {
               SizedBox(
                 height: 15,
               ),
-              CustomButton(
-                  width: Get.width,
-                  radius: 30,
-                  height: 50,
-                  text: "Sign Up With Google",
-                  color: dark,
-                  onPressed: () => Get.offAll(() => SocialLoginView())),
-              SizedBox(
-                height: 20,
-              ),
+              // CustomButton(
+              //     width: Get.width,
+              //     radius: 30,
+              //     height: 50,
+              //     text: "Sign Up With Google",
+              //     color: dark,
+              //     onPressed: () => Get.offAll(() => SocialLoginView())),
+              // SizedBox(
+              //   height: 20,
+              // ),
               GestureDetector(
                 onTap: () => Get.to(() => SocialLoginView()),
                 child: Row(

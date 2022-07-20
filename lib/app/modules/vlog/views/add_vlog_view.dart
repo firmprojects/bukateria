@@ -143,16 +143,12 @@ class _AddVlogState extends State<AddVlog> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                     child: TextFormField(
                       controller: fullNameController,
-                      onChanged: (_) => EasyDebounce.debounce(
-                        'fullNameController',
-                        Duration(milliseconds: 2000),
-                        () => setState(() {}),
-                      ),
+                      onChanged: (_) {},
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Food Name',
-                        hintText: 'Title: e.g Vegetable Salad',
+                        labelText: 'Title',
+                        hintText: 'Title',
                         hintStyle: title3.copyWith(color: grey),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(

@@ -70,16 +70,16 @@ class SocialLoginView extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              CustomButton(
-                  width: Get.width,
-                  radius: 30,
-                  height: 50,
-                  text: "Sign In With Google",
-                  color: dark,
-                  onPressed: () => Get.offAll(() => RoleRedirectWidget())),
-              SizedBox(
-                height: 20,
-              ),
+              // CustomButton(
+              //     width: Get.width,
+              //     radius: 30,
+              //     height: 50,
+              //     text: "Sign In With Google",
+              //     color: dark,
+              //     onPressed: () => Get.offAll(() => RoleRedirectWidget())),
+              // SizedBox(
+              //   height: 20,
+              // ),
               GestureDetector(
                 onTap: () => Get.to(() => SocialRegisterView()),
                 child: Row(

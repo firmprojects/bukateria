@@ -37,21 +37,24 @@ class _NotificationViewState extends State<NotificationView> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 12, 0, 12),
-                    child: Text(
-                      'This Week',
-                      style: FlutterFlowTheme.of(context).bodyText2,
-                    ),
-                  ),
-                ],
+              SizedBox(
+                height: 20,
               ),
-              NotificationItem(),
-              NotificationItem(),
-              NotificationItem(),
+              // Row(
+              //   mainAxisSize: MainAxisSize.max,
+              //   children: [
+              //     Padding(
+              //       padding: EdgeInsetsDirectional.fromSTEB(16, 12, 0, 12),
+              //       child: Text(
+              //         'This Week',
+              //         style: FlutterFlowTheme.of(context).bodyText2,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              NotificationItem(title: 'Notifications of orders'),
+              NotificationItem(title: 'Cancellation of orders'),
+              NotificationItem(title: 'Messages from Bukkateria'),
             ],
           ),
         ),

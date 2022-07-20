@@ -3,9 +3,9 @@ import 'package:bukateria/themes/text.dart';
 import 'package:flutter/material.dart';
 
 class NotificationItem extends StatelessWidget {
-  const NotificationItem({
-    Key? key,
-  }) : super(key: key);
+  const NotificationItem({Key? key, required this.title}) : super(key: key);
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -39,28 +39,23 @@ class NotificationItem extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.85,
                     height: 1,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context)
-                          .primaryBackground,
+                      color: FlutterFlowTheme.of(context).primaryBackground,
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
+                    padding: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0, 4, 0, 0),
-                          child: Text('Welcome to the family',
-                              style: title4),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                          child: Text(title.toString(), style: title4),
                         ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
+                    padding: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [

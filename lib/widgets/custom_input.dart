@@ -22,7 +22,7 @@ class CustomInput extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onEditingCompleted;
   final TextInputType? keyboardType;
-  final ValueChanged<String>? onChanged;
+  final Function(String)? onChanged;
   final bool? isMulti;
   final bool? autofocus;
   final String? errorText;
@@ -76,6 +76,7 @@ class CustomInput extends StatelessWidget {
         keyboardType: keyboardType,
         validator: validator,
         controller: controller,
+        onChanged: onChanged,
         maxLines: maxLines ?? 1,
         readOnly: null == readOnly ? false : true,
         obscureText: null == isPassword ? false : true,

@@ -46,7 +46,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.REGISTER,
-      page: () => const RegisterView(),
+      page: () => RegisterView(),
       binding: RegisterBinding(),
     ),
     GetPage(
@@ -94,11 +94,11 @@ class AppPages {
       page: () => const HistoryWidget(),
       binding: OrdersBinding(),
     ),
-    GetPage(
-      name: _Paths.ACCOUNT,
-      page: () => const AccountPageWidget(),
-      binding: AccountBinding(),
-    ),
+    // GetPage(
+    //   name: _Paths.ACCOUNT,
+    //   page: () => const AccountPageWidget(),
+    //   binding: AccountBinding(),
+    // ),
     GetPage(
       name: _Paths.PAYMENT,
       page: () => const PaymentWidget(),

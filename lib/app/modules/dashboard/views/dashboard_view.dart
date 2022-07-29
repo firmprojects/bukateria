@@ -1,4 +1,6 @@
+import 'package:bukateria/app/modules/account/views/account.dart';
 import 'package:bukateria/app/modules/account/views/account_view.dart';
+import 'package:bukateria/app/modules/account/views/chef-account_view.dart';
 import 'package:bukateria/app/modules/favourites/views/favourites_view.dart';
 import 'package:bukateria/app/modules/menus/views/menus_view.dart';
 import 'package:bukateria/app/modules/recipes/views/recipes_view.dart';
@@ -19,7 +21,7 @@ class _DashboardViewState extends State<DashboardView> {
     RecipesView(),
     VlogView(),
     FavouritesView(),
-    AccountPageWidget()
+    Account()
 
     //AccountView()
   ];

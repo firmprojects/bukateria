@@ -1,3 +1,4 @@
+import 'package:bukateria/app/modules/account/views/account.dart';
 import 'package:bukateria/app/modules/account/views/chef_settings.dart';
 import 'package:bukateria/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
@@ -35,7 +36,7 @@ class _ProfilesViewState extends State<ProfilesView> {
 
   void switchRole() {
     if (_checked == true) {
-      Get.to(() => ChefSettings());
+      Get.to(() => Account());
     } else {
       Get.to(() => DashboardView());
     }

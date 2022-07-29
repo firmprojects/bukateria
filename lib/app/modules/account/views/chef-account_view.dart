@@ -8,20 +8,18 @@
 // import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 // import 'package:get/get.dart';
 
-// class FoodieAccountView extends StatefulWidget {
-//   const FoodieAccountView({Key? key}) : super(key: key);
+// class ChefAccountView extends StatefulWidget {
+//   const ChefAccountView({Key? key}) : super(key: key);
 
 //   @override
-//   _FoodieAccountViewState createState() => _FoodieAccountViewState();
+//   _ChefAccountViewState createState() => _ChefAccountViewState();
 // }
 
-// class _FoodieAccountViewState extends State<FoodieAccountView> {
+// class _ChefAccountViewState extends State<ChefAccountView> {
 //   TextEditingController? myBioController;
 //   TextEditingController? yourNameController1;
 //   TextEditingController? yourNameController2;
 //   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-//   bool mode = false;
 
 //   @override
 //   void initState() {
@@ -129,7 +127,7 @@
 //       );
 
 //   Widget buildChefSwitch() => SwitchSettingsTile(
-//         title: "Foodie Mode",
+//         title: "Chef Mode",
 //         settingKey: "chef-switch",
 //         subtitle: "",
 //         leading: Icon(Icons.switch_access_shortcut),
@@ -143,7 +141,7 @@
 //       );
 
 //   Widget buildLogout() => SimpleSettingsTile(
-//         title: "Logout",
+//         title: "LogOut",
 //         subtitle: "",
 //         leading: Icon(Icons.logout),
 //         onTap: () {

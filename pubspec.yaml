@@ -1,13 +1,12 @@
 name: bukateria
 version: 1.0.0+1
 publish_to: none
-description: A new Flutter project.
+description: Bukkateria.
 environment:
   sdk: '>=2.17.3 <3.0.0'
 
 dependencies:
   auto_size_text: 3.0.0
-  bloc: ^8.0.3
   cached_network_image: 3.1.0+1
   carousel_slider: ^4.0.0-nullsafety.0
   cloud_firestore: ^2.5.3
@@ -16,17 +15,18 @@ dependencies:
   currency_picker: ^2.0.11
   easy_debounce: 2.0.1
   equatable: ^2.0.3
-  firebase_auth: ^3.1.1
   firebase_core: ^1.6.0
+  firebase_auth: ^3.1.1
   firebase_storage: ^10.0.3
+  settings_ui: ^2.0.2
   flutter:
     sdk: flutter
   flutter_advanced_switch: ^3.0.1
   flutter_awesome_select: ^6.4.0
-  # flutter_bloc: ^8.0.1
   flutter_localizations:
     sdk: flutter
-  flutter_settings_screens: ^0.2.2+1
+  # flutter_settings_screens: ^0.2.2+1
+  flutter_bloc: ^8.0.1
   font_awesome_flutter: 10.1.0
   get: 4.6.5
   get_cli: ^0.2.30

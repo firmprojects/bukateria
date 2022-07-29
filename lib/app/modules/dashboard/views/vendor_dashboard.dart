@@ -1,4 +1,6 @@
+import 'package:bukateria/app/modules/account/views/account.dart';
 import 'package:bukateria/app/modules/account/views/account_view.dart';
+import 'package:bukateria/app/modules/account/views/chef-account_view.dart';
 import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
 import 'package:bukateria/app/modules/orders/views/vendor_order_view.dart';
 import 'package:bukateria/app/modules/pages/create.dart';
@@ -19,7 +21,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
     VendorOrdersWidget(),
     CreateView(),
     NotificationView(),
-    AccountPageWidget()
+    Account()
   ];
 
   var curentIndex = 0;

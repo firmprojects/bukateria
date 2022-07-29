@@ -1,20 +1,13 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 
-import 'package:bukateria/app/modules/pages/google_places_search.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:bukateria/flutter_flow/flutter_flow_theme.dart';
-import 'package:bukateria/flutter_flow/flutter_flow_widgets.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
-import 'package:bukateria/widgets/custom_button.dart';
 import 'package:bukateria/widgets/radio_button_widget.dart';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_awesome_select/flutter_awesome_select.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddRecipe extends StatefulWidget {
@@ -237,7 +230,7 @@ class _AddRecipeState extends State<AddRecipe> {
                         choiceType: S2ChoiceType.chips,
                         placeholder: "",
                         selectedValue: value,
-                        title: 'Type of Cuisines',
+                        title: 'Types of Cuisine',
                         choiceItems: options,
                         onChange: (state) =>
                             setState(() => value = state.value)),

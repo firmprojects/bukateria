@@ -182,7 +182,7 @@ class _AddVlogState extends State<AddVlog> {
                       obscureText: false,
                       decoration: InputDecoration(
                         // labelText: 'Description',
-                        hintText: 'Briefly describe your menu here',
+                        hintText: 'Briefly describe your vlog here',
                         hintStyle: body3.copyWith(color: grey),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(

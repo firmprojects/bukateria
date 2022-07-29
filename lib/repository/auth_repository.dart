@@ -23,6 +23,6 @@ class AuthRepository extends BaseAuthRepository{
 
   @override
   // TODO: implement user
-  Stream<User?> get user => throw UnimplementedError();
+  Stream<auth.User?> get user => _firebaseAuth.userChanges();
   
 }

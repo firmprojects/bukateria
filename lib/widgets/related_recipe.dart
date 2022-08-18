@@ -37,12 +37,24 @@ class RelatedRecipe extends StatelessWidget {
               padding: EdgeInsetsDirectional.fromSTEB(0, 1, 1, 1),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
+                child: FadeInImage(
+                  width: 70,
+                  height: 100,
+                  fit: BoxFit.fill,
+                  image: NetworkImage(
+                    //widget.product[Constants.image]
+                      '${image}'),
+                  placeholder: AssetImage(
+                    "assets/images/big_logo.png",
+                  ),
+                )
+
+                /*Image.asset(
                   '$image',
                   width: 70,
                   height: 100,
                   fit: BoxFit.cover,
-                ),
+                ),*/
               ),
             ),
             Expanded(

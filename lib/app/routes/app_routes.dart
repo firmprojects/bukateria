@@ -3,12 +3,14 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
+  static const SPLASH = _Paths.SPLASH;
   static const HOME = _Paths.HOME;
   static const REGISTER = _Paths.REGISTER;
   static const LOGIN = _Paths.LOGIN;
   static const ONBOARDING = _Paths.ONBOARDING;
   static const OTP = _Paths.OTP;
   static const DASHBOARD = _Paths.DASHBOARD;
+  static const VENDOR_DASHBOARD = _Paths.VENDOR_DASHBOARD;
   static const RECIPES = _Paths.RECIPES;
   static const MENUS = _Paths.MENUS;
   static const PROFILES = _Paths.PROFILES;
@@ -22,12 +24,14 @@ abstract class Routes {
 
 abstract class _Paths {
   _Paths._();
+  static const SPLASH = '/splash';
   static const HOME = '/home';
   static const REGISTER = '/register';
   static const LOGIN = '/login';
   static const ONBOARDING = '/onboarding';
   static const OTP = '/otp';
   static const DASHBOARD = '/dashboard';
+  static const VENDOR_DASHBOARD = '/dashboard/views/vendor_dashboard';
   static const RECIPES = '/recipes';
   static const MENUS = '/menus';
   static const PROFILES = '/profiles';

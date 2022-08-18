@@ -1,3 +1,5 @@
+import 'package:bukateria/app/modules/dashboard/views/vendor_dashboard.dart';
+import 'package:bukateria/app/modules/splash/bindings/splash_binding.dart';
 import 'package:get/get.dart';
 
 import '../modules/account/bindings/account_binding.dart';
@@ -28,6 +30,7 @@ import '../modules/recipes/bindings/recipes_binding.dart';
 import '../modules/recipes/views/recipes_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/splash/views/splash_view.dart';
 import '../modules/vlog/bindings/vlog_binding.dart';
 import '../modules/vlog/views/vlog_view.dart';
 
@@ -36,9 +39,17 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.ONBOARDING;
+  static const INITIAL = Routes.SPLASH;
+  static const USER_DASHBOARD = Routes.DASHBOARD;
+  static const VENDOR_DASHBOARD = Routes.VENDOR_DASHBOARD;
+  static const REGISTER_VIEW = Routes.REGISTER;
 
   static final routes = [
+    GetPage(
+      name: _Paths.SPLASH,
+      page: () => const SplashView(),
+      binding: SplashBinding(),
+    ),
     GetPage(
       name: _Paths.HOME,
       page: () => const HomeView(),
@@ -66,6 +77,11 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DASHBOARD,
+      page: () => DashboardView(),
+      binding: DashboardBinding(),
+    ),
+    GetPage(
+      name: _Paths.VENDOR_DASHBOARD,
       page: () => DashboardView(),
       binding: DashboardBinding(),
     ),

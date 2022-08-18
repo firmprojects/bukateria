@@ -5,7 +5,7 @@ import 'package:bukateria/models/recipe_model.dart';
 import 'package:bukateria/models/user_model.dart';
 
 List<MenusModel> menus = [
-  MenusModel(
+  /*MenusModel(
       title: "Pounded Yam & Ogbono Soup",
       description:
           'Cras dapibus. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Nam at tortor in tellus interdum sagittis. Phasellus accumsan cursus velit. Curabitur a felis in nunc fringilla tristique.',
@@ -76,11 +76,11 @@ List<MenusModel> menus = [
       stars: 4.2,
       amount: 12000,
       image: 'assets/images/fd6.jpg',
-      likes: true),
+      likes: true),*/
 ];
 
 List<RecipeModel> recipes = [
-  RecipeModel(
+  /*RecipeModel(
       title: "Pounded Yam & Ogbono Soup",
       description:
           'Cras dapibus. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Nam at tortor in tellus interdum sagittis. Phasellus accumsan cursus velit. Curabitur a felis in nunc fringilla tristique.',
@@ -161,5 +161,5 @@ List<RecipeModel> recipes = [
       stars: 4.2,
       amount: 12000,
       image: 'assets/images/fd6.jpg',
-      likes: true),
+      likes: true),*/
 ];

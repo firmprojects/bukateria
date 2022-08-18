@@ -3,17 +3,19 @@ import 'package:bukateria/themes/text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ProfileMenuCard extends StatelessWidget {
-  ProfileMenuCard({Key? key, required this.index, required this.recipes})
+
+  ProfileMenuCard({Key? key, required this.menu })
       : super(key: key);
 
-  final recipes;
-  final index;
+  final menu;
+
 
   @override
   Widget build(BuildContext context) {
-    var recipe = recipes[index];
+
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,28 +45,34 @@ class ProfileMenuCard extends StatelessWidget {
         //   ),
         // ),
         GestureDetector(
-          onTap: () => Get.to(() => RecipeDetailView(recipe: recipe)),
+          onTap: () => Get.to(() => RecipeDetailView(recipe: menu)),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              '${recipe.image}',
+            child: FadeInImage(
               width: double.infinity,
               height: 151,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
+              image: NetworkImage(
+                //widget.product[Constants.image]
+                  '${menu.image}'
+              ),
+              placeholder: AssetImage(
+                "assets/images/big_logo.png",
+              ),
             ),
           ),
         ),
         Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
           child: GestureDetector(
-              onTap: () => Get.to(() => RecipeDetailView(recipe: recipe)),
-              child: Text('${recipe.title}',
+              onTap: () => Get.to(() => RecipeDetailView(recipe: menu)),
+              child: Text('${menu.title}',
                   textAlign: TextAlign.start, style: title6)),
         ),
         Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text('Date: March 5th, 2022', style: body5),
+            Text("Date: "+DateFormat('MMM dd, yyyy').format(menu.created_at), style: body5),
           ],
         ),
       ],

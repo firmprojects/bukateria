@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RecipeCard extends StatelessWidget {
-  RecipeCard({Key? key, required this.index, required this.recipes})
+  RecipeCard({Key? key,  required this.recipe})
       : super(key: key);
 
-  final recipes;
-  final index;
+  final recipe;
 
   @override
   Widget build(BuildContext context) {
-    var recipe = recipes[index];
+
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,11 +45,17 @@ class RecipeCard extends StatelessWidget {
           onTap: () => Get.to(() => RecipeDetailView(recipe: recipe)),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              '${recipe.image}',
+            child: FadeInImage(
               width: double.infinity,
               height: 151,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
+              image: NetworkImage(
+                //widget.product[Constants.image]
+                  '${recipe.image}'
+              ),
+              placeholder: AssetImage(
+                "assets/images/big_logo.png",
+              ),
             ),
           ),
         ),

@@ -1,6 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:bukateria/repository/auth_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
+
+import '../app/modules/login/views/login_view.dart';
 
 part 'signup_state.dart';
 
@@ -18,12 +22,19 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(password: value, status: SignupStatus.initial));
   }
 
+  void confirmPasswordChanged(String value) {
+    emit(state.copyWith(password: value, status: SignupStatus.initial));
+  }
+
   void signupWithCredentials() async {
     if (!state.isValid) return;
+    emit(state.copyWith(status: SignupStatus.submitting));
     try {
-      await _authRepository.signup(
-          email: state.email, password: state.password);
+      User? userCredential = await _authRepository.signup(email: state.email, password: state.password);
+      await _authRepository.submitUser(email: userCredential?.email ?? "",userType: "foodie", uid: userCredential?.uid ?? "");
       emit(state.copyWith(status: SignupStatus.success));
-    } catch (_) {}
+    } catch (_) {
+      emit(state.copyWith(status: SignupStatus.error));
+    }
   }
 }

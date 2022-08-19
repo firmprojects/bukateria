@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:bukateria/cubit/post_cubit/post_cubit.dart';
 import 'package:bukateria/widgets/deliverytype_radio_button_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
 import 'package:bukateria/app/modules/pages/google_places_search.dart';
@@ -11,8 +13,11 @@ import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/radio_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_awesome_select/flutter_awesome_select.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../../common_views.dart';
 
 class AddMenu extends StatefulWidget {
   const AddMenu({Key? key}) : super(key: key);
@@ -25,10 +30,12 @@ class _AddMenuState extends State<AddMenu> {
   TextEditingController? addIngredientFieldController1;
   TextEditingController? descriptionController;
   TextEditingController? fullNameController;
+  TextEditingController? priceController;
   double? sliderValue;
   TextEditingController? addIngredientFieldController2;
   TextEditingController? texeareaController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  String selectedLocation = "Location";
 
   @override
   void initState() {
@@ -36,13 +43,14 @@ class _AddMenuState extends State<AddMenu> {
     addIngredientFieldController1 = TextEditingController();
     descriptionController = TextEditingController();
     fullNameController = TextEditingController();
+    priceController = TextEditingController();
     addIngredientFieldController2 = TextEditingController();
     texeareaController = TextEditingController();
     // WidgetsBinding.instance?.addPostFrameCallback((_) => setState(() {}));
   }
 
   MenuType? _menuType;
-  DeliveryType? _deliveryType;
+  DeliveryType? _deliveryType = null;
 
   String value = 'cuisines';
   List<S2Choice<String>> options = [
@@ -89,6 +97,23 @@ class _AddMenuState extends State<AddMenu> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocListener<PostCubit, PostState>(listener: (context, state) {
+
+      if (state.status == PostStatus.save) {
+        Get.back();
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Menu Successfully saved!")));
+      }else if (state.status == PostStatus.publish) {
+        Get.back();
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Menu Successfully published!")));
+        Get.back();
+      }else if (state.status == PostStatus.error) {
+        Get.back();
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Something went wrong!")));
+      }else if(state.status == PostStatus.submitting){
+        CommonViews.showProgressDialog(context);
+      }
+    }, child: BlocBuilder<PostCubit, PostState>(
+    builder: (context, state) {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -97,24 +122,63 @@ class _AddMenuState extends State<AddMenu> {
         iconTheme: IconThemeData(color: dark),
         automaticallyImplyLeading: true,
         actions: [
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            height: 20,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            decoration: BoxDecoration(
-                color: grey, borderRadius: BorderRadius.circular(10)),
-            child: Text("Save"),
+          InkWell(
+            onTap: (){
+              String deliveryType = _deliveryType == null? "" :_deliveryType == DeliveryType.Delivery ? "delivery": "pickup";
+              if(image == null){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Image is not selected")));
+              }else  if((fullNameController?.text ?? "").isEmpty){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter title")));
+              }else  if((descriptionController?.text ?? "").isEmpty){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter description")));
+              }else  if((priceController?.text ?? "").isEmpty){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter price")));
+              }else  if((selectedLocation ?? "").isEmpty){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("please enter location")));
+              }else  if(deliveryType.isEmpty){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Delivery type is not selected")));
+
+              }else{
+                context.read<PostCubit>().imageChanged(image!);
+                context.read<PostCubit>().titleChanged(fullNameController!.text);
+                context.read<PostCubit>().descriptionChanged(descriptionController!.text);
+                context.read<PostCubit>().productStatusChanged("SAVE");
+                context.read<PostCubit>().priceChanged(priceController!.text);
+                context.read<PostCubit>().locationChanged(selectedLocation);
+                context.read<PostCubit>().delvieryTypeChanged(_deliveryType == DeliveryType.Delivery ? "delivery": "pickup");
+
+                context.read<PostCubit>().postMenuCredentials(image?.path ?? "", FirebaseAuth.instance.currentUser?.uid ?? "");
+              }
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              height: 20,
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              decoration: BoxDecoration(
+                  color: state.status == PostStatus.initial? grey : Colors.grey.shade300, borderRadius: BorderRadius.circular(10)),
+              child: Text("Save"),
+            ),
           ),
           SizedBox(
             width: 10,
           ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            height: 20,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            decoration: BoxDecoration(
-                color: primary, borderRadius: BorderRadius.circular(10)),
-            child: Text("Publish"),
+          InkWell(
+            onTap: (){
+              if(state.status == PostStatus.save){
+                context.read<PostCubit>().productStatusChanged("SAVE");
+                context.read<PostCubit>().updateMenuStatus("${state.key}", FirebaseAuth.instance.currentUser?.uid ?? "");
+              }else{
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Save first!")));
+              }
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              height: 20,
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              decoration: BoxDecoration(
+                  color: primary, borderRadius: BorderRadius.circular(10)),
+              child: Text("Publish"),
+            ),
           ),
           SizedBox(
             width: 20,
@@ -171,6 +235,7 @@ class _AddMenuState extends State<AddMenu> {
                       onChanged: (val) {},
                       autofocus: true,
                       obscureText: false,
+                      keyboardType: state.status != PostStatus.save ? TextInputType.text: TextInputType.none,
                       decoration: InputDecoration(
                         labelText: 'Title',
                         hintText: 'Title',
@@ -202,6 +267,7 @@ class _AddMenuState extends State<AddMenu> {
                       onChanged: (val) {},
                       autofocus: true,
                       obscureText: false,
+                      keyboardType: state.status != PostStatus.save ? TextInputType.text: TextInputType.none,
                       decoration: InputDecoration(
                         // labelText: 'Description',
                         hintText: 'Briefly describe your menu here',
@@ -230,11 +296,11 @@ class _AddMenuState extends State<AddMenu> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                     child: TextFormField(
-                      controller: fullNameController,
+                      controller: priceController,
                       onChanged: (val) {},
                       autofocus: true,
                       obscureText: false,
-                      keyboardType: TextInputType.number,
+                      keyboardType: state.status != PostStatus.save ? TextInputType.number: TextInputType.none,
                       decoration: InputDecoration(
                         labelText: 'Price',
                         hintText: 'Price',
@@ -261,12 +327,16 @@ class _AddMenuState extends State<AddMenu> {
                   ),
 
                   GestureDetector(
-                    onTap: () => Get.to(() => PlaceSearch()),
+                       onTap: state.status == PostStatus.save ? null : () => Get.to(() =>  PlaceSearch(onSelection: (location){
+                      setState((){
+                        selectedLocation = location;
+                      });
+                    },)),
                     child: Container(
                         color: greyLight.withOpacity(0.3),
                         child: ListTile(
                           title: Text(
-                            "Location",
+                            selectedLocation,
                             style: body3,
                           ),
                           trailing: Icon(
@@ -584,6 +654,8 @@ class _AddMenuState extends State<AddMenu> {
         ),
       ),
     );
+    },
+    ),);
   }
 
   void _selectOptionBottomSheet() {

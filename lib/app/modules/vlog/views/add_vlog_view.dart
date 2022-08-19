@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
 import 'package:bukateria/themes/colors.dart';
@@ -6,7 +7,13 @@ import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/radio_button_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../../common_views.dart';
+import '../../../../cubit/post_cubit/post_cubit.dart';
 
 class AddVlog extends StatefulWidget {
   const AddVlog({Key? key}) : super(key: key);
@@ -23,6 +30,8 @@ class _AddVlogState extends State<AddVlog> {
   TextEditingController? addIngredientFieldController2;
   TextEditingController? texeareaController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  var file;
 
   @override
   void initState() {
@@ -56,6 +65,7 @@ class _AddVlogState extends State<AddVlog> {
       if (image == null) return;
 
       final imagePath = File(image.path);
+      file = imagePath;
       setState(() => this.image = imagePath);
     } on PlatformException catch (e) {
       print(e);
@@ -64,153 +74,210 @@ class _AddVlogState extends State<AddVlog> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: white,
-        // toolbarHeight: 70,
-        iconTheme: IconThemeData(color: dark),
-        automaticallyImplyLeading: true,
-        actions: [
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            height: 20,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            decoration: BoxDecoration(
-                color: grey, borderRadius: BorderRadius.circular(10)),
-            child: Text("Save"),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            height: 20,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            decoration: BoxDecoration(
-                color: primary, borderRadius: BorderRadius.circular(10)),
-            child: Text("Publish"),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-        ],
-        centerTitle: true,
-        elevation: 0,
-      ),
-      backgroundColor: white,
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            GestureDetector(
-              onTap: () => _selectOptionBottomSheet(),
-              child: image != null
-                  ? Image.file(
-                      image!,
-                      height: 230,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    )
-                  : Container(
-                      height: 230,
-                      padding: EdgeInsets.only(bottom: 20),
-                      alignment: Alignment.center,
-                      width: double.infinity,
-                      child: Text(
-                        "Tap to upload image/video",
-                        style: title3,
-                        textAlign: TextAlign.center,
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          image: DecorationImage(
-                              scale: 2.0,
-                              fit: BoxFit.contain,
-                              image: AssetImage("assets/images/food1.png"))),
-                    ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 30),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                    child: TextFormField(
-                      controller: fullNameController,
-                      onChanged: (_) {},
-                      autofocus: true,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: 'Title',
-                        hintText: 'Title',
-                        hintStyle: title3.copyWith(color: grey),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xFFE5E5E5),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xFFE5E5E5),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        filled: true,
-                        fillColor: greyLight.withOpacity(0.2),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                    child: TextFormField(
-                      controller: descriptionController,
-                      onChanged: (_) => EasyDebounce.debounce(
-                        'descriptionController',
-                        Duration(milliseconds: 2000),
-                        () => setState(() {}),
-                      ),
-                      autofocus: true,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        // labelText: 'Description',
-                        hintText: 'Briefly describe your vlog here',
-                        hintStyle: body3.copyWith(color: grey),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: greyLight.withOpacity(0.3),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: greyLight.withOpacity(0.3),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        filled: true,
-                        fillColor: greyLight.withOpacity(0.2),
-                      ),
-                      maxLines: 4,
-                    ),
-                  ),
-                ],
+    return BlocListener<PostCubit, PostState>(listener: (context, state) {
+
+      if (state.status == PostStatus.save) {
+        Get.back();
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Vlog Successfully saved!")));
+      }else if (state.status == PostStatus.publish) {
+        Get.back();
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Vlog Successfully published!")));
+        Get.back();
+      }else if (state.status == PostStatus.error) {
+        Get.back();
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Something went wrong!")));
+      }else if(state.status == PostStatus.submitting){
+        CommonViews.showProgressDialog(context);
+      }
+    }, child: BlocBuilder<PostCubit, PostState>(
+      builder: (context, state) {
+        return Scaffold(
+          key: scaffoldKey,
+          appBar: AppBar(
+            backgroundColor: white,
+            // toolbarHeight: 70,
+            iconTheme: IconThemeData(color: dark),
+            automaticallyImplyLeading: true,
+            actions: [
+              InkWell(
+                onTap: (){
+                  if(state.status != PostStatus.save) {
+                    if (image == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Image not selected!")));
+                    } else if (state.title == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Please write title first!")));
+                    } else if (state.description == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Description write title first!")));
+                    } else {
+                      print("----------save-----------");
+                      context.read<PostCubit>().imageChanged(image!);
+                      context.read<PostCubit>().productStatusChanged("SAVE");
+                      context.read<PostCubit>().postExploreCredentials("${state.title}", FirebaseAuth.instance.currentUser?.uid ?? "");
+                    }
+                  }
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  height: 20,
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  decoration: BoxDecoration(
+                      color: state.status == PostStatus.initial? grey : Colors.grey.shade300, borderRadius: BorderRadius.circular(10)),
+                  child: Text("Save"),
+                ),
               ),
+              SizedBox(
+                width: 10,
+              ),
+              InkWell(
+                onTap: (){
+                  if(state.status == PostStatus.save){
+                    context.read<PostCubit>().productStatusChanged("SAVE");
+                    context.read<PostCubit>().updateExploreStatus("${state.key}", FirebaseAuth.instance.currentUser?.uid ?? "");
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Save first!")));
+                  }
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  height: 20,
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  decoration: BoxDecoration(
+                      color: primary, borderRadius: BorderRadius.circular(10)),
+                  child: Text("Publish"),
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+            ],
+            centerTitle: true,
+            elevation: 0,
+          ),
+          backgroundColor: white,
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                GestureDetector(
+                  onTap: () => state.status != PostStatus.save ?_selectOptionBottomSheet() : null,
+                  child: image != null
+                      ? Image.file(
+                    image!,
+                    height: 230,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  )
+                      : Container(
+                    height: 230,
+                    padding: EdgeInsets.only(bottom: 20),
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    child: Text(
+                      "Tap to upload image/video",
+                      style: title3,
+                      textAlign: TextAlign.center,
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        image: DecorationImage(
+                            scale: 2.0,
+                            fit: BoxFit.contain,
+                            image: AssetImage("assets/images/food1.png"))),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 30),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                        child: TextFormField(
+                          controller: fullNameController,
+                          onChanged: (value) {
+                            context.read<PostCubit>().titleChanged(value);
+                          },
+                          keyboardType: state.status != PostStatus.save ? TextInputType.text: TextInputType.none,
+                          autofocus: true,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: 'Title',
+                            hintText: 'Title',
+                            hintStyle: title3.copyWith(color: grey),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFE5E5E5),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFE5E5E5),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            filled: true,
+                            fillColor: greyLight.withOpacity(0.2),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                        child: TextFormField(
+                          controller: descriptionController,
+                          onChanged: (value) =>
+                              EasyDebounce.debounce(
+                                'descriptionController',
+                                Duration(milliseconds: 2000),
+                                    () => setState(() {
+                                      context.read<PostCubit>().descriptionChanged(value);
+                                    }),
+                              ),
+                          keyboardType: state.status != PostStatus.save ? TextInputType.text: TextInputType.none,
+                          autofocus: true,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            // labelText: 'Description',
+                            hintText: 'Briefly describe your vlog here',
+                            hintStyle: body3.copyWith(color: grey),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: greyLight.withOpacity(0.3),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: greyLight.withOpacity(0.3),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            filled: true,
+                            fillColor: greyLight.withOpacity(0.2),
+                          ),
+                          maxLines: 4,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        );
+      },
+    ),);
   }
 
   void _selectOptionBottomSheet() {

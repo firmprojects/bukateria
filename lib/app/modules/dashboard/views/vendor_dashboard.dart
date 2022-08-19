@@ -1,6 +1,4 @@
-import 'package:bukateria/app/modules/account/views/account.dart';
 import 'package:bukateria/app/modules/account/views/account_view.dart';
-import 'package:bukateria/app/modules/account/views/chef-account_view.dart';
 import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
 import 'package:bukateria/app/modules/orders/views/vendor_order_view.dart';
 import 'package:bukateria/app/modules/pages/create.dart';
@@ -9,7 +7,7 @@ import 'package:bukateria/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 class VendorDashboard extends StatefulWidget {
-  VendorDashboard({Key? key}) : super(key: key);
+  const VendorDashboard({Key? key}) : super(key: key);
 
   @override
   State<VendorDashboard> createState() => _VendorDashboardState();
@@ -21,7 +19,8 @@ class _VendorDashboardState extends State<VendorDashboard> {
     VendorOrdersWidget(),
     CreateView(),
     NotificationView(),
-    Account()
+    //Account()
+    AccountView()
   ];
 
   var curentIndex = 0;

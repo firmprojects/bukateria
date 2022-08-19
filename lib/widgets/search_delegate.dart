@@ -30,7 +30,7 @@ class MenuSearchDelegate extends SearchDelegate {
     List<MenusModel> menusList = [];
 
     for (var i in menus) {
-      if (i.title.toLowerCase().contains(query.toLowerCase())) {
+      if (i.title!.toLowerCase().contains(query.toLowerCase())) {
         menusList.add(i);
       }
     }
@@ -39,7 +39,7 @@ class MenuSearchDelegate extends SearchDelegate {
         itemCount: menusList.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(menusList[index].title),
+            title: Text(menusList[index].title ?? ""),
           );
         });
   }
@@ -49,7 +49,7 @@ class MenuSearchDelegate extends SearchDelegate {
     List<MenusModel> menusList = [];
 
     for (var i in menus) {
-      if (i.title.toLowerCase().contains(query.toLowerCase())) {
+      if (i.title!.toLowerCase().contains(query.toLowerCase())) {
         menusList.add(i);
       }
     }
@@ -58,7 +58,7 @@ class MenuSearchDelegate extends SearchDelegate {
         itemCount: menusList.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(menusList[index].title),
+            title: Text(menusList[index].title ?? ""),
           );
         });
   }
@@ -94,7 +94,7 @@ class RecipeSearchDelegate extends SearchDelegate {
     List<MenusModel> RecipeList = [];
 
     for (var i in menus) {
-      if (i.title.toLowerCase().contains(query.toLowerCase())) {
+      if (i.title!.toLowerCase().contains(query.toLowerCase())) {
         RecipeList.add(i);
       }
     }
@@ -103,7 +103,7 @@ class RecipeSearchDelegate extends SearchDelegate {
         itemCount: RecipeList.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(RecipeList[index].title),
+            title: Text(RecipeList[index]?.title ?? ""),
           );
         });
   }
@@ -113,7 +113,7 @@ class RecipeSearchDelegate extends SearchDelegate {
     List<MenusModel> recipeList = [];
 
     for (var i in menus) {
-      if (i.title.toLowerCase().contains(query.toLowerCase())) {
+      if (i.title!.toLowerCase().contains(query.toLowerCase())) {
         recipeList.add(i);
       }
     }
@@ -122,7 +122,7 @@ class RecipeSearchDelegate extends SearchDelegate {
         itemCount: recipeList.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(recipeList[index].title),
+            title: Text(recipeList[index].title??""),
           );
         });
   }

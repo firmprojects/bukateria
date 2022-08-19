@@ -1,4 +1,3 @@
-import 'package:bukateria/app/modules/account/views/account.dart';
 import 'package:bukateria/app/modules/account/views/account_view.dart';
 import 'package:bukateria/app/modules/account/views/chef-account_view.dart';
 import 'package:bukateria/app/modules/favourites/views/favourites_view.dart';
@@ -21,9 +20,8 @@ class _DashboardViewState extends State<DashboardView> {
     RecipesView(),
     VlogView(),
     FavouritesView(),
-    Account()
-
-    //AccountView()
+    //Account()
+    AccountView()
   ];
 
   var curentIndex = 0;

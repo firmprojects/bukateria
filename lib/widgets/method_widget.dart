@@ -26,14 +26,26 @@ class MethodWidget extends StatelessWidget {
           dense: false,
         ),
         Align(
-          alignment: AlignmentDirectional(0.7, 0),
-          child: Image.asset(
+            alignment: AlignmentDirectional(0.7, 0),
+            child: FadeInImage(
+              width: 250,
+              height: 100,
+              fit: BoxFit.fill,
+              image: NetworkImage(
+                  //widget.product[Constants.image]
+                  '${image}'),
+              placeholder: AssetImage(
+                "assets/images/big_logo.png",
+              ),
+            )
+
+            /*Image.asset(
             '$image',
             width: 250,
             height: 100,
             fit: BoxFit.cover,
-          ),
-        ),
+          ),*/
+            ),
       ],
     );
   }

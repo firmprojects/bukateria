@@ -4,38 +4,48 @@ import 'package:bukateria/models/recipe_method_model.dart';
 import 'package:bukateria/models/user_model.dart';
 
 class RecipeModel {
-  String title;
-  String description;
+  String? title;
+  String? description;
   UserModel? user;
   String? location;
-  List<Ingredients>? ingredients;
-  List<RecipeMethod>? method;
+  List<String>? ingredients;
+  List<Map<String,dynamic>>? method;
   String? createdAt;
-  String image;
+  String? image;
   bool? likes;
-  int amount;
+  int? amount;
   double? stars;
   List<Comment>? comments;
   String? category;
+  String? cuisine;
   String? duration;
+  String? productStatus;
+  String? key;
+  DateTime? created_at;
+  String? uid;
 
   RecipeModel(
-      {required this.title,
-      required this.description,
+      { this.title,
+       this.description,
       this.user,
       this.location,
       this.ingredients,
       this.createdAt,
-      required this.image,
+        this.image,
       this.likes,
-      required this.amount,
+       this.amount,
       this.method,
       this.category,
+        this.cuisine,
+      this.productStatus,
+      this.created_at,
       this.duration,
       this.stars,
-      this.comments});
+      this.comments,
+      this.key,
+      this.uid});
 
-  factory RecipeModel.fromJson(Map<String, dynamic> json) => RecipeModel(
+ /* factory RecipeModel.fromJson(Map<String, dynamic> json) => RecipeModel(
       title: json['title'],
       description: json['description'],
       user: json['user'],
@@ -64,5 +74,5 @@ class RecipeModel {
         'comments': comments,
         'category': category,
         'duration': duration,
-      };
+      };*/
 }

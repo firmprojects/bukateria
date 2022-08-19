@@ -7,9 +7,11 @@ import 'package:bukateria/app/modules/register/views/register_view.dart';
 import 'package:bukateria/app/modules/register/views/social_register_view.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../../../cubit/onboarding_cubit/onboard_cubit.dart';
 import '../controllers/onboarding_controller.dart';
 
 class OnboardingView extends StatefulWidget {
@@ -24,6 +26,14 @@ class _OnboardingViewState extends State<OnboardingView> {
   bool isLast = false;
   @override
   Widget build(BuildContext context) {
+
+    return BlocListener<OnboardCubit, OnboardState>(listener: (context,state){
+      print("-----------------${state.status}");
+      if(state.status == OnboardStatus.success){
+        Get.offAll(() => RegisterView());
+      }
+    },child: BlocBuilder<OnboardCubit, OnboardState>(
+        builder: (context, state) {
     return Stack(
       children: [
         PageView(
@@ -40,7 +50,9 @@ class _OnboardingViewState extends State<OnboardingView> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       TextButton(
-                          onPressed: () => Get.to(() => SocialRegisterView()),
+                          onPressed: () {
+                            context.read<OnboardCubit>().setOnboard("YES");
+                          },
                           child: Text("Skip",
                               style: GoogleFonts.openSans(
                                   color: white,
@@ -66,12 +78,16 @@ class _OnboardingViewState extends State<OnboardingView> {
                     height: 45,
                     margin: EdgeInsets.symmetric(horizontal: 60),
                     child: ElevatedButton(
-                      onPressed: () => Get.to(() => SocialRegisterView()),
+                      onPressed: () {
+                        context.read<OnboardCubit>().setOnboard("YES");
+                      },
                       child: Text("Proceed"),
                       style: ElevatedButton.styleFrom(primary: primary),
                     ),
                   ))
       ],
     );
+        },
+    ),);
   }
 }

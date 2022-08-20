@@ -1,6 +1,6 @@
 part of 'post_cubit.dart';
 
-enum PostStatus { initial, submitting, success,save,publish, error }
+enum PostStatus { initial, submitting, success,save,publish, error,locationFound }
 
 class PostState extends Equatable {
   final String? title;
@@ -11,23 +11,25 @@ class PostState extends Equatable {
   final String? key;
   final String? price;
   final String? location;
+  final Map<String,dynamic>? currentLocation;
   final String? deliveryType;
   final File? image;
   final List<String>? ingredients;
   final List<Map<String,dynamic>>? methods;
   final PostStatus status;
   const PostState(
-      {this.title, this.description,this.typeOfCuisine,this.recipeCategory,this.productStatus, this.key,this.price,this.location,this.deliveryType, this.image, this.ingredients,this.methods, required this.status});
+      {this.title, this.description,this.currentLocation, this.typeOfCuisine,this.recipeCategory,this.productStatus, this.key,this.price,this.location,this.deliveryType, this.image, this.ingredients,this.methods, required this.status});
 
   factory PostState.initial() {
     return PostState( status: PostStatus.initial);
   }
 
   PostState copyWith(
-      {String? title, String? description, String? typeOfCuisine,String? recipeCategory,String? productStatus,String? key,String? price,String? location,String? deliveryType, File? image, List<String>? ingredients, List<Map<String,dynamic>>? methods, PostStatus? status}) {
+      {String? title, String? description, String? typeOfCuisine,Map<String,dynamic>? currentLocation,String? recipeCategory,String? productStatus,String? key,String? price,String? location,String? deliveryType, File? image, List<String>? ingredients, List<Map<String,dynamic>>? methods, PostStatus? status}) {
     return PostState(
         title: title ?? this.title,
         description: description ?? this.description,
+        currentLocation: currentLocation ?? this.currentLocation,
         typeOfCuisine: typeOfCuisine ?? this.typeOfCuisine,
         recipeCategory: recipeCategory ?? this.recipeCategory,
         productStatus: productStatus ?? this.productStatus,
@@ -46,5 +48,5 @@ class PostState extends Equatable {
   bool get isValidExplore => title != null && description != null && productStatus != null && image != null;
 
   @override
-  List<Object> get props => [title ?? "", description ?? "",typeOfCuisine ?? "",recipeCategory ?? "",productStatus ?? "",key ?? "",price ?? "",location ?? "",deliveryType ?? "",image ?? "", ingredients ?? "",methods ?? "", status];
+  List<Object> get props => [title ?? "", description ?? "",currentLocation ?? {}, typeOfCuisine ?? "",recipeCategory ?? "",productStatus ?? "",key ?? "",price ?? "",location ?? "",deliveryType ?? "",image ?? "", ingredients ?? "",methods ?? "", status];
 }

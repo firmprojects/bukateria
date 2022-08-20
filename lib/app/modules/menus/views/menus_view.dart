@@ -20,6 +20,7 @@ class _MenusViewState extends State<MenusView> {
   @override
   void initState() {
     super.initState();
+    context.read<PostCubit>().getCurrentPosition();
   }
 
   @override
@@ -47,7 +48,7 @@ class _MenusViewState extends State<MenusView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Ikeja, Lagos",
+                          "${state.currentLocation?["address"] ?? "Loading..."}",
                           style: body3.copyWith(color: white),
                         ),
                       ],

@@ -43,6 +43,10 @@ dependencies:
   url_launcher: 6.0.15
   weekday_selector: ^1.1.0
   flutter_settings_screens: ^0.3.2-null-safety
+  geolocator: ^9.0.1
+  geocoding: ^2.0.4
+  location: ^4.2.0
+
 
 
 dev_dependencies:

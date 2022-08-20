@@ -4,6 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:bukateria/repository/auth_repository.dart';
 import 'package:bukateria/repository/postRepository/post_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 part 'post_state.dart';
 
@@ -275,4 +277,25 @@ class PostCubit extends Cubit<PostState> {
       emit(state.copyWith(status: PostStatus.error));
     }
   }
+
+ Future<void > getCurrentPosition() async {
+    var position = await _authRepository.determinePosition();
+    List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+    print(placemarks);
+    Placemark place = placemarks[0];
+    String address =  '${place.locality}, ${place.administrativeArea}, ${place.country}';
+    Map<String,dynamic> map = {};
+    map["lat"] = position.latitude;
+    map["long"] = position.longitude;
+    map["address"] = address;
+    emit(state.copyWith(status: PostStatus.locationFound, currentLocation: map));
+ }
+
+/*  Future<void> GetAddressFromLatLong(Position position)async {
+    List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+    print(placemarks);
+    Placemark place = placemarks[0];
+    String address = '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
+
+  }*/
 }

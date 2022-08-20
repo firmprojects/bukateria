@@ -1,5 +1,7 @@
 // @dart=2.9
 
+import 'dart:io';
+
 import 'package:bukateria/bloc/auth/auth_bloc.dart';
 import 'package:bukateria/cubit/account_cubit/account_cubit.dart';
 import 'package:bukateria/cubit/onboarding_cubit/onboard_cubit.dart';
@@ -16,6 +18,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart' as setting;
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'app/routes/app_pages.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -102,4 +105,5 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
 }

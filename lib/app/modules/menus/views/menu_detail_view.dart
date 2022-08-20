@@ -89,54 +89,56 @@ class MenuDetailView extends GetView {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 7, 0),
-                                    child: Container(
-                                      width: 40,
-                                      height: 40,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Image.asset(
-                                        'assets/images/avatar1.png',
+                          Expanded(
+                            child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 7, 0),
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.asset(
+                                          'assets/images/avatar1.png',
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('${snap.data?["email"]}',
-                                          style: body4),
-                                      Text('${snap.data?["userType"]}',
-                                          style: body5),
-                                      SizedBox(
-                                        height: 3,
-                                      ),
-                                      Row(
+                                    Column(
                                         mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Icon(
-                                            Icons.location_pin,
-                                            color: green,
-                                            size: 20,
+                                          Text('${snap.data?["email"]}',
+                                              style: body4),
+                                          Text('${snap.data?["userType"]}',
+                                              style: body5),
+                                          SizedBox(
+                                            height: 3,
                                           ),
-                                          Text('Location', style: body5),
+                                          Container(
+                                            width: MediaQuery.of(context).size.width/2,
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Icon(
+                                                  Icons.location_pin,
+                                                  color: green,
+                                                  size: 20,
+                                                ),
+                                               Expanded(child: Text(menu.location, maxLines: 2, style: body5)),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                ],
-                              )),
+
+                                  ],
+                                )),
                           CustomButton(
                               width: 90,
                               radius: 30,

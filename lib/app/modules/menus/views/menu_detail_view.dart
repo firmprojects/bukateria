@@ -10,6 +10,7 @@ import 'package:bukateria/widgets/method_widget.dart';
 import 'package:bukateria/widgets/pop_menu.dart';
 import 'package:bukateria/widgets/recipe_card.dart';
 import 'package:bukateria/widgets/related_recipe.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +25,6 @@ class MenuDetailView extends GetView {
 
   @override
   Widget build(BuildContext context) {
-
     return StreamBuilder<DocumentSnapshot<Object?>>(
       stream: context.read<PostCubit>().getSpecificUser(menu.uid),
       builder: (context, snap) {
@@ -54,19 +54,21 @@ class MenuDetailView extends GetView {
                   expandedHeight: 250,
                   pinned: true,
                   flexibleSpace: Container(
-                    /*decoration: BoxDecoration(
+                      /*decoration: BoxDecoration(
                   image: DecorationImage(image: AssetImage("${menu.image}"))),*/
-                    child: FadeInImage(
-                      fit: BoxFit.contain,
-                      image: NetworkImage(
-                          //widget.product[Constants.image]
-                          '${menu.image}'),
-
-                      placeholder: AssetImage(
-                        "assets/images/big_logo.png",
-                      ),
+                      child: Container(
+                    width: double.infinity,
+                    height: 300,
+                    child: CachedNetworkImage(
+                      fit: BoxFit.fill,
+                      imageUrl: "${menu.image}",
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) =>
+                              CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
-                  )),
+                  ))),
               SliverList(
                   delegate: SliverChildListDelegate([
                 Padding(
@@ -223,24 +225,24 @@ class MenuDetailView extends GetView {
                                           ),
                                           Card(
                                             child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Column(
                                                 children: [
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.symmetric(
-                                                            vertical: 5),
+                                                    padding: const EdgeInsets
+                                                        .symmetric(vertical: 5),
                                                     child: Row(
                                                       children: [
-                                                        Icon(Icons.location_pin),
+                                                        Icon(
+                                                            Icons.location_pin),
                                                         Text("Abuja, Nigeria")
                                                       ],
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.symmetric(
-                                                            vertical: 5),
+                                                    padding: const EdgeInsets
+                                                        .symmetric(vertical: 5),
                                                     child: Row(
                                                       children: [
                                                         Icon(Icons.person),
@@ -249,13 +251,13 @@ class MenuDetailView extends GetView {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.symmetric(
-                                                            vertical: 5),
+                                                    padding: const EdgeInsets
+                                                        .symmetric(vertical: 5),
                                                     child: Row(
                                                       children: [
                                                         Icon(Icons.phone),
-                                                        Text("+234-801-998882282")
+                                                        Text(
+                                                            "+234-801-998882282")
                                                       ],
                                                     ),
                                                   ),
@@ -279,7 +281,7 @@ class MenuDetailView extends GetView {
                                     ),
                                   );
                                 });
-                          //  Get.to(() => PaymentWidget());
+                            //  Get.to(() => PaymentWidget());
                           },
                           color: dark,
                           text: "Place Order"),

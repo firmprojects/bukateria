@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class RelatedRecipe extends StatelessWidget {
@@ -37,24 +38,13 @@ class RelatedRecipe extends StatelessWidget {
               padding: EdgeInsetsDirectional.fromSTEB(0, 1, 1, 1),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: FadeInImage(
-                  width: 70,
-                  height: 100,
-                  fit: BoxFit.fill,
-                  image: NetworkImage(
-                    //widget.product[Constants.image]
-                      '${image}'),
-                  placeholder: AssetImage(
-                    "assets/images/big_logo.png",
-                  ),
-                )
-
-                /*Image.asset(
-                  '$image',
-                  width: 70,
-                  height: 100,
+                child: CachedNetworkImage(
+                  width: 80,
+                  height: 80,
                   fit: BoxFit.cover,
-                ),*/
+                  imageUrl: "${image}",
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
               ),
             ),
             Expanded(

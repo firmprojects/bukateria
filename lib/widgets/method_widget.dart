@@ -1,5 +1,6 @@
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class MethodWidget extends StatelessWidget {
@@ -26,26 +27,15 @@ class MethodWidget extends StatelessWidget {
           dense: false,
         ),
         Align(
-            alignment: AlignmentDirectional(0.7, 0),
-            child: FadeInImage(
-              width: 250,
-              height: 100,
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                  //widget.product[Constants.image]
-                  '${image}'),
-              placeholder: AssetImage(
-                "assets/images/big_logo.png",
-              ),
-            )
-
-            /*Image.asset(
-            '$image',
+          alignment: AlignmentDirectional(0.7, 0),
+          child: CachedNetworkImage(
             width: 250,
             height: 100,
             fit: BoxFit.cover,
-          ),*/
-            ),
+            imageUrl: "${image}",
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
+        ),
       ],
     );
   }

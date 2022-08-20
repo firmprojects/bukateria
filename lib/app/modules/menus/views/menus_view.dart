@@ -46,10 +46,10 @@ class _MenusViewState extends State<MenusView> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Ikeja, Lagos",
-                          style: body3.copyWith(color: white),
-                        ),
+                        // Text(
+                        //   "Ikeja, Lagos",
+                        //   style: body3.copyWith(color: white),
+                        // ),
                       ],
                     ),
                   ),

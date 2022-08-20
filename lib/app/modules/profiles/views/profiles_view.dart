@@ -122,7 +122,7 @@ class _ProfilesViewState extends State<ProfilesView> {
                                                   fit: BoxFit.fitWidth,
                                                 )
                                               : FadeInImage(
-                                                  fit: BoxFit.fitWidth,
+                                                  fit: BoxFit.cover,
                                                   image: NetworkImage(
                                                       //widget.product[Constants.image]
                                                       '${snap.data!["image"].toString()}'),

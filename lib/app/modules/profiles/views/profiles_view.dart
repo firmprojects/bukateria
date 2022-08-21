@@ -121,10 +121,10 @@ class _ProfilesViewState extends State<ProfilesView> {
                                                     .isEmpty
                                                 ? Image.asset(
                                                     'assets/images/square.jpg',
-                                                    fit: BoxFit.fitWidth,
+                                                    fit: BoxFit.fill,
                                                   )
                                                 : CachedNetworkImage(
-                                                    fit: BoxFit.fill,
+                                                    fit: BoxFit.cover,
                                                     imageUrl:
                                                         "${snap.data!["image"].toString()}",
                                                     errorWidget:
@@ -194,7 +194,7 @@ class _ProfilesViewState extends State<ProfilesView> {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Text(
-                                                '800',
+                                                '0',
                                                 style: title3,
                                               ),
                                               Text(
@@ -210,19 +210,6 @@ class _ProfilesViewState extends State<ProfilesView> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              // Padding(
-                              //   padding: const EdgeInsets.symmetric(horizontal: 40),
-                              //   child: CustomButton(
-                              //       radius: 30,
-                              //       height: 40,
-                              //       onPressed: () {},
-                              //       color: primary,
-                              //       width: Get.width,
-                              //       text: "Follow"),
-                              // ),
-                              // SizedBox(
-                              //   height: 10,
-                              // ),
                               Obx(
                                 () => Padding(
                                   padding: const EdgeInsets.symmetric(

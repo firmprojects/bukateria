@@ -16,30 +16,6 @@ class RecipeCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Padding(
-        //   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-        //   child: Row(
-        //     mainAxisSize: MainAxisSize.max,
-        //     children: [
-        //       Padding(
-        //         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 7, 0),
-        //         child: Container(
-        //           width: 30,
-        //           height: 30,
-        //           clipBehavior: Clip.antiAlias,
-        //           decoration: BoxDecoration(
-        //             shape: BoxShape.circle,
-        //           ),
-        //           child: Image.asset(
-        //             '${recipe.user.avatar}',
-        //           ),
-        //         ),
-        //       ),
-        //       Text('${recipe.user.firstName} ${recipe.user.lastName}',
-        //           style: body5),
-        //     ],
-        //   ),
-        // ),
         GestureDetector(
           onTap: () => Get.to(() => RecipeDetailView(recipe: recipe)),
           child: ClipRRect(
@@ -62,8 +38,8 @@ class RecipeCard extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text('${recipe.category} > ', style: body5),
-            Text('${recipe.duration}', style: body5),
+            Text('${recipe.category}', style: body5),
+            // Text('${recipe.duration}', style: body5),
           ],
         ),
       ],

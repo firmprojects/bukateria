@@ -146,11 +146,11 @@ class PostCubit extends Cubit<PostState> {
     return _postRepository.getRelatedExplore;
   }
 
-  getUser(){
+  getUser() {
     return _authRepository.user;
   }
 
-  getSpecificUser(String uid){
+  getSpecificUser(String uid) {
     _authRepository.uid = uid;
     return _authRepository.specificUser;
   }
@@ -185,14 +185,14 @@ class PostCubit extends Cubit<PostState> {
         print("--------------- ${value} ----------");
         _postRepository
             .addMenuPost(
-            title: state.title ?? "",
-            description: state.description ?? "",
-            productStatus: state.productStatus ?? "init",
-            image: value ?? "",
-            price: state.price ?? "",
-            location: state.location ?? "",
-            deliveryType: state.deliveryType ?? "",
-            uid: uid)
+                title: state.title ?? "",
+                description: state.description ?? "",
+                productStatus: state.productStatus ?? "init",
+                image: value ?? "",
+                price: state.price ?? "",
+                location: state.location ?? "",
+                deliveryType: state.deliveryType ?? "",
+                uid: uid)
             .then((value) {
           emit(state.copyWith(
               status: PostStatus.save, key: value?["key"].toString()));
@@ -204,9 +204,9 @@ class PostCubit extends Cubit<PostState> {
   }
 
   void updateMenuStatus(
-      String key,
-      String uid,
-      ) async {
+    String key,
+    String uid,
+  ) async {
     if (!state.isValidExplore) return;
     emit(state.copyWith(status: PostStatus.submitting));
     try {
@@ -218,7 +218,6 @@ class PostCubit extends Cubit<PostState> {
     }
   }
 
-
   void postRecipeCredentials(String imageName, String uid) async {
     if (!state.isValidExplore) return;
     emit(state.copyWith(status: PostStatus.submitting));
@@ -229,15 +228,15 @@ class PostCubit extends Cubit<PostState> {
         print("--------------- ${value} ----------");
         _postRepository
             .addRecipePost(
-            title: state.title ?? "",
-            description: state.description ?? "",
-            productStatus: state.productStatus ?? "init",
-            image: value ?? "",
-            category: state.recipeCategory ?? "",
-            ingredients: state.ingredients ?? [],
-            methods: state.methods ?? [],
-            cuisine: state.typeOfCuisine ?? "",
-            uid: uid)
+                title: state.title ?? "",
+                description: state.description ?? "",
+                productStatus: state.productStatus ?? "init",
+                image: value ?? "",
+                category: state.recipeCategory ?? "",
+                ingredients: state.ingredients ?? [],
+                methods: state.methods ?? [],
+                cuisine: state.typeOfCuisine ?? "",
+                uid: uid)
             .then((value) {
           emit(state.copyWith(
               status: PostStatus.save, key: value?["key"].toString()));
@@ -249,9 +248,9 @@ class PostCubit extends Cubit<PostState> {
   }
 
   void updateRecipeStatus(
-      String key,
-      String uid,
-      ) async {
+    String key,
+    String uid,
+  ) async {
     if (!state.isValidExplore) return;
     emit(state.copyWith(status: PostStatus.submitting));
     try {
@@ -264,32 +263,35 @@ class PostCubit extends Cubit<PostState> {
   }
 
   void addFollow(String followedUID, String followingUID) async {
-
     emit(state.copyWith(status: PostStatus.submitting));
     try {
-      _authRepository.followUser(followedUID: followedUID, followingUID: followingUID).then((value) {
-
-          emit(state.copyWith(status: PostStatus.success, key: value?["key"].toString()));
-
-        });
-
+      _authRepository
+          .followUser(followedUID: followedUID, followingUID: followingUID)
+          .then((value) {
+        emit(state.copyWith(
+            status: PostStatus.success, key: value?["key"].toString()));
+      });
     } catch (_) {
       emit(state.copyWith(status: PostStatus.error));
     }
   }
 
- Future<void > getCurrentPosition() async {
+  Future<void> getCurrentPosition() async {
     var position = await _authRepository.determinePosition();
-    List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemarks);
     Placemark place = placemarks[0];
-    String address =  '${place.locality}, ${place.administrativeArea}, ${place.country}';
-    Map<String,dynamic> map = {};
+    // String address =  '${place.locality}, ${place.administrativeArea}, ${place.country}';
+    String address =
+        '${place.subAdministrativeArea}, ${place.administrativeArea}';
+    Map<String, dynamic> map = {};
     map["lat"] = position.latitude;
     map["long"] = position.longitude;
     map["address"] = address;
-    emit(state.copyWith(status: PostStatus.locationFound, currentLocation: map));
- }
+    emit(
+        state.copyWith(status: PostStatus.locationFound, currentLocation: map));
+  }
 
 /*  Future<void> GetAddressFromLatLong(Position position)async {
     List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);

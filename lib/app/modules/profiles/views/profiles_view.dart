@@ -13,6 +13,7 @@ import 'package:bukateria/widgets/profile_explore_list.dart';
 import 'package:bukateria/widgets/profile_menu_list.dart';
 import 'package:bukateria/widgets/profile_recipe_list.dart';
 import 'package:bukateria/widgets/tab_button.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -108,29 +109,28 @@ class _ProfilesViewState extends State<ProfilesView> {
                                         const EdgeInsetsDirectional.fromSTEB(
                                             0, 20, 0, 20),
                                     child: Container(
-                                      width: 120,
-                                      height: 120,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child:
-                                          (snap.data?["image"].toString() ?? "")
-                                                  .isEmpty
-                                              ? Image.asset(
-                                                  'assets/images/square.jpg',
-                                                  fit: BoxFit.fitWidth,
-                                                )
-                                              : FadeInImage(
-                                                  fit: BoxFit.cover,
-                                                  image: NetworkImage(
-                                                      //widget.product[Constants.image]
-                                                      '${snap.data!["image"].toString()}'),
-                                                  placeholder: const AssetImage(
-                                                    "assets/images/big_logo.png",
-                                                  ),
-                                                ),
-                                    ),
+                                        width: 120,
+                                        height: 120,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child:
+                                            (snap.data?["image"].toString() ??
+                                                        "")
+                                                    .isEmpty
+                                                ? Image.asset(
+                                                    'assets/images/square.jpg',
+                                                    fit: BoxFit.fitWidth,
+                                                  )
+                                                : CachedNetworkImage(
+                                                    fit: BoxFit.fill,
+                                                    imageUrl:
+                                                        "${snap.data!["image"].toString()}",
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            Icon(Icons.error),
+                                                  )),
                                   ),
                                 ],
                               ),

@@ -60,12 +60,8 @@ class MenuDetailView extends GetView {
                     width: double.infinity,
                     height: 300,
                     child: CachedNetworkImage(
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       imageUrl: "${menu.image}",
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) =>
-                              CircularProgressIndicator(
-                                  value: downloadProgress.progress),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                   ))),
@@ -92,55 +88,55 @@ class MenuDetailView extends GetView {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 7, 0),
-                                      child: Container(
-                                        width: 40,
-                                        height: 40,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
+                              child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 7, 0),
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/avatar1.png',
+                                  ),
+                                ),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('${snap.data?["email"]}', style: body4),
+                                  // Text('${snap.data?["userType"]}',
+                                  //     style: body5),
+                                  SizedBox(
+                                    height: 3,
+                                  ),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Icon(
+                                          Icons.location_pin,
+                                          color: green,
+                                          size: 20,
                                         ),
-                                        child: Image.asset(
-                                          'assets/images/avatar1.png',
-                                        ),
-                                      ),
+                                        Expanded(
+                                            child: Text(menu.location,
+                                                maxLines: 2, style: body5)),
+                                      ],
                                     ),
-                                    Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text('${snap.data?["email"]}',
-                                              style: body4),
-                                          Text('${snap.data?["userType"]}',
-                                              style: body5),
-                                          SizedBox(
-                                            height: 3,
-                                          ),
-                                          Container(
-                                            width: MediaQuery.of(context).size.width/2,
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Icon(
-                                                  Icons.location_pin,
-                                                  color: green,
-                                                  size: 20,
-                                                ),
-                                               Expanded(child: Text(menu.location, maxLines: 2, style: body5)),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-
-                                  ],
-                                )),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )),
                           CustomButton(
                               width: 90,
                               radius: 30,

@@ -57,7 +57,7 @@ class _RecipesViewState extends State<RecipesView> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        toolbarHeight: 130,
+        toolbarHeight: 110,
         backgroundColor: primary,
         title: Column(
           children: [
@@ -68,10 +68,10 @@ class _RecipesViewState extends State<RecipesView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Ikeja, Lagos",
-                      style: body3.copyWith(color: white),
-                    ),
+                    // Text(
+                    //   "Ikeja, Lagos",
+                    //   style: body3.copyWith(color: white),
+                    // ),
                   ],
                 ),
               ),

@@ -69,10 +69,6 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                             child: CachedNetworkImage(
                               fit: BoxFit.fill,
                               imageUrl: "${widget.menu.image}",
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) =>
-                                      CircularProgressIndicator(
-                                          value: downloadProgress.progress),
                               errorWidget: (context, url, error) =>
                                   Icon(Icons.error),
                             ),
@@ -123,18 +119,7 @@ class _MenuCardComponentWidgetState extends State<MenuCardComponentWidget> {
                                   width: 60,
                                   height: 60,
                                 )
-                                /*FadeInImage(
-                                width: double.infinity,
-                                height: 151,
-                                fit: BoxFit.fill,
-                                image: NetworkImage(
-                                    '${snap.data?["image"]}'
-                                ),
-                                placeholder: AssetImage(
-                                  "assets/images/big_logo.png",
-                                ),
-                              )*/
-                                ,
+                                                                ,
                               ),
                             ),
                             Expanded(

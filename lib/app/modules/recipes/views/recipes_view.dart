@@ -1,8 +1,4 @@
-import 'package:bukateria/app/modules/account/views/chef_settings.dart';
-import 'package:bukateria/app/modules/dashboard/views/dashboard_view.dart';
-import 'package:bukateria/app/modules/dashboard/views/vendor_dashboard.dart';
 import 'package:bukateria/cubit/post_cubit/post_cubit.dart';
-import 'package:bukateria/data/menus_list.dart';
 import 'package:bukateria/models/recipe_model.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
@@ -10,11 +6,8 @@ import 'package:bukateria/widgets/recipe_card.dart';
 import 'package:bukateria/widgets/search_delegate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
-import '../controllers/recipes_controller.dart';
 
 class RecipesView extends StatefulWidget {
   const RecipesView({Key? key}) : super(key: key);

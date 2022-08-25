@@ -3,6 +3,7 @@ import 'package:bukateria/models/menus_model.dart';
 import 'package:bukateria/themes/colors.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/menu_card.dart';
+import 'package:bukateria/widgets/search_delegate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,11 +53,19 @@ class _MenusViewState extends State<MenusView> {
                                       "${state.currentLocation?["address"] ?? "Loading location..."}",
                                       style: body3.copyWith(color: white),
                                     ),
+                                    GestureDetector(
+                                        onTap: () => {
+                                              showSearch(
+                                                  context: context,
+                                                  delegate:
+                                                      MenuSearchDelegate())
+                                            },
+                                        child: Icon(Icons.search)),
                                   ],
                                 ),
                               ),
                             ),
-                                                      ],
+                          ],
                         ),
                       ),
                       body: SafeArea(

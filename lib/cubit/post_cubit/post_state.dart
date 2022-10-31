@@ -1,6 +1,6 @@
 part of 'post_cubit.dart';
 
-enum PostStatus { initial, submitting, success,save,publish, error,locationFound }
+enum PostStatus { initial, submitting, success,save,publish,unPublish, error,locationFound, updated, deleted,deleting,pausing,paused,reported }
 
 class PostState extends Equatable {
   final String? title;
@@ -14,7 +14,7 @@ class PostState extends Equatable {
   final Map<String,dynamic>? currentLocation;
   final String? deliveryType;
   final File? image;
-  final List<String>? ingredients;
+  final List<Map<String,dynamic>>? ingredients;
   final List<Map<String,dynamic>>? methods;
   final PostStatus status;
   const PostState(
@@ -25,7 +25,7 @@ class PostState extends Equatable {
   }
 
   PostState copyWith(
-      {String? title, String? description, String? typeOfCuisine,Map<String,dynamic>? currentLocation,String? recipeCategory,String? productStatus,String? key,String? price,String? location,String? deliveryType, File? image, List<String>? ingredients, List<Map<String,dynamic>>? methods, PostStatus? status}) {
+      {String? title, String? description, String? typeOfCuisine,Map<String,dynamic>? currentLocation,String? recipeCategory,String? productStatus,String? key,String? price,String? location,String? deliveryType, File? image, List<Map<String,dynamic>>? ingredients, List<Map<String,dynamic>>? methods, PostStatus? status}) {
     return PostState(
         title: title ?? this.title,
         description: description ?? this.description,

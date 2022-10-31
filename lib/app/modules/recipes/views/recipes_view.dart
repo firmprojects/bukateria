@@ -25,6 +25,8 @@ class _RecipesViewState extends State<RecipesView> {
     super.initState();
   }
 
+  String searchKey = "";
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<PostCubit, PostState>(listener: (context, state) {
@@ -33,9 +35,9 @@ class _RecipesViewState extends State<RecipesView> {
         builder: (context, state)
     {
       return StreamBuilder<QuerySnapshot>(
-          stream:  context.read<PostCubit>().getAllRecipes(),
+          stream:  context.read<PostCubit>().getAllRecipes(""),
     builder: (context,snap){
-    if(snap.hasData) {
+
      /*
       List<QuerySnapshot> list = [];
       list = snap.data.docs;
@@ -47,6 +49,13 @@ class _RecipesViewState extends State<RecipesView> {
           print("----------${list.length}");
         });
       });*/
+      List<DocumentSnapshot> list = [];
+      snap.data?.docs.forEach((element) {
+        if(element["title"].toString().toLowerCase().contains(searchKey.toLowerCase())){
+          list.add(element);
+        }
+      });
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -88,9 +97,24 @@ class _RecipesViewState extends State<RecipesView> {
                       SizedBox(
                         width: 40,
                       ),
-                      Text(
-                        "Search recipes",
-                        style: body3,
+                      Expanded(
+                        child: TextFormField(
+                          onChanged: (val) {
+                            setState(() {
+                              searchKey = val;
+                            });
+                          },
+                          autofocus: false,
+                          obscureText: false,
+                          keyboardType: TextInputType.text,
+
+                          decoration: InputDecoration(
+                            // labelText: 'Description',
+                            hintText: 'Search Recipe',
+                            hintStyle: body3,
+                          ),
+                          maxLines: 1,
+                        ),
                       )
                     ],
                   )),
@@ -106,9 +130,9 @@ class _RecipesViewState extends State<RecipesView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: GridView.builder(
+              child: list.isNotEmpty ? GridView.builder(
                 padding: EdgeInsets.zero,
-                itemCount: snap.data?.docs.length,
+                itemCount: list.length ?? 0,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 20,
@@ -118,28 +142,25 @@ class _RecipesViewState extends State<RecipesView> {
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   RecipeModel model = RecipeModel(
-                    key: snap.data?.docs[index]["key"],
-                    title: snap.data?.docs[index]["title"],
-                    description: snap.data?.docs[index]["description"],
-                    productStatus: snap.data?.docs[index]["productStatus"],
-                    created_at: (snap.data?.docs[index]["created_at"] as Timestamp).toDate(),
-                    image: snap.data?.docs[index]["image"],
-                    uid: snap.data?.docs[index]["uid"],
-                    cuisine: snap.data?.docs[index]["cuisine"],
-                    category: snap.data?.docs[index]["category"],
+                    key: list[index]["key"],
+                    title: list[index]["title"],
+                    description: list[index]["description"],
+                    productStatus: list[index]["productStatus"],
+                    created_at: (list[index]["created_at"] as Timestamp).toDate(),
+                    image: list[index]["image"],
+                    isVideo: list[index]["isVideo"],
+                    uid: list[index]["uid"],
+                    cuisine: list[index]["cuisine"],
+                    category: list[index]["category"],
                   );
+                  print("------isVideo-------${model.isVideo}");
                   return RecipeCard(recipe: model);
                 },
-              ),
+              ) : Center(child: Text("No Recipe found")),
             ),
           ],
         ),
       ),
-    );
-    }
-
-    return const Padding(padding: EdgeInsets.all(12),
-      child:  Text("Loading, please wait... "),
     );
     });
     },),

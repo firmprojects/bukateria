@@ -10,7 +10,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../cubit/post_cubit/post_cubit.dart';
 
 class ProfileRecipeList extends StatelessWidget {
+  final uid;
   const ProfileRecipeList({
+    this.uid,
     Key? key,
   }) : super(key: key);
 
@@ -22,7 +24,7 @@ class ProfileRecipeList extends StatelessWidget {
         builder: (context, state) {
           return StreamBuilder<QuerySnapshot>(
               stream: context.read<PostCubit>().getRelatedRecipes(
-                  FirebaseAuth.instance.currentUser?.uid ?? ""),
+                  uid != null ? uid.toString() :FirebaseAuth.instance.currentUser?.uid ?? ""),
               builder: (context, snap) {
                 if (snap.hasData) {
                   return Padding(
@@ -64,6 +66,7 @@ class ProfileRecipeList extends StatelessWidget {
                                     .toDate(),
                                 image: snap.data?.docs[index]["image"],
                                 uid: snap.data?.docs[index]["uid"],
+                                isVideo: snap.data?.docs[index]["isVideo"],
                                 cuisine: snap.data?.docs[index]["cuisine"],
                                 category: snap.data?.docs[index]["category"],
                               );

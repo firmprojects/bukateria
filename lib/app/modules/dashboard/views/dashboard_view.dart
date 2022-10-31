@@ -2,6 +2,7 @@ import 'package:bukateria/app/modules/account/views/account_view.dart';
 import 'package:bukateria/app/modules/account/views/chef-account_view.dart';
 import 'package:bukateria/app/modules/favourites/views/favourites_view.dart';
 import 'package:bukateria/app/modules/menus/views/menus_view.dart';
+import 'package:bukateria/app/modules/orders/views/orders_view.dart';
 import 'package:bukateria/app/modules/recipes/views/recipes_view.dart';
 import 'package:bukateria/app/modules/vlog/views/vlog_view.dart';
 import 'package:bukateria/themes/colors.dart';
@@ -19,8 +20,8 @@ class _DashboardViewState extends State<DashboardView> {
     MenusView(),
     RecipesView(),
     VlogView(),
-    FavouritesView(),
-    //Account()
+    // FavouritesView(),
+    HistoryWidget(),
     AccountView()
   ];
 
@@ -57,7 +58,7 @@ class _DashboardViewState extends State<DashboardView> {
                 ),
                 label: "Explore"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_outline), label: "Favourites"),
+                icon: Icon(Icons.shopping_cart_outlined), label: "My Orders"),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,

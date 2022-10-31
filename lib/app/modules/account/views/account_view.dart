@@ -7,11 +7,14 @@ import 'package:bukateria/app/modules/account/views/settings_page.dart';
 import 'package:bukateria/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:bukateria/app/modules/dashboard/views/vendor_dashboard.dart';
 import 'package:bukateria/app/modules/login/views/login_view.dart';
+import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
+import 'package:bukateria/app/modules/pause_posts/views/pause_post_view.dart';
 import 'package:bukateria/app/modules/splash/views/splash_view.dart';
 import 'package:bukateria/cubit/account_cubit/account_cubit.dart';
 import 'package:bukateria/cubit/post_cubit/post_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart' as firestore;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -166,6 +169,14 @@ class _AccountViewState extends State<AccountView> {
                       const SizedBox(
                         height: 15,
                       ),
+                      buildPause(),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      buildNotifications(),
+                      const SizedBox(
+                        height: 15,
+                      ),
                       buildLogout(),
                       const SizedBox(
                         height: 15,
@@ -204,8 +215,51 @@ class _AccountViewState extends State<AccountView> {
         child: Container(),
       );
 
+  Widget buildPause() => SimpleSettingsTile(
+        title: "Paused Posts",
+        subtitle: "",
+        leading: const Icon(Icons.pause),
+        onTap: () {
+          //Navigator.push(context, MaterialPageRoute(builder: (context)=> PausePostView()));
+        },
+        child: PausePostView(),
+      );
+
+  Widget buildNotifications() => SimpleSettingsTile(
+    title: "Notifications",
+    subtitle: "",
+    leading: const Icon(Icons.notifications),
+    onTap: () {
+      //Navigator.push(context, MaterialPageRoute(builder: (context)=> PausePostView()));
+    },
+    child: NotificationView(),
+  );
+
   Widget buildChefSwitch(String userType) {
     print("-------------${userType == "foodie" ? true : false}");
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0, bottom: 12.0),
+      child: Row(
+        children: [
+          SizedBox(width: 16,),
+          Icon(Icons.switch_access_shortcut,size: 24,),
+          SizedBox(width: 30,),
+          Expanded(child: Text("chef-switch",style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.w400),)),
+          CupertinoSwitch(value: userType == "foodie" ? false: true, onChanged: (val){
+            context.read<AccountCubit>().userTypeChanged(!val ? "foodie" : "vendor");
+            context.read<AccountCubit>().updateUserType();
+            if (val == true) {
+              Get.offAll(() => const VendorDashboard());
+            } else {
+              Get.offAll(() => DashboardView());
+            }
+          }),
+          SizedBox(width: 16,),
+          Divider(color: Colors.grey,)
+        ],
+      ),
+    );
    return SwitchSettingsTile(
       title:   "chef-switch",
       settingKey: userType == "foodie" ? "chef-switch": "Foodie Mode",

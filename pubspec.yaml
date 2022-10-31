@@ -46,6 +46,13 @@ dependencies:
   geolocator: ^9.0.1
   geocoding: ^2.0.4
   location: ^4.2.0
+  video_player: ^2.4.7
+  http: ^0.13.5
+  firebase_messaging: ^13.1.0
+  flutter_local_notifications: ^9.1.4
+  flutter_rating_bar: ^4.0.1
+  uuid: 3.0.6
+  flutter_swipe_action_cell: ^3.0.4
 
 
 

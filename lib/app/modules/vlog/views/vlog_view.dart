@@ -36,7 +36,7 @@ class VlogView extends StatelessWidget {
         body: Column(
           children: [
             Expanded(
-              child: ListView.builder(
+              child: (snap.data?.docs.isNotEmpty ?? false) ? ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
                   itemCount: snap.data?.docs.length,
@@ -50,11 +50,12 @@ class VlogView extends StatelessWidget {
                       created_at: (snap.data?.docs[index]["created_at"] as Timestamp).toDate(),
                       image: snap.data?.docs[index]["image"],
                       uid: snap.data?.docs[index]["uid"],
+                      isVideo: snap.data?.docs[index]["isVideo"],
                     );
                     return ExploreCard(
                       explore: model,
                     );
-                  }),
+                  }) : Center(child: Text("No Explore found")),
             ),
           ],
         ));

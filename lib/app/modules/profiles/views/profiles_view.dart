@@ -26,7 +26,8 @@ import '../../../../cubit/post_cubit/post_cubit.dart';
 import '../controllers/profiles_controller.dart';
 
 class ProfilesView extends StatefulWidget {
-  ProfilesView({Key? key}) : super(key: key);
+  final uid;
+  ProfilesView({this.uid, Key? key}) : super(key: key);
 
   @override
   State<ProfilesView> createState() => _ProfilesViewState();
@@ -72,11 +73,11 @@ class _ProfilesViewState extends State<ProfilesView> {
         builder: (context, state) {
           return StreamBuilder<DocumentSnapshot>(
               stream: context.read<PostCubit>().getSpecificUser(
-                  FirebaseAuth.instance.currentUser?.uid ?? ""),
+                  widget.uid != null ? widget.uid.toString() : FirebaseAuth.instance.currentUser?.uid ?? ""),
               builder: (context, snap) {
                 if (snap.hasData) {
                   return Scaffold(
-                    appBar: AppBar(
+                    appBar: widget.uid!= null ? null : null /*AppBar(
                       backgroundColor: white,
                       iconTheme: const IconThemeData(color: dark),
                       automaticallyImplyLeading: true,
@@ -88,7 +89,7 @@ class _ProfilesViewState extends State<ProfilesView> {
                       ],
                       centerTitle: true,
                       elevation: 1,
-                    ),
+                    )*/,
                     backgroundColor: white,
                     body: SafeArea(
                       child: GestureDetector(
@@ -129,7 +130,7 @@ class _ProfilesViewState extends State<ProfilesView> {
                                                         "${snap.data!["image"].toString()}",
                                                     errorWidget:
                                                         (context, url, error) =>
-                                                            Icon(Icons.error),
+                                                            Image.asset("assets/images/image_placeholder.jpeg"),
                                                   )),
                                   ),
                                 ],
@@ -139,6 +140,49 @@ class _ProfilesViewState extends State<ProfilesView> {
                                 textAlign: TextAlign.center,
                                 style: title3,
                               ),
+                              StreamBuilder<QuerySnapshot>(
+                                  stream: FirebaseFirestore.instance.collection("Reviews").where("sellerId", isEqualTo: widget.uid != null ? widget.uid.toString(): FirebaseAuth.instance.currentUser?.uid).snapshots(),
+                                  builder: (context,snap){
+                                    double stars = 0;
+                                    print("----------rating----------- ${snap.data?.docs}");
+                                    if(snap.data?.docs.isNotEmpty ?? false){
+                                      for (var value in snap.data!.docs) {
+                                        print("----------rating----------- ${value["rating"]}");
+                                        stars = stars+value["rating"];
+                                      }
+                                    }
+
+                                    return stars/(snap.data?.size ?? 0) > 0 ? Container(
+                                      child: Row(
+                                        children: [
+                                          Expanded(child: Container()),
+                                          Padding(
+                                              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 12),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    mainAxisSize: MainAxisSize.max,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.star_rounded,
+                                                        color: orange,
+                                                        size: 24,
+                                                      ),
+                                                      Text('${(stars/(snap.data?.size ?? 0)).toStringAsFixed(1)}', style: body4),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          Expanded(child: Container()),
+                                        ],
+                                      ),
+                                    ):Container(
+                                      height: 20,
+                                    );
+                                  }),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     20, 20, 20, 0),
@@ -150,7 +194,7 @@ class _ProfilesViewState extends State<ProfilesView> {
                                     StreamBuilder<QuerySnapshot>(
                                         stream: context
                                             .read<PostCubit>()
-                                            .getRecipes(),
+                                            .getRelatedRecipes(widget.uid != null ? widget.uid.toString() :FirebaseAuth.instance.currentUser?.uid ?? ""),
                                         builder: (context, snapshot) {
                                           return Column(
                                             mainAxisSize: MainAxisSize.max,
@@ -160,7 +204,7 @@ class _ProfilesViewState extends State<ProfilesView> {
                                                 style: title3,
                                               ),
                                               Text(
-                                                'Recipies',
+                                                'Recipes',
                                                 style: body3,
                                               ),
                                             ],
@@ -169,7 +213,7 @@ class _ProfilesViewState extends State<ProfilesView> {
                                     StreamBuilder<QuerySnapshot>(
                                         stream: context
                                             .read<PostCubit>()
-                                            .getMenus(),
+                                            .getRelatedMenus(widget.uid != null ? widget.uid.toString() : FirebaseAuth.instance.currentUser?.uid ?? ""),
                                         builder: (context, snapshot) {
                                           return Column(
                                             mainAxisSize: MainAxisSize.max,
@@ -188,13 +232,14 @@ class _ProfilesViewState extends State<ProfilesView> {
                                     StreamBuilder<QuerySnapshot>(
                                         stream: context
                                             .read<PostCubit>()
-                                            .getRecipes(),
+                                            .getAllFollowers(widget.uid ?? FirebaseAuth.instance.currentUser?.uid ?? ""),
                                         builder: (context, snapshot) {
+                                          print("-----------${snapshot.data?.docs.length }");
                                           return Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Text(
-                                                '0',
+                                               "${snapshot.data?.docs.length ?? 0}",
                                                 style: title3,
                                               ),
                                               Text(
@@ -261,9 +306,9 @@ class _ProfilesViewState extends State<ProfilesView> {
                                   },
                                   controller: controller.pagecontroller,
                                   children: [
-                                    const ProfileMenusList(),
-                                    const ProfileRecipeList(),
-                                    const ProfileExploreList(),
+                                     ProfileMenusList(uid: widget.uid,),
+                                     ProfileRecipeList(uid: widget.uid),
+                                     ProfileExploreList(uid: widget.uid),
                                   ],
                                 ),
                               ),

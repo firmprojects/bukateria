@@ -25,7 +25,8 @@ import '../cubit/post_cubit/post_cubit.dart';
 }*/
 
 class ProfileExploreList extends StatefulWidget {
-  const ProfileExploreList({Key? key}) : super(key: key);
+  final uid;
+  const ProfileExploreList({this.uid, Key? key}) : super(key: key);
 
   @override
   State<ProfileExploreList> createState() => _ProfileExploreListState();
@@ -47,7 +48,7 @@ class _ProfileExploreListState extends State<ProfileExploreList> {
       builder: (context, state)
       {
         return StreamBuilder<QuerySnapshot>(
-            stream:  context.read<PostCubit>().getRelatedExplore(FirebaseAuth.instance.currentUser?.uid ?? ""),
+            stream:  context.read<PostCubit>().getRelatedExplore(widget.uid != null ? widget.uid.toString() :FirebaseAuth.instance.currentUser?.uid ?? ""),
             builder: (context,snap){
           if(snap.hasData) {
             return Padding(
@@ -84,6 +85,7 @@ class _ProfileExploreListState extends State<ProfileExploreList> {
                           created_at: (snap.data?.docs[index]["created_at"] as Timestamp).toDate(),
                           image: snap.data?.docs[index]["image"],
                           uid: snap.data?.docs[index]["uid"],
+                          isVideo: snap.data?.docs[index]["isVideo"],
                         );
                         return ProfileExploreCard(exploreModel: model);
                       },

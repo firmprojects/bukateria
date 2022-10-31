@@ -13,6 +13,8 @@ class MenusModel {
   String? deliveryType;
   String? price;
   String? key;
+  bool? isVideo;
+  int? distance;
   String? productStatus;
   //double? stars;
 
@@ -28,7 +30,9 @@ class MenusModel {
     this.image,
     this.created_at,
     this.productStatus,
-    this.key
+    this.isVideo,
+    this.key,
+    this.distance
 });
 
 /*  factory MenusModel.fromJson(Map<String, dynamic> json) => MenusModel(

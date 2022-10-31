@@ -1,6 +1,7 @@
 import 'package:bukateria/app/modules/account/views/account_view.dart';
 import 'package:bukateria/app/modules/notifications/views/notifications_view.dart';
 import 'package:bukateria/app/modules/orders/views/vendor_order_view.dart';
+import 'package:bukateria/app/modules/orders/views/vendor_orders_list.dart';
 import 'package:bukateria/app/modules/pages/create.dart';
 import 'package:bukateria/app/modules/profiles/views/profiles_view.dart';
 import 'package:bukateria/themes/colors.dart';
@@ -16,10 +17,10 @@ class VendorDashboard extends StatefulWidget {
 class _VendorDashboardState extends State<VendorDashboard> {
   final screens = [
     ProfilesView(),
-    VendorOrdersWidget(),
+    VendorOrderList(),
+    // VendorOrdersWidget(),
     CreateView(),
     NotificationView(),
-    //Account()
     AccountView()
   ];
 

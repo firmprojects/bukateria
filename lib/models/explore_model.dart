@@ -6,6 +6,7 @@ class ExploreModel {
   DateTime? created_at;
   String? uid;
   String? image;
+  bool? isVideo;
 
   ExploreModel.getInstance();
 
@@ -16,5 +17,6 @@ class ExploreModel {
       this.productStatus,
       this.created_at,
       this.uid,
+      this.isVideo,
       this.image});
 }

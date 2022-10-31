@@ -14,7 +14,11 @@ import '../../../../cubit/signin_cubit.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocListener<SigninCubit, SigninState>(listener: (context,state){
@@ -55,6 +59,7 @@ class LoginView extends GetView<LoginController> {
             ),
              CustomInput(
               height: 70,
+              controller: _emailController,
               hintText: "Email",
               labelText: "Email",
               keyboardType: TextInputType.emailAddress,
@@ -68,6 +73,7 @@ class LoginView extends GetView<LoginController> {
               height: 70,
               hintText: "Password",
               labelText: "Password",
+              controller: _passwordController,
               keyboardType: TextInputType.text,
               isPassword: true,
               prefixIcon: Icons.lock,
@@ -83,7 +89,13 @@ class LoginView extends GetView<LoginController> {
               text: "Sign In",
               color: primary,
                 onPressed: () {
+                if(_emailController.text.isEmpty){
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter Email first")));
+                }else if (_passwordController.text.isEmpty){
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter password first")));
+                }else {
                   context.read<SigninCubit>().signinWithCredentials();
+                }
                 },
             ),
             SizedBox(

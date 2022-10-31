@@ -1,6 +1,7 @@
 import 'package:bukateria/repository/base_auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
@@ -11,6 +12,7 @@ class AuthRepository extends BaseAuthRepository{
   String uid = "";
   String followingUID = "";
   String followedUID = "";
+
 
   AuthRepository({auth.FirebaseAuth? firebaseAuth,FirebaseFirestore? firestoreReference}) : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance, _firebaseReference = firestoreReference ?? FirebaseFirestore.instance;
 
@@ -38,6 +40,11 @@ class AuthRepository extends BaseAuthRepository{
       );
 
      final user = credential.user;
+     String? token = await FirebaseMessaging.instance.getToken();
+     Map<String,String> map ={};
+     map["token"] = token ?? "";
+     await FirebaseFirestore.instance.collection("User").doc(auth.FirebaseAuth.instance.currentUser?.uid).update(map);
+
      return user;
     } catch (_) {
       throw Exception();
@@ -53,7 +60,9 @@ class AuthRepository extends BaseAuthRepository{
         return true;
       }
 
-    } catch (_) {
+    } catch (err) {
+      print("${err.toString()}");
+      return false;
       throw Exception();
       return false;
     }
@@ -69,8 +78,9 @@ class AuthRepository extends BaseAuthRepository{
   Stream<DocumentSnapshot?> get userDetails => _firebaseReference.collection("User").doc(_firebaseAuth.currentUser?.uid ?? "").snapshots();
 
   @override
-  Future<Map<String,Object>?> submitUser({required String email, required String userType, required String uid}) async{
+  Future<Map<String,Object>?> submitUser({required String email, required String username, required String userType, required String uid}) async{
     try{
+      String? token = await FirebaseMessaging.instance.getToken();
       var map = <String,Object>{};
       map["email"] = email;
       map["userType"] = userType;
@@ -78,7 +88,11 @@ class AuthRepository extends BaseAuthRepository{
       map["name"] = "";
       map["image"] = "";
       map["phone"] = "";
+      map["notification"] = true;
       map["address"] = "";
+      map["token"] = token ?? "";
+      map["username"] = username;
+
       await _firebaseReference.collection("User").doc(uid).set(map);
       return map;
     }catch(_){
@@ -125,9 +139,29 @@ class AuthRepository extends BaseAuthRepository{
       var map = <String,Object>{};
       map["followerUID"] = followingUID;
       map["followedUID"] = followedUID;
+      print("----------------${map}");
+      var key = _firebaseReference.collection("Follows").doc().id;
+      await _firebaseReference.collection("Follows").doc(key).set(map);
 
-      var key = _firebaseReference.collection("Follows").doc(followedUID).collection("list").doc().id;
-      await _firebaseReference.collection("Follows").doc(followedUID).collection("list").doc(key).set(map);
+      return map;
+
+    }catch(_){
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<Map<String, Object>?> reportUser({required String reportedUser, required String reportedBy, required String reason, required String postId}) async{
+    try{
+      var map = <String,Object>{};
+      map["reportedUser"] = reportedUser;
+      map["reportedBy"] = reportedBy;
+      map["reason"] = reason;
+      map["postId"] = postId;
+      print("----------------${map}");
+      var key = _firebaseReference.collection("ReportedUsers").doc().id;
+      map["key"] = key;
+      await _firebaseReference.collection("ReportedUsers").doc(key).set(map);
 
       return map;
 
@@ -140,11 +174,31 @@ class AuthRepository extends BaseAuthRepository{
 
   @override
   // TODO: implement getAllFollower
-  Stream<QuerySnapshot<Object?>?> get getAllFollower => _firebaseReference.collection("Follows").doc(uid).collection("list").snapshots();
+  Stream<QuerySnapshot<Object?>?> get getAllFollower => _firebaseReference.collection("Follows").where("followedUID", isEqualTo: followedUID).snapshots();
 
   @override
   // TODO: implement getSpecificFollower
-  Stream<QuerySnapshot<Object?>?> get getSpecificFollower => _firebaseReference.collection("Follows").doc(followedUID).collection("list").where("followingUID", isEqualTo: followingUID).snapshots();
+  Stream<QuerySnapshot<Object?>?> get getSpecificFollower => _firebaseReference.collection("Follows").where("followerUID", isEqualTo: followingUID).where("followedUID",  isEqualTo: followedUID).snapshots();
+
+
+  @override
+  Future<bool?> unFollowUser({required String followedUID, required String followingUID}) async {
+    try{
+
+      _firebaseReference.collection("Follows").where("followerUID", isEqualTo: followingUID).where("followedUID",  isEqualTo: followedUID).get().then((value) {
+        value.docs.forEach((doc) {
+          _firebaseReference.collection("Follows").doc(doc.id).delete().then((value) {
+            return true;
+          });
+        });
+      });
+
+    }catch(_){
+
+      throw Exception();
+    }
+    return null;
+  }
 
 
 
@@ -199,5 +253,6 @@ class AuthRepository extends BaseAuthRepository{
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
   }
+
 
 }

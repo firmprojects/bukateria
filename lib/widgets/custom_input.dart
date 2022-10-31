@@ -32,6 +32,7 @@ class CustomInput extends StatelessWidget {
   final double? height;
   final double? borderRadius;
   final int? maxLines;
+  final focusNode;
 
   const CustomInput(
       {this.controller,
@@ -64,6 +65,7 @@ class CustomInput extends StatelessWidget {
       this.borderColor = Colors.grey,
       this.keyboardType,
       this.height,
+        this.focusNode,
       Key? key})
       : super(key: key);
 
@@ -77,12 +79,15 @@ class CustomInput extends StatelessWidget {
         validator: validator,
         controller: controller,
         onChanged: onChanged,
+        focusNode: focusNode,
         maxLines: maxLines ?? 1,
+
         readOnly: null == readOnly ? false : true,
         obscureText: null == isPassword ? false : true,
         decoration: InputDecoration(
           filled: filled,
           fillColor: bgcolor,
+          errorText: errorText,
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: borderColor, width: 1),
               borderRadius: BorderRadius.circular(borderRadius!)),

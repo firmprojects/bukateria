@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:bukateria/cubit/post_cubit/post_cubit.dart';
 import 'package:bukateria/widgets/deliverytype_radio_button_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
@@ -16,11 +17,13 @@ import 'package:flutter_awesome_select/flutter_awesome_select.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../../../common_views.dart';
 
 class AddMenu extends StatefulWidget {
-  const AddMenu({Key? key}) : super(key: key);
+  final menu;
+  const AddMenu({this.menu, Key? key}) : super(key: key);
 
   @override
   _AddMenuState createState() => _AddMenuState();
@@ -37,15 +40,39 @@ class _AddMenuState extends State<AddMenu> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String selectedLocation = "Location";
 
+  late VideoPlayerController _controller;
+
+  bool isPlaying = false;
+
+
   @override
   void initState() {
     super.initState();
-    addIngredientFieldController1 = TextEditingController();
-    descriptionController = TextEditingController();
-    fullNameController = TextEditingController();
-    priceController = TextEditingController();
-    addIngredientFieldController2 = TextEditingController();
-    texeareaController = TextEditingController();
+
+    if(widget.menu != null){
+      fullNameController = TextEditingController(text: widget.menu.title);
+      descriptionController = TextEditingController(text: widget.menu.description);
+      priceController = TextEditingController(text: widget.menu.price);
+      selectedLocation =  widget.menu.location;
+
+      _deliveryType = widget.menu.deliveryType == "Delivery" ? DeliveryType.Delivery: DeliveryType.Pickup;
+
+      if (widget.menu.isVideo) {
+        _controller = VideoPlayerController.network(widget.menu.image,
+            videoPlayerOptions: VideoPlayerOptions())
+          ..initialize().then((_) {
+            setState(() {});
+          });
+      }
+
+    }else {
+      addIngredientFieldController1 = TextEditingController();
+      descriptionController = TextEditingController();
+      fullNameController = TextEditingController();
+      priceController = TextEditingController();
+      addIngredientFieldController2 = TextEditingController();
+      texeareaController = TextEditingController();
+    }
     // WidgetsBinding.instance?.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -81,6 +108,8 @@ class _AddMenuState extends State<AddMenu> {
     S2Choice<String>(value: 'others', title: 'Others'),
   ];
 
+  bool isVideo = false;
+
   File? image;
 
   Future pickImage(ImageSource source) async {
@@ -95,13 +124,34 @@ class _AddMenuState extends State<AddMenu> {
     }
   }
 
+  Future pickVideo(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickVideo(source: source);
+      if (image == null) return;
+
+      final imagePath = File(image.path);
+      print("-----size---------");
+      print("-----size--------- ${imagePath.lengthSync()}");
+      if(imagePath.lengthSync()/(1000*1000) > 20){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please select video under 20MB")));
+      }else {
+        this.image = imagePath;
+        isVideo = true;
+        setState(() => this.image = imagePath);
+      }
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<PostCubit, PostState>(listener: (context, state) {
 
       if (state.status == PostStatus.save) {
         Get.back();
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Menu Successfully saved!")));
+        Get.back();
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Menu Successfully added!")));
       }else if (state.status == PostStatus.publish) {
         Get.back();
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Menu Successfully published!")));
@@ -109,12 +159,16 @@ class _AddMenuState extends State<AddMenu> {
       }else if (state.status == PostStatus.error) {
         Get.back();
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Something went wrong!")));
+      }else if (state.status == PostStatus.updated) {
+        Get.back();
+        Get.back();
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("updated Successfully")));
       }else if(state.status == PostStatus.submitting){
         CommonViews.showProgressDialog(context);
       }
     }, child: BlocBuilder<PostCubit, PostState>(
     builder: (context, state) {
-    return Scaffold(
+      return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: white,
@@ -122,7 +176,7 @@ class _AddMenuState extends State<AddMenu> {
         iconTheme: IconThemeData(color: dark),
         automaticallyImplyLeading: true,
         actions: [
-          InkWell(
+         /*  widget.menu != null ? Container(): InkWell(
             onTap: (){
               String deliveryType = _deliveryType == null? "" :_deliveryType == DeliveryType.Delivery ? "delivery": "pickup";
               if(image == null){
@@ -133,7 +187,7 @@ class _AddMenuState extends State<AddMenu> {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter description")));
               }else  if((priceController?.text ?? "").isEmpty){
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter price")));
-              }else  if((selectedLocation ?? "").isEmpty){
+              }else  if(selectedLocation.isEmpty){
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("please enter location")));
               }else  if(deliveryType.isEmpty){
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Delivery type is not selected")));
@@ -147,7 +201,7 @@ class _AddMenuState extends State<AddMenu> {
                 context.read<PostCubit>().locationChanged(selectedLocation);
                 context.read<PostCubit>().delvieryTypeChanged(_deliveryType == DeliveryType.Delivery ? "delivery": "pickup");
 
-                context.read<PostCubit>().postMenuCredentials(image?.path ?? "", FirebaseAuth.instance.currentUser?.uid ?? "");
+                context.read<PostCubit>().postMenuCredentials(image?.path ?? "", FirebaseAuth.instance.currentUser?.uid ?? "",isVideo);
               }
             },
             child: Container(
@@ -155,21 +209,46 @@ class _AddMenuState extends State<AddMenu> {
               height: 20,
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               decoration: BoxDecoration(
-                  color: state.status == PostStatus.initial? grey : Colors.grey.shade300, borderRadius: BorderRadius.circular(10)),
+                  color: state.status == PostStatus.save? Colors.grey.shade300 : Colors.grey, borderRadius: BorderRadius.circular(10)),
               child: Text("Save"),
             ),
           ),
           SizedBox(
             width: 10,
-          ),
-          InkWell(
+          ),*/
+          widget.menu != null ? Container(): InkWell(
             onTap: (){
-              if(state.status == PostStatus.save){
+              /*if(state.status == PostStatus.save){
                 context.read<PostCubit>().productStatusChanged("SAVE");
                 context.read<PostCubit>().updateMenuStatus("${state.key}", FirebaseAuth.instance.currentUser?.uid ?? "");
               }else{
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Save first!")));
+              }*/
+              String deliveryType = _deliveryType == null? "" :_deliveryType == DeliveryType.Delivery ? "delivery": "pickup";
+              if(image == null){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Image is not selected")));
+              }else  if((fullNameController?.text ?? "").isEmpty){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter title")));
+              }else  if((descriptionController?.text ?? "").isEmpty){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter description")));
+              }else  if((priceController?.text ?? "").isEmpty){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter price")));
+              }else  if(selectedLocation.isEmpty){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("please enter location")));
+              }else  if(deliveryType.isEmpty){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Delivery type is not selected")));
+
+              }else{
+                context.read<PostCubit>().imageChanged(image!);
+                context.read<PostCubit>().titleChanged(fullNameController!.text);
+                context.read<PostCubit>().descriptionChanged(descriptionController!.text);
+                context.read<PostCubit>().productStatusChanged("PUBLISH");
+                context.read<PostCubit>().priceChanged(priceController!.text);
+                context.read<PostCubit>().locationChanged(selectedLocation);
+                context.read<PostCubit>().delvieryTypeChanged(_deliveryType == DeliveryType.Delivery ? "delivery": "pickup");
+                context.read<PostCubit>().postMenuCredentials(image?.path ?? "", FirebaseAuth.instance.currentUser?.uid ?? "",isVideo);
               }
+
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 10),
@@ -178,6 +257,38 @@ class _AddMenuState extends State<AddMenu> {
               decoration: BoxDecoration(
                   color: primary, borderRadius: BorderRadius.circular(10)),
               child: Text("Publish"),
+            ),
+          ),
+          widget.menu == null ? Container(): InkWell(
+            onTap: (){
+              if(image!=null){
+                context.read<PostCubit>().imageChanged(image!);
+              }
+              if(fullNameController?.text != widget.menu.title && (fullNameController?.text ?? "").isNotEmpty){
+                context.read<PostCubit>().titleChanged(fullNameController?.text ?? "");
+              }
+              if(descriptionController?.text != widget.menu.description && (descriptionController?.text ?? "").isNotEmpty){
+                context.read<PostCubit>().descriptionChanged(descriptionController?.text ?? "");
+              }
+              if(priceController != widget.menu.price && (priceController?.text ?? "").isNotEmpty){
+                context.read<PostCubit>().priceChanged(priceController?.text ?? "");
+              }
+              if(selectedLocation != widget.menu.location && selectedLocation.isNotEmpty){
+                context.read<PostCubit>().locationChanged(selectedLocation);
+              }
+              String deliveryType = _deliveryType == null? "" :_deliveryType == DeliveryType.Delivery ? "delivery": "pickup";
+              if(deliveryType.isNotEmpty){
+                context.read<PostCubit>().delvieryTypeChanged(deliveryType);
+              }
+             context.read<PostCubit>().updateMenuDetails(widget.menu.key, FirebaseAuth.instance.currentUser?.uid ?? "",isVideo);
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              height: 20,
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              decoration: BoxDecoration(
+                  color: primary, borderRadius: BorderRadius.circular(10)),
+              child: Text("Update"),
             ),
           ),
           SizedBox(
@@ -194,8 +305,54 @@ class _AddMenuState extends State<AddMenu> {
           children: [
             GestureDetector(
               onTap: () => _selectOptionBottomSheet(),
-              child: image != null
-                  ? Image.file(
+              child: widget.menu != null && image == null
+                  ? widget.menu.isVideo
+                  ? Container(
+                height: 250,
+                child: Stack(
+                  children: [
+                    VideoPlayer(_controller),
+                    Center(
+                      child: IconButton(
+                        onPressed: () {
+                          if (isPlaying) {
+                            isPlaying = false;
+                            _controller.pause();
+                          } else {
+                            isPlaying = true;
+                            _controller.play();
+                          }
+                          setState(() {});
+                        },
+                        icon: Icon(
+                          isPlaying
+                              ? Icons.pause
+                              : Icons.play_arrow,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ),
+              )
+                  : CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: "${widget.menu.image}",
+                errorWidget: (context, url, error) =>
+                    Icon(Icons.error),
+              )
+                  : image != null ? isVideo ? Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  children: [
+                    Icon(Icons.video_file,size: 40,),
+                    Text("${image!.path.split('/')[image!.path.split('/').length-1]}")
+                  ],
+                ),
+              )
+                  : Image.file(
                       image!,
                       height: 230,
                       width: double.infinity,
@@ -235,7 +392,7 @@ class _AddMenuState extends State<AddMenu> {
                       onChanged: (val) {},
                       autofocus: true,
                       obscureText: false,
-                      keyboardType: state.status != PostStatus.save ? TextInputType.text: TextInputType.none,
+                      keyboardType:TextInputType.text,
                       decoration: InputDecoration(
                         labelText: 'Title',
                         hintText: 'Title',
@@ -267,7 +424,7 @@ class _AddMenuState extends State<AddMenu> {
                       onChanged: (val) {},
                       autofocus: true,
                       obscureText: false,
-                      keyboardType: state.status != PostStatus.save ? TextInputType.text: TextInputType.none,
+                      keyboardType:TextInputType.text,
                       decoration: InputDecoration(
                         // labelText: 'Description',
                         hintText: 'Briefly describe your menu here',
@@ -300,7 +457,7 @@ class _AddMenuState extends State<AddMenu> {
                       onChanged: (val) {},
                       autofocus: true,
                       obscureText: false,
-                      keyboardType: state.status != PostStatus.save ? TextInputType.number: TextInputType.none,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: 'Price',
                         hintText: 'Price',
@@ -327,7 +484,7 @@ class _AddMenuState extends State<AddMenu> {
                   ),
 
                   GestureDetector(
-                       onTap: state.status == PostStatus.save ? null : () => Get.to(() =>  PlaceSearch(onSelection: (location){
+                       onTap:() => Get.to(() =>  PlaceSearch(onSelection: (location){
                       setState((){
                         selectedLocation = location;
                       });
@@ -703,6 +860,34 @@ class _AddMenuState extends State<AddMenu> {
                                 ),
                                 Text(
                                   'Camera',
+                                  style: title4,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            pickVideo(ImageSource.gallery);
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: width,
+                            padding: EdgeInsets.all(10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.video_collection,
+                                  color: Colors.black.withOpacity(0.7),
+                                  size: 18.0,
+                                ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                Text(
+                                  'Video',
                                   style: title4,
                                 ),
                               ],

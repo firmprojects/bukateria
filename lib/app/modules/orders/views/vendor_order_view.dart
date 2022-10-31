@@ -46,39 +46,6 @@ class _VendorOrdersWidgetState extends State<VendorOrdersWidget> {
                     SizedBox(
                       height: 20,
                     ),
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/egusi.jpg",
-                              width: 100,
-                              height: 100,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Pot of Soup",
-                                  style: title5,
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  "Pot of Soup",
-                                  style: body4,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                       child: Container(
@@ -99,48 +66,53 @@ class _VendorOrdersWidgetState extends State<VendorOrdersWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/egusi.jpg",
+                                    width: 100,
+                                    height: 100,
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Pot of Soup",
+                                        style: title4,
+                                      ),
+                                      Text(
+                                        "Order ID: 1080000",
+                                        style: title5,
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Text(
+                                        "",
+                                        style: body4,
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   16, 16, 16, 12),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Order Summary',
-                                    style: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF090F13),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                  ),
+                                  Text('Order Detail', style: title5),
                                 ],
                               ),
                             ),
-                            // Padding(
-                            //   padding: EdgeInsetsDirectional.fromSTEB(
-                            //       16, 0, 16, 8),
-                            //   child: Row(
-                            //     mainAxisSize: MainAxisSize.max,
-                            //     mainAxisAlignment:
-                            //         MainAxisAlignment.spaceBetween,
-                            //     children: [
-                            //       Text(
-                            //         'Subtotal',
-                            //         style: FlutterFlowTheme.of(context)
-                            //             .bodyText2,
-                            //       ),
-                            //       Text(
-                            //         '[Price]',
-                            //         textAlign: TextAlign.end,
-                            //         style: FlutterFlowTheme.of(context)
-                            //             .subtitle2,
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
                             Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
@@ -151,7 +123,7 @@ class _VendorOrdersWidgetState extends State<VendorOrdersWidget> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text('Customer', style: title5),
+                                      Text('Customer', style: body3),
                                       Text('Kolade Aremu',
                                           textAlign: TextAlign.end,
                                           style: body3),
@@ -162,8 +134,8 @@ class _VendorOrdersWidgetState extends State<VendorOrdersWidget> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text('Delivery Type', style: title5),
-                                      Text('Pay on Delivery',
+                                      Text('Customer Phone', style: body3),
+                                      Text('080976677888',
                                           textAlign: TextAlign.end,
                                           style: body3),
                                     ],
@@ -173,66 +145,49 @@ class _VendorOrdersWidgetState extends State<VendorOrdersWidget> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text('Delivery Due Date', style: title5),
-                                      Text('July 25, 2022',
+                                      Text('Delivery Type', style: body3),
+                                      Text('Pickup',
                                           textAlign: TextAlign.end,
-                                          style:
-                                              body3.copyWith(color: primary)),
+                                          style: body3),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Amount', style: body3),
+                                      Text('N5,000',
+                                          textAlign: TextAlign.end,
+                                          style: body3),
                                     ],
                                   ),
                                 ],
                               ),
                             ),
-                            // Padding(
-                            //   padding: EdgeInsetsDirectional.fromSTEB(
-                            //       16, 12, 16, 16),
-                            //   child: Row(
-                            //     mainAxisSize: MainAxisSize.max,
-                            //     mainAxisAlignment:
-                            //         MainAxisAlignment.spaceBetween,
-                            //     children: [
-                            //       Text(
-                            //         'Total',
-                            //         style: FlutterFlowTheme.of(context)
-                            //             .bodyText2,
-                            //       ),
-                            //       Text(
-                            //         'N12, 000',
-                            //         textAlign: TextAlign.end,
-                            //         style:
-                            //             FlutterFlowTheme.of(context).title2,
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
                     ),
-                    Divider(
-                      height: 2,
-                      thickness: 1,
-                      indent: 16,
-                      endIndent: 16,
-                      color: Colors.transparent,
+                    SizedBox(
+                      height: 20,
                     ),
                     Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
-                            child: Text(
-                              "Accept",
-                              style: title3,
-                            )),
                         Text(
-                          "Reject",
-                          style: title3.copyWith(color: primary),
-                        )
+                          "Accept",
+                          style: title5.copyWith(color: green),
+                        ),
+                        SizedBox(
+                          width: 50,
+                        ),
+                        Text("Reject", style: title5.copyWith(color: primary)),
+                        SizedBox(
+                          width: 20,
+                        ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),

@@ -17,15 +17,19 @@ abstract class BasePostRepository {
   Stream<QuerySnapshot?> get getRelatedExplore;
   Stream<QuerySnapshot?> get getIngredients;
   Stream<QuerySnapshot?> get getMethods;
+  Stream<QuerySnapshot?> get getSpecificFavorite;
+  Stream<QuerySnapshot?> get getMyFavorites;
+  Stream<QuerySnapshot?> get getFavoritesListByKey;
   Future<String?> uploadImage({required File imageFile, required String name,required String uid});
-  Future<Map<String,Object>?> addExplorePost({required String title,required String description,required String productStatus,required String image,required String uid});
-  Future<Map<String,Object>?> addMenuPost({required String title,required String description,required String price, required String location , required String deliveryType, required String productStatus,required String image,required String uid});
+  Future<Map<String,Object>?> addExplorePost({required String title,required String description,required String productStatus,required String image,required bool isVideo,required String uid});
+  Future<Map<String,Object>?> addMenuPost({required String title,required String description,required String price, required String location , required String deliveryType,required bool isVideo, required String productStatus,required String image,required String uid});
   Future<Map<String,Object>?> addRecipePost({
     required String title,
     required String description,
     required String cuisine,
     required String category ,
-    required List<String> ingredients,
+    required bool isVideo,
+    required List<Map<String,dynamic>> ingredients,
     required List<Map<String,dynamic>> methods,
     required String image,
     required String productStatus,

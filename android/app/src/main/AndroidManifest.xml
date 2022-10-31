@@ -9,6 +9,8 @@
    <application
         android:label="Bukkateria"
         android:name="${applicationName}"
+        android:showWhenLocked="true"
+        android:turnScreenOn="true"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity

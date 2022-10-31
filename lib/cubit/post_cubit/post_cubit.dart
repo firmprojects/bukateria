@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -56,7 +57,7 @@ class PostCubit extends Cubit<PostState> {
     emit(state.copyWith(image: value, status: PostStatus.initial));
   }
 
-  void ingredientsChanged(List<String> value) {
+  void ingredientsChanged(List<Map<String, dynamic>> value) {
     emit(state.copyWith(ingredients: value, status: PostStatus.initial));
   }
 
@@ -75,26 +76,80 @@ class PostCubit extends Cubit<PostState> {
     }*/
   }
 
-  void postExploreCredentials(String imageName, String uid) async {
+  deleteExplore(String key){
+    emit(PostState(status: PostStatus.deleting));
+    _postRepository.deleteExplore(key).then((value) {
+      emit(PostState(status: PostStatus.deleted));
+    });
+  }
+
+  deleteMenu(String key){
+    emit(PostState(status: PostStatus.deleting));
+    _postRepository.deleteMenu(key).then((value) {
+      emit(PostState(status: PostStatus.deleted));
+    });
+  }
+  deleteRecipe(String key){
+    emit(PostState(status: PostStatus.deleting));
+    _postRepository.deleteRecipe(key).then((value) {
+      emit(PostState(status: PostStatus.deleted));
+    });
+  }
+
+ Future<bool> deleteIngredient(String key,String parentKey) async {
+    emit(PostState(status: PostStatus.deleting));
+    bool v = await _postRepository.deleteIngredient(parentKey,key) ?? false;
+   return v;
+  }
+
+  Future<bool> deleteMethod(String key,String parentKey) async {
+    emit(PostState(status: PostStatus.deleting));
+    bool v = await _postRepository.deleteMethod(parentKey,key) ?? false;
+    return v;
+  }
+
+  void postExploreCredentials(
+      String imageName, String uid, bool isVideo) async {
     if (!state.isValidExplore) return;
     emit(state.copyWith(status: PostStatus.submitting));
     try {
-      _postRepository
-          .uploadImage(imageFile: state.image!, name: imageName, uid: uid)
-          .then((value) async {
-        print("--------------- ${value} ----------");
+      if (isVideo) {
         _postRepository
-            .addExplorePost(
-                title: state.title ?? "",
-                description: state.description ?? "",
-                productStatus: state.productStatus ?? "init",
-                image: value ?? "",
-                uid: uid)
-            .then((value) {
-          emit(state.copyWith(
-              status: PostStatus.save, key: value?["key"].toString()));
+            .uploadVideo(state.image!, imageName)
+            .then((value) async {
+          print("--------------- ${value} ----------");
+          _postRepository
+              .addExplorePost(
+                  title: state.title ?? "",
+                  description: state.description ?? "",
+                  productStatus: state.productStatus ?? "init",
+                  image: value ?? "",
+                  isVideo: isVideo,
+                  uid: uid)
+              .then((value) {
+            emit(state.copyWith(
+                status: PostStatus.save, key: value?["key"].toString()));
+          });
         });
-      });
+      } else {
+        _postRepository
+            .uploadImage(imageFile: state.image!, name: imageName, uid: uid)
+            .then((value) async {
+          print("--------------- ${value} ----------");
+          _postRepository
+              .addExplorePost(
+                  title: state.title ?? "",
+                  description: state.description ?? "",
+                  productStatus: state.productStatus ?? "init",
+                  image: value ?? "",
+                  isVideo: isVideo,
+                  uid: uid)
+              .then((value) {
+            emit(state.copyWith(
+                status: PostStatus.save, key: value?["key"].toString()));
+          });
+        });
+      }
     } catch (_) {
       emit(state.copyWith(status: PostStatus.error));
     }
@@ -115,20 +170,87 @@ class PostCubit extends Cubit<PostState> {
     }
   }
 
+  void pauseExploreStatus(
+      String key,
+      String uid,
+      ) async {
+
+    emit(state.copyWith(status: PostStatus.submitting));
+    try {
+      _postRepository.pauseExplorePost(key: key, uid: uid).then((value) {
+        emit(state.copyWith(status: PostStatus.unPublish));
+      });
+    } catch (_) {
+      emit(state.copyWith(status: PostStatus.error));
+    }
+  }
+
+  void pauseMenuStatus(
+      String key,
+      String uid,
+      ) async {
+
+    emit(state.copyWith(status: PostStatus.pausing));
+    try {
+      print("-----------------------${key} ${uid}");
+      _postRepository.pauseMenuPost(key: key, uid: uid).then((value) {
+        emit(state.copyWith(status: PostStatus.unPublish, productStatus: "Menu"));
+      });
+    } catch (_) {
+      emit(state.copyWith(status: PostStatus.error));
+    }
+  }
+//8017
+  void pauseRecipeStatus(
+      String key,
+      String uid,
+      ) async {
+    emit(state.copyWith(status: PostStatus.pausing));
+    try {
+      _postRepository.pauseRecipePost(key: key, uid: uid).then((value) {
+        emit(state.copyWith(status: PostStatus.unPublish,productStatus: "Recipe"));
+      });
+    } catch (_) {
+      emit(state.copyWith(status: PostStatus.error));
+    }
+  }
+
+  getPauseMenus(String uid) {
+    _postRepository.menuKey = uid;
+    return _postRepository.getMyPausedMenu;
+  }
+
+  getPauseRecipes(String uid) {
+    _postRepository.recipeKey = uid;
+    return _postRepository.getMyPausedRecipe;
+  }
+
   getExplore() {
     return _postRepository.getExplores;
   }
 
-  getMenus() {
-    return _postRepository.getMenus;
+  getMenus(String searchKey) {
+
+    /*if(searchKey.isNotEmpty) {
+      _postRepository.menuSearchKey = searchKey;
+      return _postRepository.getSearchMenus;
+    }else{*/
+      return _postRepository.getMenus;
+    //}
   }
 
   getRecipes() {
     return _postRepository.getAllRecipe;
   }
 
-  getAllRecipes() {
-    return _postRepository.getAllRecipe;
+  getAllRecipes(String searchKey) {
+
+    if(searchKey.isNotEmpty){
+      _postRepository.recipeKey= searchKey;
+      return _postRepository.getAllSearchRecipe;
+    }else {
+      return _postRepository.getAllRecipe;
+    }
   }
 
   getRelatedRecipes(String uid) {
@@ -141,9 +263,19 @@ class PostCubit extends Cubit<PostState> {
     return _postRepository.getRelatedMenu;
   }
 
+  getMenuByKey(String key) {
+    _postRepository.menuKey = key;
+    return _postRepository.getMenuByKey;
+  }
+
   getRelatedExplore(String uid) {
     _postRepository.exploreKey = uid;
     return _postRepository.getRelatedExplore;
+  }
+
+  getComments(String productId) {
+    _postRepository.productId = productId;
+    return _postRepository.getCommentsByProductId;
   }
 
   getUser() {
@@ -165,8 +297,10 @@ class PostCubit extends Cubit<PostState> {
     return _postRepository.getMethods;
   }
 
-  getSpecificFollow(String followedUID) {
+  getSpecificFollow(String followedUID, String followingUID) {
     _authRepository.followedUID = followedUID;
+    _authRepository.followingUID = followingUID;
+    print("-------------------$followingUID   $followedUID");
     return _authRepository.getSpecificFollower;
   }
 
@@ -175,29 +309,137 @@ class PostCubit extends Cubit<PostState> {
     return _authRepository.getAllFollower;
   }
 
-  void postMenuCredentials(String imageName, String uid) async {
+  getSpecificFavorite(String productID) {
+    _postRepository.favoriteKey = productID;
+    return _postRepository.getSpecificFavorite;
+  }
+
+  getMyFavorites() {
+    return _postRepository.getMyFavorites;
+  }
+
+  getFavoritesListByKey(String key) {
+    _postRepository.favoriteKey = key;
+    return _postRepository.getFavoritesListByKey;
+  }
+
+  void postMenuCredentials(String imageName, String uid, bool isVideo) async {
     if (!state.isValidExplore) return;
     emit(state.copyWith(status: PostStatus.submitting));
     try {
-      _postRepository
-          .uploadImage(imageFile: state.image!, name: imageName, uid: uid)
-          .then((value) async {
-        print("--------------- ${value} ----------");
+      if (isVideo) {
         _postRepository
-            .addMenuPost(
-                title: state.title ?? "",
-                description: state.description ?? "",
-                productStatus: state.productStatus ?? "init",
-                image: value ?? "",
-                price: state.price ?? "",
-                location: state.location ?? "",
-                deliveryType: state.deliveryType ?? "",
+            .uploadVideo(state.image!, imageName)
+            .then((value) async {
+          _postRepository
+              .addMenuPost(
+                  title: state.title ?? "",
+                  description: state.description ?? "",
+                  productStatus: state.productStatus ?? "init",
+                  image: value ?? "",
+                  price: state.price ?? "",
+                  location: state.location ?? "",
+                  deliveryType: state.deliveryType ?? "",
+                  isVideo: isVideo,
+                  uid: uid)
+              .then((value) {
+            emit(state.copyWith(
+                status: PostStatus.save, key: value?["key"].toString()));
+          });
+        });
+      } else {
+        _postRepository
+            .uploadImage(imageFile: state.image!, name: imageName, uid: uid)
+            .then((value) async {
+          print("--------------- ${value} ----------");
+          _postRepository
+              .addMenuPost(
+                  title: state.title ?? "",
+                  description: state.description ?? "",
+                  productStatus: state.productStatus ?? "init",
+                  image: value ?? "",
+                  price: state.price ?? "",
+                  location: state.location ?? "",
+                  deliveryType: state.deliveryType ?? "",
+                  isVideo: isVideo,
+                  uid: uid)
+              .then((value) {
+            emit(state.copyWith(
+                status: PostStatus.save, key: value?["key"].toString()));
+          });
+        });
+      }
+    } catch (_) {
+      emit(state.copyWith(status: PostStatus.error));
+    }
+  }
+
+  void updateMenuDetails(
+      String key,
+      String uid,
+      bool isVideo,
+      ) async {
+    emit(state.copyWith(status: PostStatus.submitting));
+    try {
+      if(state.image != null){
+        if (isVideo) {
+          _postRepository
+              .uploadVideo(state.image!, "")
+              .then((value) async {
+            _postRepository
+                .updateMenuDetails(
+                title: state.title ,
+                description: state.description,
+                image: value ,
+                price: state.price,
+                location: state.location,
+                deliveryType: state.deliveryType,
+                isVideo: isVideo,
+                key: key,
                 uid: uid)
+                .then((value) {
+              emit(state.copyWith(
+                  status: PostStatus.updated));
+            });
+          });
+        } else {
+          _postRepository
+              .uploadImage(imageFile: state.image!, name: "", uid: uid)
+              .then((value) async {
+            print("--------------- ${value} ----------");
+            _postRepository
+                .updateMenuDetails(
+                title: state.title ,
+                description: state.description,
+                image: value ,
+                price: state.price,
+                location: state.location,
+                deliveryType: state.deliveryType,
+                isVideo: isVideo,
+                key: key,
+                uid: uid)
+                .then((value) {
+              emit(state.copyWith(
+                  status: PostStatus.updated));
+            });
+          });
+        }
+      }else{
+        _postRepository
+            .updateMenuDetails(
+            title: state.title ,
+            description: state.description,
+            price: state.price,
+            location: state.location,
+            deliveryType: state.deliveryType,
+            isVideo: isVideo,
+            key: key,
+            uid: uid)
             .then((value) {
           emit(state.copyWith(
-              status: PostStatus.save, key: value?["key"].toString()));
+              status: PostStatus.updated));
         });
-      });
+      }
     } catch (_) {
       emit(state.copyWith(status: PostStatus.error));
     }
@@ -207,7 +449,7 @@ class PostCubit extends Cubit<PostState> {
     String key,
     String uid,
   ) async {
-    if (!state.isValidExplore) return;
+   // if (!state.isValidExplore) return;
     emit(state.copyWith(status: PostStatus.submitting));
     try {
       _postRepository.updateMenuPost(key: key, uid: uid).then((value) {
@@ -218,30 +460,125 @@ class PostCubit extends Cubit<PostState> {
     }
   }
 
-  void postRecipeCredentials(String imageName, String uid) async {
+  void postRecipeCredentials(String imageName, String uid, bool isVideo) async {
     if (!state.isValidExplore) return;
     emit(state.copyWith(status: PostStatus.submitting));
     try {
-      _postRepository
-          .uploadImage(imageFile: state.image!, name: imageName, uid: uid)
-          .then((value) async {
-        print("--------------- ${value} ----------");
+      if (isVideo) {
         _postRepository
-            .addRecipePost(
-                title: state.title ?? "",
-                description: state.description ?? "",
-                productStatus: state.productStatus ?? "init",
-                image: value ?? "",
-                category: state.recipeCategory ?? "",
-                ingredients: state.ingredients ?? [],
-                methods: state.methods ?? [],
-                cuisine: state.typeOfCuisine ?? "",
-                uid: uid)
-            .then((value) {
-          emit(state.copyWith(
-              status: PostStatus.save, key: value?["key"].toString()));
+            .uploadVideo(state.image!, imageName)
+            .then((value) async {
+          _postRepository
+              .addRecipePost(
+                  title: state.title ?? "",
+                  description: state.description ?? "",
+                  productStatus: state.productStatus ?? "init",
+                  image: value ?? "",
+                  category: state.recipeCategory ?? "",
+                  ingredients: state.ingredients ?? [],
+                  methods: state.methods ?? [],
+                  cuisine: state.typeOfCuisine ?? "",
+                  isVideo: isVideo,
+                  uid: uid)
+              .then((value) {
+            emit(state.copyWith(
+                status: PostStatus.save, key: value?["key"].toString()));
+          });
         });
-      });
+      } else {
+        _postRepository
+            .uploadImage(imageFile: state.image!, name: imageName, uid: uid)
+            .then((value) async {
+          print("--------------- ${value} ----------");
+          _postRepository
+              .addRecipePost(
+                  title: state.title ?? "",
+                  description: state.description ?? "",
+                  productStatus: state.productStatus ?? "init",
+                  image: value ?? "",
+                  category: state.recipeCategory ?? "",
+                  ingredients: state.ingredients ?? [],
+                  methods: state.methods ?? [],
+                  cuisine: state.typeOfCuisine ?? "",
+                  isVideo: isVideo,
+                  uid: uid)
+              .then((value) {
+            emit(state.copyWith(
+                status: PostStatus.save, key: value?["key"].toString()));
+          });
+        });
+      }
+    } catch (_) {
+      emit(state.copyWith(status: PostStatus.error));
+    }
+  }
+
+  void updateRecipeCredentials(
+      String imageName, String key, String uid, bool isVideo) async {
+   // if (!state.isValidExplore) return;
+    emit(state.copyWith(status: PostStatus.submitting));
+    try {
+      if(state.image == null){
+        _postRepository
+            .updateRecipeDetails(
+            key: key,
+            title: state.title,
+            description: state.description ?? "",
+            category: state.recipeCategory ?? "",
+            ingredients: state.ingredients ?? [],
+            methods: state.methods ?? [],
+            cuisine: state.typeOfCuisine ?? "",
+            isVideo: isVideo,
+            uid: uid)
+            .then((value) {
+          emit(state.copyWith(status: PostStatus.updated));
+        });
+      }else {
+        if (isVideo) {
+          _postRepository
+              .uploadVideo(state.image!, imageName)
+              .then((value) async {
+            _postRepository
+                .updateRecipeDetails(
+                key: key,
+                title: state.title,
+                description: state.description,
+                image: value,
+                category: state.recipeCategory,
+                ingredients: state.ingredients,
+                methods: state.methods,
+                cuisine: state.typeOfCuisine,
+                isVideo: isVideo,
+                uid: uid)
+                .then((value) {
+              emit(state.copyWith(status: PostStatus.updated));
+            });
+          });
+        }
+        else {
+          _postRepository
+              .uploadImage(imageFile: state.image!, name: imageName, uid: uid)
+              .then((value) async {
+            print("--------------- ${value} ----------");
+            _postRepository
+                .updateRecipeDetails(
+                key: key,
+                title: state.title,
+                description: state.description,
+                productStatus: state.productStatus,
+                image: value,
+                category: state.recipeCategory,
+                ingredients: state.ingredients,
+                methods: state.methods,
+                cuisine: state.typeOfCuisine,
+                isVideo: isVideo,
+                uid: uid)
+                .then((value) {
+              emit(state.copyWith(status: PostStatus.updated));
+            });
+          });
+        }
+      }
     } catch (_) {
       emit(state.copyWith(status: PostStatus.error));
     }
@@ -251,7 +588,7 @@ class PostCubit extends Cubit<PostState> {
     String key,
     String uid,
   ) async {
-    if (!state.isValidExplore) return;
+   // if (!state.isValidExplore) return;
     emit(state.copyWith(status: PostStatus.submitting));
     try {
       _postRepository.updateRecipePost(key: key, uid: uid).then((value) {
@@ -262,11 +599,73 @@ class PostCubit extends Cubit<PostState> {
     }
   }
 
-  void addFollow(String followedUID, String followingUID) async {
+  void reportUser(String reportedUser, String reportedBy, String reason,postId) async {
     emit(state.copyWith(status: PostStatus.submitting));
     try {
-      _authRepository
-          .followUser(followedUID: followedUID, followingUID: followingUID)
+      if (reportedBy != reportedUser) {
+        _authRepository
+            .reportUser(reportedUser: reportedUser, reportedBy: reportedBy,reason: reason, postId:  postId)
+            .then((value) {
+          emit(state.copyWith(
+              status: PostStatus.reported, productStatus: "Reported", key: value?["key"].toString()));
+        });
+      } else {
+        emit(state.copyWith(status: PostStatus.error));
+      }
+    } catch (_) {
+      emit(state.copyWith(status: PostStatus.error));
+    }
+  }
+
+  void addFollow(String followedUID, String followingUID) async {
+   // emit(state.copyWith(status: PostStatus.submitting));
+    try {
+      if (followedUID != followingUID) {
+        _authRepository
+            .followUser(followedUID: followedUID, followingUID: followingUID)
+            .then((value) {
+          emit(state.copyWith(
+              status: PostStatus.success, key: value?["key"].toString()));
+        });
+      } else {
+        emit(state.copyWith(status: PostStatus.error));
+      }
+    } catch (_) {
+      emit(state.copyWith(status: PostStatus.error));
+    }
+  }
+
+  void unFollow(String followedUID, String followingUID) async {
+    emit(state.copyWith(status: PostStatus.submitting));
+
+    try {
+      if (followedUID != followingUID) {
+        await _authRepository
+            .unFollowUser(followedUID: followedUID, followingUID: followingUID)
+            .then((value) {
+          emit(state.copyWith(
+            status: PostStatus.success,
+          ));
+        });
+      } else {
+        emit(state.copyWith(status: PostStatus.error));
+      }
+    } catch (_) {
+      emit(state.copyWith(status: PostStatus.error));
+    }
+  }
+
+  void addComment(String productId, String commentedBy, String comment,
+      String productOwner, postType) async {
+    //emit(state.copyWith(status: PostStatus.submitting));
+    try {
+      _postRepository
+          .addComment(
+              productID: productId,
+              comment: comment,
+              productOwnerId: productOwner,
+              postType: postType,
+              commentedBy: commentedBy)
           .then((value) {
         emit(state.copyWith(
             status: PostStatus.success, key: value?["key"].toString()));
@@ -278,19 +677,65 @@ class PostCubit extends Cubit<PostState> {
 
   Future<void> getCurrentPosition() async {
     var position = await _authRepository.determinePosition();
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
-    print(placemarks);
-    Placemark place = placemarks[0];
-    // String address =  '${place.locality}, ${place.administrativeArea}, ${place.country}';
-    String address =
-        '${place.subAdministrativeArea}, ${place.administrativeArea}';
-    Map<String, dynamic> map = {};
-    map["lat"] = position.latitude;
-    map["long"] = position.longitude;
-    map["address"] = address;
-    emit(
-        state.copyWith(status: PostStatus.locationFound, currentLocation: map));
+    List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+    //print(placemarks);
+    if(placemarks.isNotEmpty) {
+      Placemark place = placemarks[0];
+      // String address =  '${place.locality}, ${place.administrativeArea}, ${place.country}';
+      String address =
+          '${place.subAdministrativeArea}, ${place.administrativeArea}';
+      Map<String, dynamic> map = {};
+      map["lat"] = position.latitude;
+      map["long"] = position.longitude;
+      map["address"] = address;
+      emit(
+          state.copyWith(
+              status: PostStatus.locationFound, currentLocation: map));
+    }
+  }
+
+  void addFavorite(String ownerUID, String favoritesUID, String productID,
+      String postType) async {
+    emit(state.copyWith(status: PostStatus.submitting));
+    try {
+      _postRepository
+          .addFavorites(
+              ownerUID: ownerUID,
+              favoritesUID: favoritesUID,
+              productID: productID,
+              postType: postType)
+          .then((value) {
+        emit(state.copyWith(
+            status: PostStatus.success, key: value?["key"].toString()));
+      });
+    } catch (_) {
+      emit(state.copyWith(status: PostStatus.error));
+    }
+  }
+
+  void removeFavorite(String ownerUID, String favoritesUID, String productID,
+      String postType) async {
+    emit(state.copyWith(status: PostStatus.submitting));
+    try {
+      _postRepository
+          .disLike(
+              ownerUID: ownerUID,
+              favoritesUID: favoritesUID,
+              /*productID: productID,
+              postType: postType*/)
+          .then((value) {
+        emit(state.copyWith(
+            status: PostStatus.success, key: value?["key"].toString()));
+      });
+    } catch (_) {
+      emit(state.copyWith(status: PostStatus.error));
+    }
+  }
+
+  Future<Map<String, dynamic>> getDistance(String currentAddress, String postAddress) async {
+    String distance = await _postRepository.getDistance(currentAddress, postAddress);
+    Map<String,dynamic> map = jsonDecode(distance);
+    return map;
   }
 
 /*  Future<void> GetAddressFromLatLong(Position position)async {

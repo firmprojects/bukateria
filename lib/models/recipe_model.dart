@@ -10,6 +10,7 @@ class RecipeModel {
   String? location;
   List<String>? ingredients;
   List<Map<String,dynamic>>? method;
+  List<Map<String,dynamic>>? ingredientsUpdatedList;
   String? createdAt;
   String? image;
   bool? likes;
@@ -23,6 +24,7 @@ class RecipeModel {
   String? key;
   DateTime? created_at;
   String? uid;
+  bool? isVideo;
 
   RecipeModel(
       { this.title,
@@ -36,6 +38,7 @@ class RecipeModel {
        this.amount,
       this.method,
       this.category,
+      this.isVideo,
         this.cuisine,
       this.productStatus,
       this.created_at,

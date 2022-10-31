@@ -18,6 +18,10 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(email: value, status: SignupStatus.initial));
   }
 
+  void usernameChanged(String value) {
+    emit(state.copyWith(username: value, status: SignupStatus.initial));
+  }
+
   void passwordChanged(String value) {
     emit(state.copyWith(password: value, status: SignupStatus.initial));
   }
@@ -31,7 +35,7 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(status: SignupStatus.submitting));
     try {
       User? userCredential = await _authRepository.signup(email: state.email, password: state.password);
-      await _authRepository.submitUser(email: userCredential?.email ?? "",userType: "foodie", uid: userCredential?.uid ?? "");
+      await _authRepository.submitUser(email: userCredential?.email ?? "",username: state.username, userType: "foodie", uid: userCredential?.uid ?? "");
       emit(state.copyWith(status: SignupStatus.success));
     } catch (_) {
       emit(state.copyWith(status: SignupStatus.error));

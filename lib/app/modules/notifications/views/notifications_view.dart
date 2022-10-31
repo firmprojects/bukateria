@@ -2,6 +2,8 @@ import 'package:bukateria/flutter_flow/flutter_flow_theme.dart';
 import 'package:bukateria/themes/text.dart';
 import 'package:bukateria/widgets/notification_item.dart';
 import 'package:bukateria/widgets/related_recipe.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,7 +36,26 @@ class _NotificationViewState extends State<NotificationView> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          child: Column(
+          child: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection("notifications").where("receiverId",isEqualTo: FirebaseAuth.instance.currentUser?.uid??"").snapshots(),
+            builder: (context,snap){
+              if(snap.hasData) {
+                return ListView.builder(
+                    itemCount: snap.data?.docs.length,
+                    itemBuilder: (context, index) {
+                  return NotificationItem(
+                      title: snap.data?.docs[index]['message'] ?? "",
+                      time: snap.data?.docs[index]['createdAt'] ?? "",
+                      notificationKey: snap.data?.docs[index].id ?? "",
+                  );
+                });
+              }else{
+                return Center(child: Text("Loading"),);
+              }
+            },
+          )
+
+          /*Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               SizedBox(
@@ -56,7 +77,7 @@ class _NotificationViewState extends State<NotificationView> {
               NotificationItem(title: 'Cancellation of orders'),
               NotificationItem(title: 'Messages from Bukkateria'),
             ],
-          ),
+          )*/,
         ),
       ),
     );

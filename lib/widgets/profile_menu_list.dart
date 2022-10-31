@@ -11,7 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/post_cubit/post_cubit.dart';
 
 class ProfileMenusList extends StatelessWidget {
+  final uid;
   const ProfileMenusList({
+    this.uid,
     Key? key,
   }) : super(key: key);
 
@@ -23,7 +25,7 @@ class ProfileMenusList extends StatelessWidget {
         builder: (context, state)
     {
       return StreamBuilder<QuerySnapshot>(
-          stream:  context.read<PostCubit>().getRelatedMenus(FirebaseAuth.instance.currentUser?.uid ?? ""),
+          stream:  context.read<PostCubit>().getRelatedMenus(uid != null ? uid.toString() :FirebaseAuth.instance.currentUser?.uid ?? ""),
     builder: (context,snap){
     if(snap.hasData) {
     return Padding(
@@ -60,6 +62,7 @@ class ProfileMenusList extends StatelessWidget {
                   created_at: (snap.data?.docs[index]["created_at"] as Timestamp).toDate(),
                   image: snap.data?.docs[index]["image"],
                   uid: snap.data?.docs[index]["uid"],
+                  isVideo: snap.data?.docs[index]["isVideo"],
                   deliveryType: snap.data?.docs[index]["deliveryType"],
                   price: snap.data?.docs[index]["price"],
                   location: snap.data?.docs[index]["location"],
